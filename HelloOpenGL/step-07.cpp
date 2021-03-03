@@ -1,17 +1,14 @@
 /**
 *
-* TOPIC: Index Buffers in OpenGL
-* 
-* -- OpenGL 所有的图像都是由三角形组合而成。例如：一个正方形由两个三角形组合而成。
-* -- OpenGL 画三角形，是绕着三角形的顶点的“逆时针方向”进行的。
-* -- Index Buffers 是三角形顶点索引，使用它可以去掉重复的顶点
-* -- glDrawElements()： how you do it GL draw elements is the function to be using most of the time
+* TOPIC: Dealing with Errors in OpenGL
+*
+* -- glDebugMessageCallback if version is greater than 4.3
 *
 * 注意 -- basic expand 和 -- basic的顺序不要颠倒
 * glewInit() 必须在 glfwMakeContextCurrent(window) 后定义
 *
 */
-#ifdef __RUN__
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -29,6 +26,29 @@
 #pragma comment(lib,"glfw3.lib")
 // ---------------------------------
 #pragma comment(lib,"OpenGL32.Lib")
+
+#define ASSERT(x) if(!(x)) __debugbreak();
+#define GLCall(x) GLClearError();\
+	x;\
+	ASSERT(GLLogCall(#x, __FILE__, __LINE__))
+
+static void GLClearError()
+{
+	while (glGetError() != GL_NO_ERROR);
+}
+
+static bool GLLogCall(const char* function, const char* file, int line)
+{
+	while (GLenum error = glGetError())
+	{
+		std::cout << "[OpenGL Error] (" << error << ")" 
+			<< function << " "
+			<< file << ":" << line 
+			<< std::endl;
+		return false;
+	}
+	return true;
+}
 
 struct ShaderProgramSource
 {
@@ -104,7 +124,7 @@ static unsigned int CompileShader(unsigned int type, const std::string& source)
 
 static unsigned int CreateShader(const std::string& vertexShader, const std::string& fragmentShader)
 {
-	unsigned int program = glCreateProgram();
+	GLCall(unsigned int program = glCreateProgram());
 	//建立顶点着色器
 	unsigned int vs = CompileShader(GL_VERTEX_SHADER, vertexShader);
 	//建立片段着色器
@@ -153,29 +173,10 @@ int main(void)
 
 	std::cout << glfwGetVersionString() << std::endl;
 
-	//分析：顶点数据重复导致浪费。
-	//float positions[] = {
-	//	-0.5f, -0.5f,
-	//	 0.5f, -0.5f,
-	//	 0.5f,  0.5f,
-
-	//	 0.5f,  0.5f,
-	//	-0.5f,  0.5f,
-	//	-0.5f, -0.5f
-	//};
-	//unsigned int buffer;
-	//glGenBuffers(1, &buffer);
-	//glBindBuffer(GL_ARRAY_BUFFER, buffer);
-	//glBufferData(GL_ARRAY_BUFFER, 6 * 2 * sizeof(float), positions, GL_STATIC_DRAW);
-
-	//glEnableVertexAttribArray(0);
-	//glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), 0);
-	//------------------------
-	//改进--使用Index Buffer
 	float positions[] = {
 		-0.5f, -0.5f,	//0
-		 0.5f, -0.5f,	//1
-		 0.5f,  0.5f,	//2
+		0.5f, -0.5f,	//1
+		0.5f,  0.5f,	//2
 
 		-0.5f,  0.5f	//3
 	};
@@ -210,12 +211,15 @@ int main(void)
 		/* Render here */
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		//画两个三角形即一个正方形
-		//glDrawArrays(GL_TRIANGLES, 0, 3 * 2);
-		//使用 index buffer 应该使用glDrawElements
-		//注意 index buffer (indices[])不能使用 signed 必须是 unsigned，相应的
-		//下面的参数中不能使用GL_INT，必须是GL_UNSIGNED_INT
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+		//正确的写法
+		//glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+		//错误的写法,结果是什么都没有画出来。看看怎么获取错误信息
+		//1.
+		//GLClearError();			//清除前面函数执行产生的错误
+		//glDrawElements(GL_TRIANGLES, 6, GL_INT, nullptr);
+		//ASSERT(GLLogCall());	//获取最近函数产生的错误，并停止程序运行
+		//2.
+		GLCall(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr));
 
 		/* Swap front and back buffers */
 		glfwSwapBuffers(window);
@@ -229,4 +233,3 @@ int main(void)
 	glfwTerminate();
 	return 0;
 }
-#endif
