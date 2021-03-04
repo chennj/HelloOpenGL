@@ -190,6 +190,7 @@
     <ClCompile Include="step-05.cpp" />
     <ClCompile Include="step-06.cpp" />
     <ClCompile Include="step-07.cpp" />
+    <ClCompile Include="step-08.cpp" />
     <ClCompile Include="test-01.cpp" />
   </ItemGroup>
   <ItemGroup>

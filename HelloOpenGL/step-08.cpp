@@ -1,14 +1,14 @@
 /**
 *
-* TOPIC: Dealing with Errors in OpenGL
+* TOPIC: Uniforms in OpenGL
 *
-* -- glDebugMessageCallback if version is greater than 4.3
+* 
 *
 * 注意 -- basic expand 和 -- basic的顺序不要颠倒
 * glewInit() 必须在 glfwMakeContextCurrent(window) 后定义
 *
 */
-#ifdef __RUN__
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -41,9 +41,9 @@ static bool GLLogCall(const char* function, const char* file, int line)
 {
 	while (GLenum error = glGetError())
 	{
-		std::cout << "[OpenGL Error] (" << error << ")" 
+		std::cout << "[OpenGL Error] (" << error << ")"
 			<< function << " "
-			<< file << ":" << line 
+			<< file << ":" << line
 			<< std::endl;
 		return false;
 	}
@@ -96,17 +96,17 @@ static ShaderProgramSource ParseShader(const std::string& filepath)
 static unsigned int CompileShader(unsigned int type, const std::string& source)
 {
 	//建立一个着色器
-	unsigned int id = glCreateShader(type);
+	GLCall(unsigned int id = glCreateShader(type));
 	//需要编译的源码字符串
 	const char* src = source.c_str();
 	//将源码和着色器关联起来
-	glShaderSource(id, 1, &src, nullptr);
+	GLCall(glShaderSource(id, 1, &src, nullptr));
 	//编译源码
-	glCompileShader(id);
+	GLCall(glCompileShader(id));
 
 	// TODO: Synatx errors handling
 	int result;
-	glGetShaderiv(id, GL_COMPILE_STATUS, &result);
+	GLCall(glGetShaderiv(id, GL_COMPILE_STATUS, &result));
 	if (result == GL_FALSE)
 	{
 		int length;
@@ -133,14 +133,14 @@ static unsigned int CreateShader(const std::string& vertexShader, const std::str
 	//将这两个着色器都附加到我们的程序中，在程序中指定要附加的着色器
 	//把它想象成编译c++代码，我们有两个不同的文件: vertexShader 和 fragmentShader，
 	//将他们放入我们的 propram，然后就可以使用他们。
-	glAttachShader(program, vs);
-	glAttachShader(program, fs);
-	glLinkProgram(program);
-	glValidateProgram(program);
+	GLCall(glAttachShader(program, vs));
+	GLCall(glAttachShader(program, fs));
+	GLCall(glLinkProgram(program));
+	GLCall(glValidateProgram(program));
 
 	//将着色器链接进program后，立即释放这两个着色器
-	glDeleteShader(vs);
-	glDeleteShader(fs);
+	GLCall(glDeleteShader(vs));
+	GLCall(glDeleteShader(fs));
 
 	return program;
 }
@@ -171,6 +171,9 @@ int main(void)
 		std::cout << "error :" << glewGetErrorString(err) << std::endl;
 	}
 
+	//缓冲刷新间隔时间
+	GLCall(glfwSwapInterval(1));
+
 	std::cout << glfwGetVersionString() << std::endl;
 
 	float positions[] = {
@@ -186,24 +189,30 @@ int main(void)
 	};
 
 	unsigned int buffer;
-	glGenBuffers(1, &buffer);
-	glBindBuffer(GL_ARRAY_BUFFER, buffer);
-	glBufferData(GL_ARRAY_BUFFER, 4 * 2 * sizeof(float), positions, GL_STATIC_DRAW);
+	GLCall(glGenBuffers(1, &buffer));
+	GLCall(glBindBuffer(GL_ARRAY_BUFFER, buffer));
+	GLCall(glBufferData(GL_ARRAY_BUFFER, 4 * 2 * sizeof(float), positions, GL_STATIC_DRAW));
 
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), 0);
+	GLCall(glEnableVertexAttribArray(0));
+	GLCall(glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), 0));
 
 	unsigned int ibo;	//index buffer object = ibo;
-	glGenBuffers(1, &ibo);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(unsigned int), indices, GL_STATIC_DRAW);
+	GLCall(glGenBuffers(1, &ibo));
+	GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo));
+	GLCall(glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(unsigned int), indices, GL_STATIC_DRAW));
 	//------------------------
 
 	std::string filepath = "Basic.shader";
 	ShaderProgramSource source = ParseShader(filepath);
 
 	unsigned int shader = CreateShader(source.VertexSource, source.FragmentSource);
-	glUseProgram(shader);
+	GLCall(glUseProgram(shader));
+
+	//使用uniform
+	GLCall(int location = glGetUniformLocation(shader, "u_Color"));
+	ASSERT(location != -1);
+	float r = 0.0f;
+	float increment = 0.05f;
 
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(window))
@@ -211,15 +220,16 @@ int main(void)
 		/* Render here */
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		//正确的写法
-		//glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
-		//错误的写法,结果是什么都没有画出来。看看怎么获取错误信息
-		//1.
-		//GLClearError();			//清除前面函数执行产生的错误
-		//glDrawElements(GL_TRIANGLES, 6, GL_INT, nullptr);
-		//ASSERT(GLLogCall());	//获取最近函数产生的错误，并停止程序运行
-		//2.
+		GLCall(glUniform4f(location, r, 0.3f, 0.8f, 1.0f));
 		GLCall(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr));
+
+		if (r > 1.0f) {
+			increment = -0.05f;
+		}
+		else if (r < 0.0f) {
+			increment = 0.05f;
+		}
+		r += increment;
 
 		/* Swap front and back buffers */
 		glfwSwapBuffers(window);
@@ -228,9 +238,8 @@ int main(void)
 		glfwPollEvents();
 	}
 
-	glDeleteProgram(shader);
+	GLCall(glDeleteProgram(shader));
 
 	glfwTerminate();
 	return 0;
 }
-#endif

@@ -41,6 +41,9 @@
     <ClCompile Include="step-07.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="step-08.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Basic.shader">
