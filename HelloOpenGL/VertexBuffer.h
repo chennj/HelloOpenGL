@@ -1,5 +1,5 @@
 #ifndef __VERTEX_BUFFER_H__
-#define __VERTEX_BUFFER_H_
+#define __VERTEX_BUFFER_H__
 
 class VertexBuffer
 {

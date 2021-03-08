@@ -1,6 +1,6 @@
 /**
 *
-* TOPIC: Vertex Arrays in OpenGL
+* TOPIC: Buffer Layout Abstraction in OpenGL
 *
 * Abstracting OpenGL into Classes
 *
@@ -11,15 +11,16 @@
 *
 */
 
-#ifdef __RUN__
 #include <iostream>
 #include <fstream>
 #include <string>
 #include <sstream>
 
 #include "Renderer.h"
+
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"
+#include "VertexArray.h"
 
 struct ShaderProgramSource
 {
@@ -167,22 +168,14 @@ int main(void)
 		};
 
 		//VAO
-		//----------------------------------------------------
-		unsigned int vao;
-		GLCall(glGenVertexArrays(1, &vao));
-		GLCall(glBindVertexArray(vao));
-
+		VertexArray va;
 		//VBO
-		//----------------------------------------------------
-		VertexBuffer vbo(positions, 4 * 2 * sizeof(float));
-
-		//描述绑定的顶点缓冲区的布局,并链接VBO->VAO
-		GLCall(glEnableVertexAttribArray(0));	//指定VAO的第一个位置有效
-		GLCall(glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), 0));
-
+		VertexBuffer vb(positions, 4 * 2 * sizeof(float));
+		VertexBufferLayout layout;
+		layout.Push<float>(2);
+		va.AddBuffer(vb, layout);
 		//IBO
-		//----------------------------------------------------
-		IndexBuffer ibo(indices, 6);
+		IndexBuffer ib(indices, 6);
 
 		std::string filepath = "Basic.shader";
 		ShaderProgramSource source = ParseShader(filepath);
@@ -213,10 +206,9 @@ int main(void)
 			//重新绑定shader
 			GLCall(glUseProgram(shader));
 			GLCall(glUniform4f(location, r, 0.3f, 0.8f, 1.0f));
-			//重新绑定VAO
-			GLCall(glBindVertexArray(vao));
-			//重新绑定IBO
-			ibo.Bind();
+
+			va.Bind();
+			ib.Bind();
 
 			GLCall(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr));
 
@@ -240,4 +232,3 @@ int main(void)
 	glfwTerminate();
 	return 0;
 }
-#endif

@@ -1,5 +1,5 @@
-#ifndef __VERTEX_BUFFER_H__
-#define __VERTEX_BUFFER_H_
+#ifndef __INDEX_BUFFER_H__
+#define __INDEX_BUFFER_H__
 
 class IndexBuffer
 {
