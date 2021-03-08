@@ -183,6 +183,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="IndexBuffer.cpp" />
+    <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="step-01.cpp" />
     <ClCompile Include="step-02.cpp" />
     <ClCompile Include="step-03.cpp" />
@@ -192,10 +194,17 @@
     <ClCompile Include="step-07.cpp" />
     <ClCompile Include="step-08.cpp" />
     <ClCompile Include="step-09.cpp" />
+    <ClCompile Include="step-10.cpp" />
     <ClCompile Include="test-01.cpp" />
+    <ClCompile Include="VertexBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Basic.shader" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="IndexBuffer.h" />
+    <ClInclude Include="Renderer.h" />
+    <ClInclude Include="VertexBuffer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
