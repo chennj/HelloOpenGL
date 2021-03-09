@@ -198,6 +198,7 @@
     <ClCompile Include="step-10.cpp" />
     <ClCompile Include="step-11.cpp" />
     <ClCompile Include="step-12.cpp" />
+    <ClCompile Include="step-13.cpp" />
     <ClCompile Include="test-01.cpp" />
     <ClCompile Include="VertexArray.cpp" />
     <ClCompile Include="VertexBuffer.cpp" />

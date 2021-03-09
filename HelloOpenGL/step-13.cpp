@@ -1,17 +1,15 @@
 /**
 *
-* TOPIC: Shader Abstraction in OpenGL
-*
-*
-*
-*
+* TOPIC: Writing a Basic Renderer in OpenGL
+* -- 注：
+*	 what a material is basically a shader plus a set of data
+*	 or a shader plus all of its uniforms
 *
 * 注意 -- basic expand 和 -- basic的顺序不要颠倒
 * glewInit() 必须在 glfwMakeContextCurrent(window) 后定义
 *
 */
 
-#ifdef __RUN__
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -20,9 +18,9 @@
 #include "Renderer.h"
 
 #include "VertexBuffer.h"
+#include "VertexBufferLayout.h"
 #include "IndexBuffer.h"
 #include "VertexArray.h"
-
 #include "Shader.h"
 
 int main(void)
@@ -97,6 +95,8 @@ int main(void)
 		ib.Unbind();
 		shader.Unbind();
 
+		Renderer renderer;
+
 		float r = 0.0f;
 		float increment = 0.05f;
 
@@ -104,16 +104,13 @@ int main(void)
 		while (!glfwWindowShouldClose(window))
 		{
 			/* Render here */
-			glClear(GL_COLOR_BUFFER_BIT);
+			renderer.Clear();
 
 			//重新绑定shader
 			shader.Bind();
 			shader.SetUniform4f("u_Color", r, 0.3f, 0.8f, 1.0f);
 
-			va.Bind();
-			ib.Bind();
-
-			GLCall(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr));
+			renderer.Draw(va, ib, shader);
 
 			if (r > 1.0f) {
 				increment = -0.05f;
@@ -134,4 +131,3 @@ int main(void)
 	glfwTerminate();
 	return 0;
 }
-#endif
