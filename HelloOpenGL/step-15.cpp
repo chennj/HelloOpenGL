@@ -1,23 +1,15 @@
 /**
 *
-* TOPIC: Textures in OpenGL
+* TOPIC: Blending in OpenGL
 *
-* 当大多数人想到纹理时，他们真正想到的是在游戏中的3d对象上有一个图像，它当然不一定是3d对象，
-* 而是你在Photoshop或paint之类的东西中创建的某种图像，在你的图形应用程序中的某种表面上有这种图像，本质上就是纹理，
-* 或者至少是纹理，这就是大多数人对纹理的看法。
-* 可以把一个纹理想象成一个我们在渲染东西时可以使用的图像
-* 注：
-* 我们要说的是，屏幕上矩形的左下角是坐标（0,0），右上角是纹理的另一端，用OpenGL的术语来说就是（1,1）。
-* 因为纹理实际上并没有将纹理绑定到特定的大小，或者我们也没有将纹理坐标绑定到特定的分辨率，因为纹理可以是64X64
-* 也可能使1000X1000。所以我们需要做的基本上是为我们的矩形的每个顶点指定它应该是纹理的哪个区域，
-* 然后片段着色器将在这个区域之间插值。因此，我们渲染一个像素，比如两个顶点的中间一点，相应的片段着色器会选择
-* 纹理上相应的两个顶点坐标的一半的位置的纹理坐标。
+* -- Blending 只是决定我们如何将输出颜色与目标缓冲区中已有的颜色相结合,
+*	 我们从片段着色器输出的颜色（称为源）,
 *
 * 注意 -- basic expand 和 -- basic的顺序不要颠倒
 * glewInit() 必须在 glfwMakeContextCurrent(window) 后定义
 *
 */
-#ifdef __RUN__
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -81,8 +73,11 @@ int main(void)
 			2, 3, 0			//第二个三角形的三个顶点的索引
 		};
 
-		//指定纹理像素和矩形背景像素混合模式
-		//1 - alpha of source
+		/**
+		*
+		* blending 混合方式
+		* 具体解释：看 /doc/blend-*.jpg
+		*/
 		GLCall(glEnable(GL_BLEND));
 		GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
 
@@ -150,4 +145,3 @@ int main(void)
 	glfwTerminate();
 	return 0;
 }
-#endif
