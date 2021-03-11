@@ -9,7 +9,7 @@
 * glewInit() 必须在 glfwMakeContextCurrent(window) 后定义
 *
 */
-
+#ifdef __RUN__
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -145,3 +145,4 @@ int main(void)
 	glfwTerminate();
 	return 0;
 }
+#endif
