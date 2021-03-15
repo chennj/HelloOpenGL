@@ -1,13 +1,13 @@
 /**
 *
-* TOPIC: Creating Tests in OpenGL
+* TOPIC: Creating a Texture test in OpenGL
 *
 * -- OpenGL 用到的数学库地址：https://github.com/g-truc/glm
 * -- ImGui 窗口框架地址：https://github.com/ocornut/imgui
 *
 *
 */
-#ifdef __RUN__
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -28,6 +28,7 @@
 #include "imgui\imgui_impl_glfw_gl3.h"
 
 #include "tests\TestClearColor.h"
+#include "tests\TestTexture2D.h"
 
 int main(void)
 {
@@ -81,6 +82,7 @@ int main(void)
 		currentTest = testMenu;
 
 		testMenu->RegisterTest<tests::TestClearColor>("Clear Color");
+		testMenu->RegisterTest<tests::TestTexture2D>("2D Texture");
 
 		while (!glfwWindowShouldClose(window))
 		{
@@ -121,4 +123,3 @@ int main(void)
 	glfwTerminate();
 	return 0;
 }
-#endif

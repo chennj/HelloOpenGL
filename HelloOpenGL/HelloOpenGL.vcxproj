@@ -211,9 +211,11 @@
     <ClCompile Include="step-20.cpp" />
     <ClCompile Include="step-21.cpp" />
     <ClCompile Include="step-22.cpp" />
+    <ClCompile Include="step-23.cpp" />
     <ClCompile Include="test-01.cpp" />
     <ClCompile Include="tests\Test.cpp" />
     <ClCompile Include="tests\TestClearColor.cpp" />
+    <ClCompile Include="tests\TestTexture2D.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="VertexArray.cpp" />
     <ClCompile Include="VertexBuffer.cpp" />
@@ -237,6 +239,7 @@
     <ClInclude Include="stb_image\stb_image.h" />
     <ClInclude Include="tests\Test.h" />
     <ClInclude Include="tests\TestClearColor.h" />
+    <ClInclude Include="tests\TestTexture2D.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="VertexArray.h" />
     <ClInclude Include="VertexBuffer.h" />
