@@ -15,14 +15,11 @@
     <Filter Include="res\shaders">
       <UniqueIdentifier>{66dfc95f-6e15-4165-a723-b278aefe05cb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="第三方">
-      <UniqueIdentifier>{b5229320-9d44-4933-9275-af6da2ce80b5}</UniqueIdentifier>
+    <Filter Include="头文件\stb_image">
+      <UniqueIdentifier>{17281140-4bc0-4794-ae22-ccc5b2ca05f0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="第三方\vendor">
-      <UniqueIdentifier>{f6abae74-2ea2-4105-9309-50a1da2694d1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="第三方\vendor\stb_image">
-      <UniqueIdentifier>{24baac64-aea3-4acf-92bb-bb6bebea8851}</UniqueIdentifier>
+    <Filter Include="头文件\imgui">
+      <UniqueIdentifier>{2474dc93-71c2-4bc6-b244-b98f3d9f45c6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -89,9 +86,6 @@
     <ClCompile Include="step-14.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="stb_image.cpp">
-      <Filter>第三方\vendor\stb_image</Filter>
-    </ClCompile>
     <ClCompile Include="Texture.cpp">
       <Filter>头文件</Filter>
     </ClCompile>
@@ -106,6 +100,24 @@
     </ClCompile>
     <ClCompile Include="step-18.cpp">
       <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="step-19.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="stb_image\stb_image.cpp">
+      <Filter>头文件\stb_image</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui.cpp">
+      <Filter>头文件\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_demo.cpp">
+      <Filter>头文件\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_draw.cpp">
+      <Filter>头文件\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_impl_glfw_gl3.cpp">
+      <Filter>头文件\imgui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -132,14 +144,32 @@
     <ClInclude Include="Shader.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="stb_image.h">
-      <Filter>第三方\vendor\stb_image</Filter>
-    </ClInclude>
     <ClInclude Include="Texture.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="step-16.h">
-      <Filter>头文件</Filter>
+    <ClInclude Include="stb_image\stb_image.h">
+      <Filter>头文件\stb_image</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imconfig.h">
+      <Filter>头文件\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui.h">
+      <Filter>头文件\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui_impl_glfw_gl3.h">
+      <Filter>头文件\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui_internal.h">
+      <Filter>头文件\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\stb_rect_pack.h">
+      <Filter>头文件\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\stb_textedit.h">
+      <Filter>头文件\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\stb_truetype.h">
+      <Filter>头文件\imgui</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

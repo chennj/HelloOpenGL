@@ -1,8 +1,9 @@
 /**
 *
-* TOPIC: Model View Projection Matrices in OpenGL
+* TOPIC: ImGui in OpenGL
 *
 * -- OpenGL 用到的数学库地址：https://github.com/g-truc/glm
+* -- ImGui 窗口框架地址：https://github.com/ocornut/imgui
 * -- orthod projection		正交投影一般用于2d
 * -- perspective projection 透视投影一般用于3d
 * -- normalized device coordinate (space)
@@ -14,14 +15,14 @@
 *	 模型变换：被观察物体自身的旋转、缩放、错切、平移变换
 *	 视图变换：变换观察者的位置，在场景中放置照相机并让它指向某个方向
 *	 投影变换：投影变换将在模型变换->视图变换之后应用到顶点上，它将指定一个完成的场景
-	（所有视图模型变换都已完成）是如何投影到屏幕上的最终图像。
-	 即将物体的顶点坐标转换进到标准化设备坐标空间，即-1到1之间。
+（所有视图模型变换都已完成）是如何投影到屏幕上的最终图像。
+即将物体的顶点坐标转换进到标准化设备坐标空间，即-1到1之间。
 *
 * 注意 -- basic expand 和 -- basic的顺序不要颠倒
 * glewInit() 必须在 glfwMakeContextCurrent(window) 后定义
 *
 */
-#ifdef __RUN__
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -37,7 +38,9 @@
 
 #include "glm\glm.hpp"
 #include "glm\gtc\matrix_transform.hpp"
-#include "step-16.h"
+
+#include "imgui\imgui.h"
+#include "imgui\imgui_impl_glfw_gl3.h"
 
 int main(void)
 {
@@ -81,11 +84,11 @@ int main(void)
 		* 将传递给Basic.shader的gl_Position
 		*/
 		float positions[] = {
-			 100.0f,	100.0f,	/*左下角顶点坐标*/	0.0f, 0.0f,		/*对应的纹理坐标*/
-			 200.0f,	100.0f,	/*右下角顶点坐标*/	1.0f, 0.0f,		/*对应的纹理坐标*/
-			 200.0f,	200.0f,	/*右上角顶点坐标*/	1.0f, 1.0f,		/*对应的纹理坐标*/
+			100.0f,	100.0f,	/*左下角顶点坐标*/	0.0f, 0.0f,		/*对应的纹理坐标*/
+			200.0f,	100.0f,	/*右下角顶点坐标*/	1.0f, 0.0f,		/*对应的纹理坐标*/
+			200.0f,	200.0f,	/*右上角顶点坐标*/	1.0f, 1.0f,		/*对应的纹理坐标*/
 
-			 100.0f,	200.0f,	/*左上角顶点坐标*/	0.0f, 1.0f		/*对应的纹理坐标*/
+			100.0f,	200.0f,	/*左上角顶点坐标*/	0.0f, 1.0f		/*对应的纹理坐标*/
 		};
 
 		unsigned int indices[] = {
@@ -121,13 +124,8 @@ int main(void)
 		*	 如果我有一个-0.5的顶点，它是向最左边的一个方向的四分之一，因为0.5是2的四分之一，
 		*	 所以，那么这个正交矩阵将这个位置转换成-1和1之间，那么0到-1之间的四分之一是0.25
 		*/
-		glm::mat4 proj	= glm::ortho(0.0f, 960.0f, 0.0f, 540.0f, -1.0f, 1.0f);	// 纵横比 = 9：16 保持和窗口相同的纵横比 远近比 1：1
-		// 模型变换矩阵：作用是物体像右上移动200
-		glm::mat4 model = glm::translate(glm::mat4(1.0f), glm::vec3(200, 200, 0));
-		// 视图变换矩阵：作用是物体向左移动，相当于相机向右移动。
-		glm::mat4 view	= glm::translate(glm::mat4(1.0f), glm::vec3(-100, 0, 0));
-		// mvp等于先投影然后右上移动200然后向左平移100
-		glm::mat4 mvp = proj * model * view;
+		glm::mat4 proj = glm::ortho(0.0f, 960.0f, 0.0f, 540.0f, -1.0f, 1.0f);	// 纵横比 = 9：16 保持和窗口相同的纵横比 远近比 1：1
+		glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(-100, 0, 0));
 
 		//shader																																		
 		Shader shader("Basic.shader");
@@ -135,8 +133,6 @@ int main(void)
 
 		//使用uniform
 		shader.SetUniform4f("u_Color", 0.8f, 0.3f, 0.8f, 1.0f);
-		//使用正交投影矩阵
-		shader.SetUniformMat4f("u_MVP", mvp);
 
 		//纹理
 		Texture texture("../res/texture/texture-01.png");
@@ -151,6 +147,12 @@ int main(void)
 
 		Renderer renderer;
 
+		ImGui::CreateContext();
+		ImGui_ImplGlfwGL3_Init(window, true);
+		ImGui::StyleColorsDark();
+
+		glm::vec3 translation(200, 200, 0);
+
 		float r = 0.0f;
 		float increment = 0.05f;
 
@@ -160,9 +162,15 @@ int main(void)
 			/* Render here */
 			renderer.Clear();
 
+			ImGui_ImplGlfwGL3_NewFrame();
+
+			glm::mat4 model = glm::translate(glm::mat4(1.0f), translation);
+			glm::mat4 mvp = proj * model * view;
+
 			//重新绑定shader
 			shader.Bind();
 			shader.SetUniform4f("u_Color", r, 0.3f, 0.8f, 1.0f);
+			shader.SetUniformMat4f("u_MVP", mvp);
 
 			renderer.Draw(va, ib, shader);
 
@@ -174,6 +182,14 @@ int main(void)
 			}
 			r += increment;
 
+			{
+				ImGui::SliderFloat3("Translation", &translation.x, 0.0f, 960.0f);
+				ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+			}
+
+			ImGui::Render();
+			ImGui_ImplGlfwGL3_RenderDrawData(ImGui::GetDrawData());
+
 			/* Swap front and back buffers */
 			glfwSwapBuffers(window);
 
@@ -182,7 +198,10 @@ int main(void)
 		}
 
 	}
+
+	// Cleanup
+	ImGui_ImplGlfwGL3_Shutdown();
+	ImGui::DestroyContext();
 	glfwTerminate();
 	return 0;
 }
-#endif

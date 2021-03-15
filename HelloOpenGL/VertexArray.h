@@ -1,5 +1,5 @@
-#ifndef __VERTEX_ARRAY__
-#define __VERTEX_ARRAY__
+#ifndef __VERTEX_ARRAY_H_
+#define __VERTEX_ARRAY_H_
 
 #include "VertexBuffer.h"
 
