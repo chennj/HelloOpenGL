@@ -1,13 +1,13 @@
 /**
 *
-* TOPIC: Setting up a Test Framework for OpenGL
+* TOPIC: Creating Tests in OpenGL
 *
 * -- OpenGL 用到的数学库地址：https://github.com/g-truc/glm
 * -- ImGui 窗口框架地址：https://github.com/ocornut/imgui
 *
 *
 */
-#ifdef __RUN__
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -76,17 +76,33 @@ int main(void)
 		ImGui_ImplGlfwGL3_Init(window, true);
 		ImGui::StyleColorsDark();
 
-		test::TestClearColor test;
+		tests::Test* currentTest = nullptr;
+		tests::TestMenu* testMenu = new tests::TestMenu(currentTest);
+		currentTest = testMenu;
+
+		testMenu->RegisterTest<tests::TestClearColor>("Clear Color");
 
 		while (!glfwWindowShouldClose(window))
 		{
+			GLCall(glClearColor(0, 0, 0, 1));
+
 			renderer.Clear();
 
-			test.OnUpdate(0.0f);
-			test.OnRender();
-
 			ImGui_ImplGlfwGL3_NewFrame();
-			test.OnImGuiRender();
+			if (currentTest)
+			{
+				currentTest->OnUpdate(0.0f);
+				currentTest->OnRender();
+				ImGui::Begin("Test");
+				if (currentTest != testMenu && ImGui::Button("<-"))
+				{
+					delete currentTest;
+					currentTest = testMenu;
+				}
+				currentTest->OnImGuiRender();
+				ImGui::End();
+			}
+
 			ImGui::Render();
 			ImGui_ImplGlfwGL3_RenderDrawData(ImGui::GetDrawData());
 
@@ -94,6 +110,9 @@ int main(void)
 			glfwPollEvents();
 		}
 
+		delete currentTest;
+		if (currentTest != testMenu)
+			delete testMenu;
 	}
 
 	// Cleanup
@@ -102,4 +121,3 @@ int main(void)
 	glfwTerminate();
 	return 0;
 }
-#endif

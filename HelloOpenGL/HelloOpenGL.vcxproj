@@ -210,7 +210,9 @@
     <ClCompile Include="step-19.cpp" />
     <ClCompile Include="step-20.cpp" />
     <ClCompile Include="step-21.cpp" />
+    <ClCompile Include="step-22.cpp" />
     <ClCompile Include="test-01.cpp" />
+    <ClCompile Include="tests\Test.cpp" />
     <ClCompile Include="tests\TestClearColor.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="VertexArray.cpp" />

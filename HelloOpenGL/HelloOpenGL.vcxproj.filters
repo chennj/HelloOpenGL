@@ -131,6 +131,12 @@
     <ClCompile Include="tests\TestClearColor.cpp">
       <Filter>头文件\tests</Filter>
     </ClCompile>
+    <ClCompile Include="step-22.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\Test.cpp">
+      <Filter>头文件\tests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Basic.shader">
