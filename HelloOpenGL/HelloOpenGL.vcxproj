@@ -211,6 +211,7 @@
     <ClCompile Include="step-20.cpp" />
     <ClCompile Include="step-21.cpp" />
     <ClCompile Include="test-01.cpp" />
+    <ClCompile Include="tests\TestClearColor.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="VertexArray.cpp" />
     <ClCompile Include="VertexBuffer.cpp" />
@@ -229,12 +230,18 @@
     <ClInclude Include="imgui\stb_truetype.h" />
     <ClInclude Include="IndexBuffer.h" />
     <ClInclude Include="Renderer.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="stb_image\stb_image.h" />
+    <ClInclude Include="tests\Test.h" />
+    <ClInclude Include="tests\TestClearColor.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="VertexArray.h" />
     <ClInclude Include="VertexBuffer.h" />
     <ClInclude Include="VertexBufferLayout.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="HelloOpenGL.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

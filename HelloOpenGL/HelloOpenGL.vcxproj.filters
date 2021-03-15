@@ -21,6 +21,9 @@
     <Filter Include="头文件\imgui">
       <UniqueIdentifier>{2474dc93-71c2-4bc6-b244-b98f3d9f45c6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\tests">
+      <UniqueIdentifier>{c262e8bc-442d-49be-8868-6fd8cce95229}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="test-01.cpp">
@@ -125,6 +128,9 @@
     <ClCompile Include="step-21.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="tests\TestClearColor.cpp">
+      <Filter>头文件\tests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Basic.shader">
@@ -177,5 +183,17 @@
     <ClInclude Include="imgui\stb_truetype.h">
       <Filter>头文件\imgui</Filter>
     </ClInclude>
+    <ClInclude Include="tests\Test.h">
+      <Filter>头文件\tests</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="tests\TestClearColor.h">
+      <Filter>头文件\tests</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="HelloOpenGL.rc" />
   </ItemGroup>
 </Project>
