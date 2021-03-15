@@ -119,6 +119,12 @@
     <ClCompile Include="imgui\imgui_impl_glfw_gl3.cpp">
       <Filter>头文件\imgui</Filter>
     </ClCompile>
+    <ClCompile Include="step-20.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="step-21.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Basic.shader">

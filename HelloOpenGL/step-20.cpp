@@ -1,6 +1,6 @@
 /**
 *
-* TOPIC: ImGui in OpenGL
+* TOPIC: Rendering Multiple Objects in OpenGL
 *
 * -- OpenGL 用到的数学库地址：https://github.com/g-truc/glm
 * -- ImGui 窗口框架地址：https://github.com/ocornut/imgui
@@ -72,23 +72,17 @@ int main(void)
 	GLCall(glfwSwapInterval(1));
 
 	std::cout << glfwGetVersionString() << std::endl;
-	//加”{}“这个东西，是为了防止出现调用glfwTerminate();
-	//vbo或ibo的析构函数还没有被调用而出现死循环导致的程序无法退出
-	//换句话说在调用glfwTerminate();之前需要先调用vbo和ibo的析构
-	//函数,因为这两个对象都用到了这个东西：
-	//while (glGetError() != GL_NO_ERROR);幽默不！！！！
-	//再说一下应为vbo和ibo是new 出来的，所以需要delete才会失效
-	//也就是说像step-09中那样使用是不会出现这种情况的。
+
 	{
 		/**
 		* 将传递给Basic.shader的gl_Position
 		*/
 		float positions[] = {
-			100.0f,	100.0f,	/*左下角顶点坐标*/	0.0f, 0.0f,		/*对应的纹理坐标*/
-			200.0f,	100.0f,	/*右下角顶点坐标*/	1.0f, 0.0f,		/*对应的纹理坐标*/
-			200.0f,	200.0f,	/*右上角顶点坐标*/	1.0f, 1.0f,		/*对应的纹理坐标*/
+			-50.0f,	-50.0f,	/*左下角顶点坐标*/	0.0f, 0.0f,		/*对应的纹理坐标*/
+			 50.0f,	-50.0f,	/*右下角顶点坐标*/	1.0f, 0.0f,		/*对应的纹理坐标*/
+			 50.0f,	 50.0f,	/*右上角顶点坐标*/	1.0f, 1.0f,		/*对应的纹理坐标*/
 
-			100.0f,	200.0f,	/*左上角顶点坐标*/	0.0f, 1.0f		/*对应的纹理坐标*/
+			-50.0f,	 50.0f,	/*左上角顶点坐标*/	0.0f, 1.0f		/*对应的纹理坐标*/
 		};
 
 		unsigned int indices[] = {
@@ -125,7 +119,7 @@ int main(void)
 		*	 所以，那么这个正交矩阵将这个位置转换成-1和1之间，那么0到-1之间的四分之一是0.25
 		*/
 		glm::mat4 proj = glm::ortho(0.0f, 960.0f, 0.0f, 540.0f, -1.0f, 1.0f);	// 纵横比 = 9：16 保持和窗口相同的纵横比 远近比 1：1
-		glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(-100, 0, 0));
+		glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, 0));
 
 		//shader																																		
 		Shader shader("Basic.shader");
@@ -151,7 +145,8 @@ int main(void)
 		ImGui_ImplGlfwGL3_Init(window, true);
 		ImGui::StyleColorsDark();
 
-		glm::vec3 translation(200, 200, 0);
+		glm::vec3 translationA(200, 200, 0);
+		glm::vec3 translationB(400, 200, 0);
 
 		float r = 0.0f;
 		float increment = 0.05f;
@@ -164,15 +159,21 @@ int main(void)
 
 			ImGui_ImplGlfwGL3_NewFrame();
 
-			glm::mat4 model = glm::translate(glm::mat4(1.0f), translation);
-			glm::mat4 mvp = proj * model * view;
+			{
+				glm::mat4 model = glm::translate(glm::mat4(1.0f), translationA);
+				glm::mat4 mvp = proj * model * view;
+				shader.Bind();
+				shader.SetUniformMat4f("u_MVP", mvp);
+				renderer.Draw(va, ib, shader);
+			}
+			{
+				glm::mat4 model = glm::translate(glm::mat4(1.0f), translationB);
+				glm::mat4 mvp = proj * model * view;
+				shader.Bind();
+				shader.SetUniformMat4f("u_MVP", mvp);
+				renderer.Draw(va, ib, shader);
+			}
 
-			//重新绑定shader
-			shader.Bind();
-			shader.SetUniform4f("u_Color", r, 0.3f, 0.8f, 1.0f);
-			shader.SetUniformMat4f("u_MVP", mvp);
-
-			renderer.Draw(va, ib, shader);
 
 			if (r > 1.0f) {
 				increment = -0.05f;
@@ -183,7 +184,8 @@ int main(void)
 			r += increment;
 
 			{
-				ImGui::SliderFloat3("Translation", &translation.x, 0.0f, 960.0f);
+				ImGui::SliderFloat3("Translation A", &translationA.x, 0.0f, 960.0f);
+				ImGui::SliderFloat3("Translation B", &translationB.x, 0.0f, 960.0f);
 				ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
 			}
 
