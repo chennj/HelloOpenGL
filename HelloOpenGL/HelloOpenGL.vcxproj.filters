@@ -149,12 +149,21 @@
     <ClCompile Include="tests\TestBatchColor.cpp">
       <Filter>头文件\tests</Filter>
     </ClCompile>
+    <ClCompile Include="step-25.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\TestBatchTexture2D.cpp">
+      <Filter>头文件\tests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Basic.shader">
       <Filter>res\shaders</Filter>
     </None>
     <None Include="Color.shader">
+      <Filter>res\shaders</Filter>
+    </None>
+    <None Include="ColorAndTexture.shader">
       <Filter>res\shaders</Filter>
     </None>
   </ItemGroup>
@@ -207,9 +216,6 @@
     <ClInclude Include="tests\Test.h">
       <Filter>头文件\tests</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="tests\TestClearColor.h">
       <Filter>头文件\tests</Filter>
     </ClInclude>
@@ -219,8 +225,8 @@
     <ClInclude Include="tests\TestBatchColor.h">
       <Filter>头文件\tests</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="HelloOpenGL.rc" />
+    <ClInclude Include="tests\TestBatchTexture2D.h">
+      <Filter>头文件\tests</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

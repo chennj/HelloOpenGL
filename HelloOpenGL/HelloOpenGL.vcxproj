@@ -213,9 +213,11 @@
     <ClCompile Include="step-22.cpp" />
     <ClCompile Include="step-23.cpp" />
     <ClCompile Include="step-24.cpp" />
+    <ClCompile Include="step-25.cpp" />
     <ClCompile Include="test-01.cpp" />
     <ClCompile Include="tests\Test.cpp" />
     <ClCompile Include="tests\TestBatchColor.cpp" />
+    <ClCompile Include="tests\TestBatchTexture2D.cpp" />
     <ClCompile Include="tests\TestClearColor.cpp" />
     <ClCompile Include="tests\TestTexture2D.cpp" />
     <ClCompile Include="Texture.cpp" />
@@ -226,6 +228,7 @@
   <ItemGroup>
     <None Include="Basic.shader" />
     <None Include="Color.shader" />
+    <None Include="ColorAndTexture.shader" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imgui\imconfig.h" />
@@ -237,20 +240,17 @@
     <ClInclude Include="imgui\stb_truetype.h" />
     <ClInclude Include="IndexBuffer.h" />
     <ClInclude Include="Renderer.h" />
-    <ClInclude Include="resource.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="stb_image\stb_image.h" />
     <ClInclude Include="tests\Test.h" />
     <ClInclude Include="tests\TestBatchColor.h" />
+    <ClInclude Include="tests\TestBatchTexture2D.h" />
     <ClInclude Include="tests\TestClearColor.h" />
     <ClInclude Include="tests\TestTexture2D.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="VertexArray.h" />
     <ClInclude Include="VertexBuffer.h" />
     <ClInclude Include="VertexBufferLayout.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="HelloOpenGL.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
