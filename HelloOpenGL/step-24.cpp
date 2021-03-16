@@ -1,13 +1,13 @@
 /**
 *
-* TOPIC: Creating a Texture test in OpenGL
+* TOPIC: Batch Rendering - An Introduction/Batch Rendering - Color
 *
 * -- OpenGL 用到的数学库地址：https://github.com/g-truc/glm
 * -- ImGui 窗口框架地址：https://github.com/ocornut/imgui
 *
-*
+* -- Batch Rendering : /doc/Batch Rendering.JPG
 */
-#ifdef __RUN__
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -29,6 +29,7 @@
 
 #include "tests\TestClearColor.h"
 #include "tests\TestTexture2D.h"
+#include "tests\TestBatchColor.h"
 
 int main(void)
 {
@@ -83,6 +84,7 @@ int main(void)
 
 		testMenu->RegisterTest<tests::TestClearColor>("Clear Color");
 		testMenu->RegisterTest<tests::TestTexture2D>("2D Texture");
+		testMenu->RegisterTest<tests::TestBatchColor>("Batch Color");
 
 		while (!glfwWindowShouldClose(window))
 		{
@@ -123,4 +125,3 @@ int main(void)
 	glfwTerminate();
 	return 0;
 }
-#endif
