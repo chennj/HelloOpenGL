@@ -1,13 +1,14 @@
 /**
 *
-* TOPIC: Batch Rendering - Dynamic Geometry
+* TOPIC: Batch Rendering - Indices
 *
 * -- OpenGL 用到的数学库地址：https://github.com/g-truc/glm
 * -- ImGui 窗口框架地址：https://github.com/ocornut/imgui
+* -- OpenGL API Document http://docs.gl/
 *
 * -- Batch Rendering : /doc/Batch Rendering.JPG
 */
-#ifdef __RUN__
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -32,6 +33,7 @@
 #include "tests\TestBatchColor.h"
 #include "tests\TestBatchTexture2D.h"
 #include "tests\TestBatchDynamicGeometry.h"
+#include "tests\TestBatchIndices.h"
 
 int main(void)
 {
@@ -89,6 +91,7 @@ int main(void)
 		testMenu->RegisterTest<tests::TestBatchColor>("Batch Color");
 		testMenu->RegisterTest<tests::TestBatchTexture2D>("Batch 2D Texture");
 		testMenu->RegisterTest<tests::TestBatchDynamicGeometry>("Batch Dynamic Geometries");
+		testMenu->RegisterTest<tests::TestBatchIndices>("Batch Indices");
 
 		while (!glfwWindowShouldClose(window))
 		{
@@ -129,4 +132,3 @@ int main(void)
 	glfwTerminate();
 	return 0;
 }
-#endif
