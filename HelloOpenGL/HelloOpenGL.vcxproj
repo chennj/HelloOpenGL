@@ -214,9 +214,11 @@
     <ClCompile Include="step-23.cpp" />
     <ClCompile Include="step-24.cpp" />
     <ClCompile Include="step-25.cpp" />
+    <ClCompile Include="step-26.cpp" />
     <ClCompile Include="test-01.cpp" />
     <ClCompile Include="tests\Test.cpp" />
     <ClCompile Include="tests\TestBatchColor.cpp" />
+    <ClCompile Include="tests\TestBatchDynamicGeometry.cpp" />
     <ClCompile Include="tests\TestBatchTexture2D.cpp" />
     <ClCompile Include="tests\TestClearColor.cpp" />
     <ClCompile Include="tests\TestTexture2D.cpp" />
@@ -244,6 +246,7 @@
     <ClInclude Include="stb_image\stb_image.h" />
     <ClInclude Include="tests\Test.h" />
     <ClInclude Include="tests\TestBatchColor.h" />
+    <ClInclude Include="tests\TestBatchDynamicGeometry.h" />
     <ClInclude Include="tests\TestBatchTexture2D.h" />
     <ClInclude Include="tests\TestClearColor.h" />
     <ClInclude Include="tests\TestTexture2D.h" />

@@ -1,13 +1,13 @@
 /**
 *
-* TOPIC: Batch Rendering - Texture
+* TOPIC: Batch Rendering - Dynamic Geometry
 *
 * -- OpenGL 用到的数学库地址：https://github.com/g-truc/glm
 * -- ImGui 窗口框架地址：https://github.com/ocornut/imgui
 *
 * -- Batch Rendering : /doc/Batch Rendering.JPG
 */
-#ifdef __RUN__
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -31,6 +31,7 @@
 #include "tests\TestTexture2D.h"
 #include "tests\TestBatchColor.h"
 #include "tests\TestBatchTexture2D.h"
+#include "tests\TestBatchDynamicGeometry.h"
 
 int main(void)
 {
@@ -87,6 +88,7 @@ int main(void)
 		testMenu->RegisterTest<tests::TestTexture2D>("2D Texture");
 		testMenu->RegisterTest<tests::TestBatchColor>("Batch Color");
 		testMenu->RegisterTest<tests::TestBatchTexture2D>("Batch 2D Texture");
+		testMenu->RegisterTest<tests::TestBatchDynamicGeometry>("Batch Dynamic Geometries");
 
 		while (!glfwWindowShouldClose(window))
 		{
@@ -127,4 +129,3 @@ int main(void)
 	glfwTerminate();
 	return 0;
 }
-#endif
