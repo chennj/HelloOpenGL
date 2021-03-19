@@ -1,14 +1,18 @@
 /**
 *
-* TOPIC: Batch Rendering - Indices
+* TOPIC: Writing a BATCH RENDERER
 *
 * -- OpenGL 用到的数学库地址：https://github.com/g-truc/glm
 * -- ImGui 窗口框架地址：https://github.com/ocornut/imgui
 * -- OpenGL API Document http://docs.gl/
 *
 * -- Batch Rendering : /doc/Batch Rendering.JPG
+* -- 这时这个课程的最后一节了，代码做了很多修改，所以和原版有许多差别。
+*	 个人感觉更适合学习，谢谢美国佬-佐夫。
+*	 下面开始游戏引擎
+*	 再长的路都会走完，除非停下或死去。完结撒花^-^.
 */
-#ifdef __RUN__
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -34,6 +38,7 @@
 #include "tests\TestBatchTexture2D.h"
 #include "tests\TestBatchDynamicGeometry.h"
 #include "tests\TestBatchIndices.h"
+#include "tests\TestBatchRenderer.h"
 
 int main(void)
 {
@@ -92,6 +97,7 @@ int main(void)
 		testMenu->RegisterTest<tests::TestBatchTexture2D>("Batch 2D Texture");
 		testMenu->RegisterTest<tests::TestBatchDynamicGeometry>("Batch Dynamic Geometries");
 		testMenu->RegisterTest<tests::TestBatchIndices>("Batch Indices");
+		testMenu->RegisterTest<tests::TestBatchRenderer>("Batch Renderer");
 
 		while (!glfwWindowShouldClose(window))
 		{
@@ -132,4 +138,3 @@ int main(void)
 	glfwTerminate();
 	return 0;
 }
-#endif

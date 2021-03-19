@@ -264,14 +264,12 @@ namespace tests
 
 		GLCall(glBufferSubData(GL_ARRAY_BUFFER, 0, vertices.size() * sizeof(Vertex), vertices.data()));
 
-		_Shader->Bind();
-
 		glm::mat4 model = glm::translate(glm::mat4(1.0f), _Translation);
 		glm::mat4 mvp = _Proj * _View * model;
+		_Shader->Bind();
 		_Shader->SetUniformMat4f("u_MVP", mvp);
 
 		GLCall(glBindVertexArray(_VA));
-		GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _IB));
 		GLCall(glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, nullptr));
 	}
 

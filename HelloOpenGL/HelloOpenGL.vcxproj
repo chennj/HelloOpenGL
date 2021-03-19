@@ -216,11 +216,13 @@
     <ClCompile Include="step-25.cpp" />
     <ClCompile Include="step-26.cpp" />
     <ClCompile Include="step-27.cpp" />
+    <ClCompile Include="step-28.cpp" />
     <ClCompile Include="test-01.cpp" />
     <ClCompile Include="tests\Test.cpp" />
     <ClCompile Include="tests\TestBatchColor.cpp" />
     <ClCompile Include="tests\TestBatchDynamicGeometry.cpp" />
     <ClCompile Include="tests\TestBatchIndices.cpp" />
+    <ClCompile Include="tests\TestBatchRenderer.cpp" />
     <ClCompile Include="tests\TestBatchTexture2D.cpp" />
     <ClCompile Include="tests\TestClearColor.cpp" />
     <ClCompile Include="tests\TestTexture2D.cpp" />
@@ -231,6 +233,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Basic.shader" />
+    <None Include="BatchRenderer.shader" />
     <None Include="Color.shader" />
     <None Include="ColorAndTexture.shader" />
   </ItemGroup>
@@ -250,6 +253,7 @@
     <ClInclude Include="tests\TestBatchColor.h" />
     <ClInclude Include="tests\TestBatchDynamicGeometry.h" />
     <ClInclude Include="tests\TestBatchIndices.h" />
+    <ClInclude Include="tests\TestBatchRenderer.h" />
     <ClInclude Include="tests\TestBatchTexture2D.h" />
     <ClInclude Include="tests\TestClearColor.h" />
     <ClInclude Include="tests\TestTexture2D.h" />

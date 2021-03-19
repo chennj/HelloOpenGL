@@ -167,6 +167,12 @@
     <ClCompile Include="tests\TestBatchIndices.cpp">
       <Filter>头文件\tests</Filter>
     </ClCompile>
+    <ClCompile Include="step-28.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\TestBatchRenderer.cpp">
+      <Filter>头文件\tests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Basic.shader">
@@ -176,6 +182,9 @@
       <Filter>res\shaders</Filter>
     </None>
     <None Include="ColorAndTexture.shader">
+      <Filter>res\shaders</Filter>
+    </None>
+    <None Include="BatchRenderer.shader">
       <Filter>res\shaders</Filter>
     </None>
   </ItemGroup>
@@ -244,6 +253,9 @@
       <Filter>头文件\tests</Filter>
     </ClInclude>
     <ClInclude Include="tests\TestBatchIndices.h">
+      <Filter>头文件\tests</Filter>
+    </ClInclude>
+    <ClInclude Include="tests\TestBatchRenderer.h">
       <Filter>头文件\tests</Filter>
     </ClInclude>
   </ItemGroup>
