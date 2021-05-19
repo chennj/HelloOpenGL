@@ -99,91 +99,91 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="main\step-01.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\zmain</Filter>
     </ClCompile>
     <ClCompile Include="main\step-02.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\zmain</Filter>
     </ClCompile>
     <ClCompile Include="main\step-03.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\zmain</Filter>
     </ClCompile>
     <ClCompile Include="main\step-04.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\zmain</Filter>
     </ClCompile>
     <ClCompile Include="main\step-05.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\zmain</Filter>
     </ClCompile>
     <ClCompile Include="main\step-06.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\zmain</Filter>
     </ClCompile>
     <ClCompile Include="main\step-07.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\zmain</Filter>
     </ClCompile>
     <ClCompile Include="main\step-08.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\zmain</Filter>
     </ClCompile>
     <ClCompile Include="main\step-09.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\zmain</Filter>
     </ClCompile>
     <ClCompile Include="main\step-10.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\zmain</Filter>
     </ClCompile>
     <ClCompile Include="main\step-11.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\zmain</Filter>
     </ClCompile>
     <ClCompile Include="main\step-12.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\zmain</Filter>
     </ClCompile>
     <ClCompile Include="main\step-13.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\zmain</Filter>
     </ClCompile>
     <ClCompile Include="main\step-14.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\zmain</Filter>
     </ClCompile>
     <ClCompile Include="main\step-15.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\zmain</Filter>
     </ClCompile>
     <ClCompile Include="main\step-16.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\zmain</Filter>
     </ClCompile>
     <ClCompile Include="main\step-17.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\zmain</Filter>
     </ClCompile>
     <ClCompile Include="main\step-18.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\zmain</Filter>
     </ClCompile>
     <ClCompile Include="main\step-19.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\zmain</Filter>
     </ClCompile>
     <ClCompile Include="main\step-20.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\zmain</Filter>
     </ClCompile>
     <ClCompile Include="main\step-21.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\zmain</Filter>
     </ClCompile>
     <ClCompile Include="main\step-22.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\zmain</Filter>
     </ClCompile>
     <ClCompile Include="main\step-23.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\zmain</Filter>
     </ClCompile>
     <ClCompile Include="main\step-24.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\zmain</Filter>
     </ClCompile>
     <ClCompile Include="main\step-25.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\zmain</Filter>
     </ClCompile>
     <ClCompile Include="main\step-26.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\zmain</Filter>
     </ClCompile>
     <ClCompile Include="main\step-27.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\zmain</Filter>
     </ClCompile>
     <ClCompile Include="main\step-28.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\zmain</Filter>
     </ClCompile>
     <ClCompile Include="main\test-01.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\zmain</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -274,6 +274,9 @@
       <Filter>assets\shaders</Filter>
     </None>
     <None Include="shaders\ColorAndTexture.shader">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="shaders\Basic3D.shader">
       <Filter>assets\shaders</Filter>
     </None>
   </ItemGroup>

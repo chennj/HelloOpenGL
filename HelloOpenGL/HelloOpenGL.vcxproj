@@ -263,6 +263,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\Basic.shader" />
+    <None Include="shaders\Basic3D.shader" />
     <None Include="shaders\BatchRenderer.shader" />
     <None Include="shaders\Color.shader" />
     <None Include="shaders\ColorAndTexture.shader" />

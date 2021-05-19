@@ -17,8 +17,14 @@ namespace tests
 		Scope<Shader> _Shader;
 		Scope<Texture> _Texture;
 
-		glm::vec3 _Translation;
-		glm::mat4 _Proj, _View;
+		glm::vec3 _MPosition;
+		glm::mat4 _MRotation;
+		glm::vec3 _MRotationDirection;
+		float _MRotationAngle;
+		glm::vec3 _MScale;
+
+		glm::mat4 _Proj, _View, _Model;
+		float _FOV;
 
 	public:
 		TestTexture3D();

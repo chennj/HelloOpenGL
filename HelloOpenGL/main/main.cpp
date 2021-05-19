@@ -1,3 +1,15 @@
+/**
+* --------------------------------------------------------------------------
+* MVP:
+* M 模型变换：将物体从局部坐标系变换到世界坐标系，决定物体所在的场景，
+*			比如物体是一个沙发，通过模型变换，决定这个沙发到底是在上海，还是在洛杉矶。
+* V 视图变换：将相机作为观察点，并决定相机的位置的位置和方向，即世界坐标系变换到观察坐标系
+*			比如把相机放置在物体的左边（相当于物体向右边移动）
+* P 投影变换：选择观察的方式，正交投影或透视投影（视锥体，近大远小），将物体投影到裁剪空间，
+*			比如物体是一个沙发，你到底是从左边看他，还是右边。使近距离看，还是离远了看，
+*			是从上到下看，还是从下往上看，如果里的太近你可能只看得到沙发的一部分。
+*/
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -35,7 +47,7 @@ int main(void)
 		return -1;
 
 	/* Create a windowed mode window and its OpenGL context */
-	window = glfwCreateWindow(960, 540, "Hello World", NULL, NULL);
+	window = glfwCreateWindow(1200, 600, "Hello World", NULL, NULL);
 	if (!window)
 	{
 		glfwTerminate();
