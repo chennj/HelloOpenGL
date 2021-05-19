@@ -3,9 +3,9 @@
 
 #include "Test.h"
 
-#include "../VertexBuffer.h"
-#include "../VertexBufferLayout.h"
-#include "../Texture.h"
+#include "../core/VertexBuffer.h"
+#include "../core/VertexBufferLayout.h"
+#include "../core/Texture.h"
 
 #include <memory>
 
@@ -35,4 +35,3 @@ namespace tests
 	};
 }
 #endif // ! __TEST_CLEAR_COLOR_H__
-

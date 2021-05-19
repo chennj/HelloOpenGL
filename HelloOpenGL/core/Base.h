@@ -1,6 +1,4 @@
-#ifndef __RENDERER_H_
-#define __RENDERER_H_
-
+#pragma once
 // import opengl third part library
 // ---------------------------------
 // -- basic expand
@@ -22,17 +20,3 @@
 void GLClearError();
 
 bool GLLogCall(const char* function, const char* file, int line);
-
-#include "VertexArray.h"
-#include "IndexBuffer.h"
-#include "Shader.h"
-
-class Renderer
-{
-private:
-
-public:
-	void Clear() const;
-	void Draw(const VertexArray& va, const IndexBuffer& ib, const Shader& shader) const;
-};
-#endif

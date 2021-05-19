@@ -1,10 +1,10 @@
 #include "TestTexture2D.h"
 
-#include "../Renderer.h"
+#include "../core/Renderer.h"
 #include "../imgui/imgui.h"
 
-#include "glm\glm.hpp"
-#include "glm\gtc\matrix_transform.hpp"
+#include "glm/glm.hpp"
+#include "glm/gtc/matrix_transform.hpp"
 
 namespace tests
 {
@@ -38,7 +38,7 @@ namespace tests
 		_VAO->AddBuffer(*_VBO, layout);
 		_IndexBuffer = std::make_unique<IndexBuffer>(indices, 6);
 																																	
-		_Shader = std::make_unique<Shader>("Basic.shader");
+		_Shader = std::make_unique<Shader>("shaders/Basic.shader");
 		_Shader->Bind();
 		_Shader->SetUniform4f("u_Color", 0.8f, 0.3f, 0.8f, 1.0f);
 
@@ -84,6 +84,8 @@ namespace tests
 		ImGui::SliderFloat3("Translation A", &_TranslationA.x, 0.0f, 960.0f);
 		ImGui::SliderFloat3("Translation B", &_TranslationB.x, 0.0f, 960.0f);
 		ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+		uint32_t textureId = _Texture->GetRendererID();
+		ImGui::Image((void*)textureId, { 64.0f, 64.0f });
 	}
 
 }

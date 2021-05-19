@@ -2,10 +2,10 @@
 
 #include "../imgui/imgui.h"
 
-#include "glm\glm.hpp"
-#include "glm\gtc\matrix_transform.hpp"
+#include "glm/glm.hpp"
+#include "glm/gtc/matrix_transform.hpp"
 
-#include "..\stb_image\stb_image.h"
+#include "../stb_image/stb_image.h"
 
 #include <array>
 
@@ -144,7 +144,7 @@ namespace tests
 		_Tex01 = LoadTexture("../res/texture/texture-01.png");
 		_Tex02 = LoadTexture("../res/texture/texture-02.png");
 
-		_Shader = std::make_unique<Shader>("ColorAndTexture.shader");
+		_Shader = std::make_unique<Shader>("shaders/ColorAndTexture.shader");
 		GLCall(glUseProgram(_Shader->GetRendererID()));
 		GLCall(auto loc = glGetUniformLocation(_Shader->GetRendererID(), "u_Textures"));
 		int samples[2] = { 0,1 };

@@ -9,254 +9,272 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="res">
-      <UniqueIdentifier>{77556bcb-a436-47c9-9d23-7cb0860f3bca}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="res\shaders">
-      <UniqueIdentifier>{66dfc95f-6e15-4165-a723-b278aefe05cb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="头文件\stb_image">
-      <UniqueIdentifier>{17281140-4bc0-4794-ae22-ccc5b2ca05f0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="头文件\imgui">
+    <Filter Include="源文件\imgui">
       <UniqueIdentifier>{2474dc93-71c2-4bc6-b244-b98f3d9f45c6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="头文件\tests">
+    <Filter Include="源文件\stb_image">
+      <UniqueIdentifier>{17281140-4bc0-4794-ae22-ccc5b2ca05f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\tests">
       <UniqueIdentifier>{c262e8bc-442d-49be-8868-6fd8cce95229}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="assets">
+      <UniqueIdentifier>{77556bcb-a436-47c9-9d23-7cb0860f3bca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="assets\shaders">
+      <UniqueIdentifier>{66dfc95f-6e15-4165-a723-b278aefe05cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\core">
+      <UniqueIdentifier>{9b32357f-b951-41ec-8802-8588f7dec115}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\zmain">
+      <UniqueIdentifier>{d78a569a-fb43-41f2-a378-a581b90239d8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="test-01.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="step-01.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="step-02.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="step-03.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="step-04.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="step-05.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="step-06.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="step-07.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="step-08.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="step-09.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="step-10.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Renderer.cpp">
-      <Filter>头文件</Filter>
-    </ClCompile>
-    <ClCompile Include="VertexBuffer.cpp">
-      <Filter>头文件</Filter>
-    </ClCompile>
-    <ClCompile Include="IndexBuffer.cpp">
-      <Filter>头文件</Filter>
-    </ClCompile>
-    <ClCompile Include="step-11.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="VertexArray.cpp">
-      <Filter>头文件</Filter>
-    </ClCompile>
-    <ClCompile Include="VertexBufferLayout.cpp">
-      <Filter>头文件</Filter>
-    </ClCompile>
-    <ClCompile Include="step-12.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Shader.cpp">
-      <Filter>头文件</Filter>
-    </ClCompile>
-    <ClCompile Include="step-13.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="step-14.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Texture.cpp">
-      <Filter>头文件</Filter>
-    </ClCompile>
-    <ClCompile Include="step-15.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="step-16.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="step-17.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="step-18.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="step-19.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="stb_image\stb_image.cpp">
-      <Filter>头文件\stb_image</Filter>
+      <Filter>源文件\stb_image</Filter>
     </ClCompile>
     <ClCompile Include="imgui\imgui.cpp">
-      <Filter>头文件\imgui</Filter>
+      <Filter>源文件\imgui</Filter>
     </ClCompile>
     <ClCompile Include="imgui\imgui_demo.cpp">
-      <Filter>头文件\imgui</Filter>
+      <Filter>源文件\imgui</Filter>
     </ClCompile>
     <ClCompile Include="imgui\imgui_draw.cpp">
-      <Filter>头文件\imgui</Filter>
+      <Filter>源文件\imgui</Filter>
     </ClCompile>
     <ClCompile Include="imgui\imgui_impl_glfw_gl3.cpp">
-      <Filter>头文件\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="step-20.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="step-21.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\imgui</Filter>
     </ClCompile>
     <ClCompile Include="tests\TestClearColor.cpp">
-      <Filter>头文件\tests</Filter>
-    </ClCompile>
-    <ClCompile Include="step-22.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\tests</Filter>
     </ClCompile>
     <ClCompile Include="tests\Test.cpp">
-      <Filter>头文件\tests</Filter>
-    </ClCompile>
-    <ClCompile Include="step-23.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\tests</Filter>
     </ClCompile>
     <ClCompile Include="tests\TestTexture2D.cpp">
-      <Filter>头文件\tests</Filter>
-    </ClCompile>
-    <ClCompile Include="step-24.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\tests</Filter>
     </ClCompile>
     <ClCompile Include="tests\TestBatchColor.cpp">
-      <Filter>头文件\tests</Filter>
-    </ClCompile>
-    <ClCompile Include="step-25.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\tests</Filter>
     </ClCompile>
     <ClCompile Include="tests\TestBatchTexture2D.cpp">
-      <Filter>头文件\tests</Filter>
-    </ClCompile>
-    <ClCompile Include="step-26.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\tests</Filter>
     </ClCompile>
     <ClCompile Include="tests\TestBatchDynamicGeometry.cpp">
-      <Filter>头文件\tests</Filter>
-    </ClCompile>
-    <ClCompile Include="step-27.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\tests</Filter>
     </ClCompile>
     <ClCompile Include="tests\TestBatchIndices.cpp">
-      <Filter>头文件\tests</Filter>
-    </ClCompile>
-    <ClCompile Include="step-28.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\tests</Filter>
     </ClCompile>
     <ClCompile Include="tests\TestBatchRenderer.cpp">
-      <Filter>头文件\tests</Filter>
+      <Filter>源文件\tests</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\TestTexture3D.cpp">
+      <Filter>源文件\tests</Filter>
+    </ClCompile>
+    <ClCompile Include="core\IndexBuffer.cpp">
+      <Filter>源文件\core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\Renderer.cpp">
+      <Filter>源文件\core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\Shader.cpp">
+      <Filter>源文件\core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\Texture.cpp">
+      <Filter>源文件\core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\VertexArray.cpp">
+      <Filter>源文件\core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\VertexBuffer.cpp">
+      <Filter>源文件\core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\VertexBufferLayout.cpp">
+      <Filter>源文件\core</Filter>
+    </ClCompile>
+    <ClCompile Include="main\main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="main\step-01.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="main\step-02.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="main\step-03.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="main\step-04.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="main\step-05.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="main\step-06.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="main\step-07.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="main\step-08.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="main\step-09.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="main\step-10.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="main\step-11.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="main\step-12.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="main\step-13.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="main\step-14.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="main\step-15.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="main\step-16.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="main\step-17.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="main\step-18.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="main\step-19.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="main\step-20.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="main\step-21.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="main\step-22.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="main\step-23.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="main\step-24.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="main\step-25.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="main\step-26.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="main\step-27.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="main\step-28.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="main\test-01.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Basic.shader">
-      <Filter>res\shaders</Filter>
-    </None>
-    <None Include="Color.shader">
-      <Filter>res\shaders</Filter>
-    </None>
-    <None Include="ColorAndTexture.shader">
-      <Filter>res\shaders</Filter>
-    </None>
-    <None Include="BatchRenderer.shader">
-      <Filter>res\shaders</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Renderer.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="VertexBuffer.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="IndexBuffer.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="VertexArray.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="VertexBufferLayout.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Shader.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="stb_image\stb_image.h">
-      <Filter>头文件\stb_image</Filter>
+      <Filter>源文件\stb_image</Filter>
     </ClInclude>
     <ClInclude Include="imgui\imconfig.h">
-      <Filter>头文件\imgui</Filter>
+      <Filter>源文件\imgui</Filter>
     </ClInclude>
     <ClInclude Include="imgui\imgui.h">
-      <Filter>头文件\imgui</Filter>
+      <Filter>源文件\imgui</Filter>
     </ClInclude>
     <ClInclude Include="imgui\imgui_impl_glfw_gl3.h">
-      <Filter>头文件\imgui</Filter>
+      <Filter>源文件\imgui</Filter>
     </ClInclude>
     <ClInclude Include="imgui\imgui_internal.h">
-      <Filter>头文件\imgui</Filter>
+      <Filter>源文件\imgui</Filter>
     </ClInclude>
     <ClInclude Include="imgui\stb_rect_pack.h">
-      <Filter>头文件\imgui</Filter>
+      <Filter>源文件\imgui</Filter>
     </ClInclude>
     <ClInclude Include="imgui\stb_textedit.h">
-      <Filter>头文件\imgui</Filter>
+      <Filter>源文件\imgui</Filter>
     </ClInclude>
     <ClInclude Include="imgui\stb_truetype.h">
-      <Filter>头文件\imgui</Filter>
+      <Filter>源文件\imgui</Filter>
     </ClInclude>
     <ClInclude Include="tests\Test.h">
-      <Filter>头文件\tests</Filter>
+      <Filter>源文件\tests</Filter>
     </ClInclude>
     <ClInclude Include="tests\TestClearColor.h">
-      <Filter>头文件\tests</Filter>
+      <Filter>源文件\tests</Filter>
     </ClInclude>
     <ClInclude Include="tests\TestTexture2D.h">
-      <Filter>头文件\tests</Filter>
+      <Filter>源文件\tests</Filter>
     </ClInclude>
     <ClInclude Include="tests\TestBatchColor.h">
-      <Filter>头文件\tests</Filter>
+      <Filter>源文件\tests</Filter>
     </ClInclude>
     <ClInclude Include="tests\TestBatchTexture2D.h">
-      <Filter>头文件\tests</Filter>
+      <Filter>源文件\tests</Filter>
     </ClInclude>
     <ClInclude Include="tests\TestBatchDynamicGeometry.h">
-      <Filter>头文件\tests</Filter>
+      <Filter>源文件\tests</Filter>
     </ClInclude>
     <ClInclude Include="tests\TestBatchIndices.h">
-      <Filter>头文件\tests</Filter>
+      <Filter>源文件\tests</Filter>
     </ClInclude>
     <ClInclude Include="tests\TestBatchRenderer.h">
-      <Filter>头文件\tests</Filter>
+      <Filter>源文件\tests</Filter>
     </ClInclude>
+    <ClInclude Include="tests\TestTexture3D.h">
+      <Filter>源文件\tests</Filter>
+    </ClInclude>
+    <ClInclude Include="core\IndexBuffer.h">
+      <Filter>源文件\core</Filter>
+    </ClInclude>
+    <ClInclude Include="core\Renderer.h">
+      <Filter>源文件\core</Filter>
+    </ClInclude>
+    <ClInclude Include="core\Shader.h">
+      <Filter>源文件\core</Filter>
+    </ClInclude>
+    <ClInclude Include="core\Texture.h">
+      <Filter>源文件\core</Filter>
+    </ClInclude>
+    <ClInclude Include="core\VertexArray.h">
+      <Filter>源文件\core</Filter>
+    </ClInclude>
+    <ClInclude Include="core\VertexBuffer.h">
+      <Filter>源文件\core</Filter>
+    </ClInclude>
+    <ClInclude Include="core\VertexBufferLayout.h">
+      <Filter>源文件\core</Filter>
+    </ClInclude>
+    <ClInclude Include="core\Base.h">
+      <Filter>源文件\core</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="shaders\Basic.shader">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="shaders\BatchRenderer.shader">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="shaders\Color.shader">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="shaders\ColorAndTexture.shader">
+      <Filter>assets\shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>

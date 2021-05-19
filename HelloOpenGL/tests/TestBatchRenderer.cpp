@@ -2,9 +2,7 @@
 
 #include "../imgui/imgui.h"
 
-#include "glm\gtc\matrix_transform.hpp"
-
-#include "..\stb_image\stb_image.h"
+#include "../stb_image/stb_image.h"
 
 #include <array>
 #include <iostream>
@@ -307,7 +305,7 @@ namespace tests
 		_Proj(glm::ortho(0.0f, 960.0f, 0.0f, 540.0f, -1.0f, 1.0f)),
 		_View(glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, 0)))
 	{
-		_Shader = std::make_unique<Shader>("BatchRenderer.shader");
+		_Shader = std::make_unique<Shader>("shaders/BatchRenderer.shader");
 		GLCall(glUseProgram(_Shader->GetRendererID()));
 		GLCall(auto loc = glGetUniformLocation(_Shader->GetRendererID(), "u_Textures"));
 		int samples[MaxTextures];

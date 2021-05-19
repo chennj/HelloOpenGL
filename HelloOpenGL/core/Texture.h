@@ -28,5 +28,6 @@ public:
 public:
 	inline int GetWidth()const { return _Width; }
 	inline int GetHeight()const { return _Height; }
+	inline int GetRendererID()const { return _RendererID; }
 };
 #endif

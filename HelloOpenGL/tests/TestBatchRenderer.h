@@ -3,9 +3,11 @@
 
 #include "Test.h"
 
-#include "../Renderer.h"
+#include "../core/Renderer.h"
 
-#include <glm/glm.hpp>
+#include "glm/glm.hpp"
+#include "glm/gtc/matrix_transform.hpp"
+
 #include <memory>
 
 // renderer 2d

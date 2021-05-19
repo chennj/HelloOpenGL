@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -22,32 +22,32 @@
     <ProjectGuid>{7DC357AB-AD70-4E3C-86ED-5AD6638E82DB}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>HelloOpenGL</RootNamespace>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -73,29 +73,29 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)/bin/$(Platform)/$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)/temp/$(Platform)/$(Configuration)\$(ProjectName)</IntDir>
-    <IncludePath>D:\VSThirdPartyLib\OpenGL\glew-2.1.0-win32\include;D:\VSThirdPartyLib\OpenGL\glfw-3.3.2.bin.WIN32\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\VSThirdPartyLib\OpenGL\glew-2.1.0-win32\lib\Release\Win32;D:\VSThirdPartyLib\OpenGL\glfw-3.3.2.bin.WIN32\lib-vc2015;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)vendor\glew-2.1.0-win32\include;$(SolutionDir)vendor\glfw-3.3.2.bin.WIN32\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)vendor\glew-2.1.0-win32\lib\Release\Win32;D:\VSThirdPartyLib\OpenGL\glfw-3.3.2.bin.WIN32\lib-vc2017;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)/bin/$(Platform)/$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)/temp/$(Platform)/$(Configuration)\$(ProjectName)</IntDir>
-    <IncludePath>D:\VSThirdPartyLib\OpenGL\glfw-3.3.2.bin.WIN64\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\VSThirdPartyLib\OpenGL\glfw-3.3.2.bin.WIN64\lib-vc2015;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)vendor\glew-2.1.0-win32\include;$(SolutionDir)vendor\glfw-3.3.2.bin.WIN64\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)vendor\glfw-3.3.2.bin.WIN64\lib-vc2017;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)/bin/$(Platform)/$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)/temp/$(Platform)/$(Configuration)\$(ProjectName)</IntDir>
-    <IncludePath>D:\VSThirdPartyLib\OpenGL\glew-2.1.0-win32\include;D:\VSThirdPartyLib\OpenGL\glfw-3.3.2.bin.WIN32\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\VSThirdPartyLib\OpenGL\glew-2.1.0-win32\lib\Release\Win32;D:\VSThirdPartyLib\OpenGL\glfw-3.3.2.bin.WIN32\lib-vc2015;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)vendor\glew-2.1.0-win32\include;$(SolutionDir)vendor\glfw-3.3.2.bin.WIN32\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)vendor\glew-2.1.0-win32\lib\Release\Win32;D:\VSThirdPartyLib\OpenGL\glfw-3.3.2.bin.WIN32\lib-vc2017;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)/bin/$(Platform)/$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)/temp/$(Platform)/$(Configuration)\$(ProjectName)</IntDir>
-    <IncludePath>D:\VSThirdPartyLib\OpenGL\glfw-3.3.2.bin.WIN64\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\VSThirdPartyLib\OpenGL\glfw-3.3.2.bin.WIN64\lib-vc2015;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)vendor\glfw-3.3.2.bin.WIN64\include;$(SolutionDir)vendor\glew-2.1.0-win32\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)vendor\glfw-3.3.2.bin.WIN64\lib-vc2017;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -125,11 +125,12 @@
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <AdditionalOptions>/NODEFAULTLIB:libcmt %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>$(SolutionDir)vendor;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\VSThirdPartyLib\OpenGL\glew-2.1.0-win32\lib\Release\x64;D:\VSThirdPartyLib\OpenGL\glfw-3.3.2.bin.WIN64\lib-vc2015;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)\vendor\glew-2.1.0-win32\lib\Release\x64;$(SolutionDir)\vendor\glfw-3.3.2.bin.WIN64\lib-vc2017;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreAllDefaultLibraries>
       </IgnoreAllDefaultLibraries>
@@ -181,43 +182,48 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="core\IndexBuffer.cpp" />
+    <ClCompile Include="core\Renderer.cpp" />
+    <ClCompile Include="core\Shader.cpp" />
+    <ClCompile Include="core\Texture.cpp" />
+    <ClCompile Include="core\VertexArray.cpp" />
+    <ClCompile Include="core\VertexBuffer.cpp" />
+    <ClCompile Include="core\VertexBufferLayout.cpp" />
     <ClCompile Include="imgui\imgui.cpp" />
     <ClCompile Include="imgui\imgui_demo.cpp" />
     <ClCompile Include="imgui\imgui_draw.cpp" />
     <ClCompile Include="imgui\imgui_impl_glfw_gl3.cpp" />
-    <ClCompile Include="IndexBuffer.cpp" />
-    <ClCompile Include="Renderer.cpp" />
-    <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="main\main.cpp" />
+    <ClCompile Include="main\step-01.cpp" />
+    <ClCompile Include="main\step-02.cpp" />
+    <ClCompile Include="main\step-03.cpp" />
+    <ClCompile Include="main\step-04.cpp" />
+    <ClCompile Include="main\step-05.cpp" />
+    <ClCompile Include="main\step-06.cpp" />
+    <ClCompile Include="main\step-07.cpp" />
+    <ClCompile Include="main\step-08.cpp" />
+    <ClCompile Include="main\step-09.cpp" />
+    <ClCompile Include="main\step-10.cpp" />
+    <ClCompile Include="main\step-11.cpp" />
+    <ClCompile Include="main\step-12.cpp" />
+    <ClCompile Include="main\step-13.cpp" />
+    <ClCompile Include="main\step-14.cpp" />
+    <ClCompile Include="main\step-15.cpp" />
+    <ClCompile Include="main\step-16.cpp" />
+    <ClCompile Include="main\step-17.cpp" />
+    <ClCompile Include="main\step-18.cpp" />
+    <ClCompile Include="main\step-19.cpp" />
+    <ClCompile Include="main\step-20.cpp" />
+    <ClCompile Include="main\step-21.cpp" />
+    <ClCompile Include="main\step-22.cpp" />
+    <ClCompile Include="main\step-23.cpp" />
+    <ClCompile Include="main\step-24.cpp" />
+    <ClCompile Include="main\step-25.cpp" />
+    <ClCompile Include="main\step-26.cpp" />
+    <ClCompile Include="main\step-27.cpp" />
+    <ClCompile Include="main\step-28.cpp" />
+    <ClCompile Include="main\test-01.cpp" />
     <ClCompile Include="stb_image\stb_image.cpp" />
-    <ClCompile Include="step-01.cpp" />
-    <ClCompile Include="step-02.cpp" />
-    <ClCompile Include="step-03.cpp" />
-    <ClCompile Include="step-04.cpp" />
-    <ClCompile Include="step-05.cpp" />
-    <ClCompile Include="step-06.cpp" />
-    <ClCompile Include="step-07.cpp" />
-    <ClCompile Include="step-08.cpp" />
-    <ClCompile Include="step-09.cpp" />
-    <ClCompile Include="step-10.cpp" />
-    <ClCompile Include="step-11.cpp" />
-    <ClCompile Include="step-12.cpp" />
-    <ClCompile Include="step-13.cpp" />
-    <ClCompile Include="step-14.cpp" />
-    <ClCompile Include="step-15.cpp" />
-    <ClCompile Include="step-16.cpp" />
-    <ClCompile Include="step-17.cpp" />
-    <ClCompile Include="step-18.cpp" />
-    <ClCompile Include="step-19.cpp" />
-    <ClCompile Include="step-20.cpp" />
-    <ClCompile Include="step-21.cpp" />
-    <ClCompile Include="step-22.cpp" />
-    <ClCompile Include="step-23.cpp" />
-    <ClCompile Include="step-24.cpp" />
-    <ClCompile Include="step-25.cpp" />
-    <ClCompile Include="step-26.cpp" />
-    <ClCompile Include="step-27.cpp" />
-    <ClCompile Include="step-28.cpp" />
-    <ClCompile Include="test-01.cpp" />
     <ClCompile Include="tests\Test.cpp" />
     <ClCompile Include="tests\TestBatchColor.cpp" />
     <ClCompile Include="tests\TestBatchDynamicGeometry.cpp" />
@@ -226,18 +232,17 @@
     <ClCompile Include="tests\TestBatchTexture2D.cpp" />
     <ClCompile Include="tests\TestClearColor.cpp" />
     <ClCompile Include="tests\TestTexture2D.cpp" />
-    <ClCompile Include="Texture.cpp" />
-    <ClCompile Include="VertexArray.cpp" />
-    <ClCompile Include="VertexBuffer.cpp" />
-    <ClCompile Include="VertexBufferLayout.cpp" />
+    <ClCompile Include="tests\TestTexture3D.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Basic.shader" />
-    <None Include="BatchRenderer.shader" />
-    <None Include="Color.shader" />
-    <None Include="ColorAndTexture.shader" />
-  </ItemGroup>
-  <ItemGroup>
+    <ClInclude Include="core\Base.h" />
+    <ClInclude Include="core\IndexBuffer.h" />
+    <ClInclude Include="core\Renderer.h" />
+    <ClInclude Include="core\Shader.h" />
+    <ClInclude Include="core\Texture.h" />
+    <ClInclude Include="core\VertexArray.h" />
+    <ClInclude Include="core\VertexBuffer.h" />
+    <ClInclude Include="core\VertexBufferLayout.h" />
     <ClInclude Include="imgui\imconfig.h" />
     <ClInclude Include="imgui\imgui.h" />
     <ClInclude Include="imgui\imgui_impl_glfw_gl3.h" />
@@ -245,9 +250,6 @@
     <ClInclude Include="imgui\stb_rect_pack.h" />
     <ClInclude Include="imgui\stb_textedit.h" />
     <ClInclude Include="imgui\stb_truetype.h" />
-    <ClInclude Include="IndexBuffer.h" />
-    <ClInclude Include="Renderer.h" />
-    <ClInclude Include="Shader.h" />
     <ClInclude Include="stb_image\stb_image.h" />
     <ClInclude Include="tests\Test.h" />
     <ClInclude Include="tests\TestBatchColor.h" />
@@ -257,10 +259,13 @@
     <ClInclude Include="tests\TestBatchTexture2D.h" />
     <ClInclude Include="tests\TestClearColor.h" />
     <ClInclude Include="tests\TestTexture2D.h" />
-    <ClInclude Include="Texture.h" />
-    <ClInclude Include="VertexArray.h" />
-    <ClInclude Include="VertexBuffer.h" />
-    <ClInclude Include="VertexBufferLayout.h" />
+    <ClInclude Include="tests\TestTexture3D.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="shaders\Basic.shader" />
+    <None Include="shaders\BatchRenderer.shader" />
+    <None Include="shaders\Color.shader" />
+    <None Include="shaders\ColorAndTexture.shader" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

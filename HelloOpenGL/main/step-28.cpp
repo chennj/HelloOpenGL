@@ -12,7 +12,7 @@
 *	 下面开始游戏引擎
 *	 再长的路都会走完，除非停下或死去。完结撒花^-^.
 */
-
+#ifdef __RUN__
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -138,3 +138,4 @@ int main(void)
 	glfwTerminate();
 	return 0;
 }
+#endif
