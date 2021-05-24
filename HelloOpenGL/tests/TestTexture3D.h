@@ -2,6 +2,8 @@
 
 #include "Test.h"
 
+#include <random>
+
 #include "../core/VertexBuffer.h"
 #include "../core/VertexBufferLayout.h"
 #include "../core/Texture.h"
@@ -26,6 +28,9 @@ namespace tests
 		glm::mat4 _Proj, _View, _Model;
 		float _FOV;
 
+		glm::vec3* _CubePositions;
+		std::default_random_engine _UEngine;
+		std::uniform_real_distribution<float> _UInt{ 0.1f,0.9f };
 	public:
 		TestTexture3D();
 		~TestTexture3D();
