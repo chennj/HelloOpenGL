@@ -185,6 +185,12 @@
     <ClCompile Include="main\test-01.cpp">
       <Filter>源文件\zmain</Filter>
     </ClCompile>
+    <ClCompile Include="core\Camera.cpp">
+      <Filter>源文件\core</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\TestCamera.cpp">
+      <Filter>源文件\tests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stb_image\stb_image.h">
@@ -261,6 +267,15 @@
     </ClInclude>
     <ClInclude Include="core\Base.h">
       <Filter>源文件\core</Filter>
+    </ClInclude>
+    <ClInclude Include="core\Camera.h">
+      <Filter>源文件\core</Filter>
+    </ClInclude>
+    <ClInclude Include="TestCamera.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="tests\TestCamera.h">
+      <Filter>源文件\tests</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

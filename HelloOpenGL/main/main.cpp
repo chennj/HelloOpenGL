@@ -37,6 +37,7 @@
 #include "../tests/TestBatchIndices.h"
 #include "../tests/TestBatchRenderer.h"
 #include "../tests/TestTexture3D.h"
+#include "../tests/TestCamera.h"
 
 int main(void)
 {
@@ -97,6 +98,7 @@ int main(void)
 		testMenu->RegisterTest<tests::TestBatchIndices>("Batch Indices");
 		testMenu->RegisterTest<tests::TestBatchRenderer>("Batch Renderer");
 		testMenu->RegisterTest<tests::TestTexture3D>("3D Texture");
+		testMenu->RegisterTest<tests::TestCamera>("Camera");
 
 		while (!glfwWindowShouldClose(window))
 		{

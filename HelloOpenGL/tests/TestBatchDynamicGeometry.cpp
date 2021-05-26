@@ -157,6 +157,9 @@ namespace tests
 		//opengl version 330 ²»Ö§³Ö
 		//glBindTextureUnit(0, _Tex01);
 		//glBindTextureUnit(1, _Tex02);
+
+		GLCall(glEnable(GL_BLEND));
+		GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
 	}
 
 	TestBatchDynamicGeometry::~TestBatchDynamicGeometry()

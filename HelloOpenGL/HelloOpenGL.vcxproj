@@ -182,6 +182,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="core\Camera.cpp" />
     <ClCompile Include="core\IndexBuffer.cpp" />
     <ClCompile Include="core\Renderer.cpp" />
     <ClCompile Include="core\Shader.cpp" />
@@ -230,12 +231,14 @@
     <ClCompile Include="tests\TestBatchIndices.cpp" />
     <ClCompile Include="tests\TestBatchRenderer.cpp" />
     <ClCompile Include="tests\TestBatchTexture2D.cpp" />
+    <ClCompile Include="tests\TestCamera.cpp" />
     <ClCompile Include="tests\TestClearColor.cpp" />
     <ClCompile Include="tests\TestTexture2D.cpp" />
     <ClCompile Include="tests\TestTexture3D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\Base.h" />
+    <ClInclude Include="core\Camera.h" />
     <ClInclude Include="core\IndexBuffer.h" />
     <ClInclude Include="core\Renderer.h" />
     <ClInclude Include="core\Shader.h" />
@@ -251,12 +254,14 @@
     <ClInclude Include="imgui\stb_textedit.h" />
     <ClInclude Include="imgui\stb_truetype.h" />
     <ClInclude Include="stb_image\stb_image.h" />
+    <ClInclude Include="TestCamera.h" />
     <ClInclude Include="tests\Test.h" />
     <ClInclude Include="tests\TestBatchColor.h" />
     <ClInclude Include="tests\TestBatchDynamicGeometry.h" />
     <ClInclude Include="tests\TestBatchIndices.h" />
     <ClInclude Include="tests\TestBatchRenderer.h" />
     <ClInclude Include="tests\TestBatchTexture2D.h" />
+    <ClInclude Include="tests\TestCamera.h" />
     <ClInclude Include="tests\TestClearColor.h" />
     <ClInclude Include="tests\TestTexture2D.h" />
     <ClInclude Include="tests\TestTexture3D.h" />

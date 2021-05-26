@@ -40,10 +40,13 @@ namespace tests
 																																	
 		_Shader = std::make_unique<Shader>("shaders/Basic.shader");
 		_Shader->Bind();
-		_Shader->SetUniform4f("u_Color", 0.8f, 0.3f, 0.8f, 1.0f);
+		_Shader->SetUniform4f("a_Color", 0.8f, 0.3f, 0.8f, 1.0f);
 
 		_Texture = std::make_unique<Texture>("../res/texture/texture-01.png");
 		_Shader->SetUniform1i("u_Texture", 0/*因为我们的纹理绑定在0卡槽，看Texture::Bind()*/);
+
+		GLCall(glEnable(GL_BLEND));
+		GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
 
 	}
 

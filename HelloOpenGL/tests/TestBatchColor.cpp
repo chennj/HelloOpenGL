@@ -59,7 +59,7 @@ namespace tests
 		GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _IB));
 		GLCall(glBufferData(GL_ELEMENT_ARRAY_BUFFER, 12 * sizeof(unsigned int), indices, GL_STATIC_DRAW));
 
-		_Shader = std::make_unique<Shader>("Color.shader");
+		_Shader = std::make_unique<Shader>("shaders/Color.shader");
 	}
 
 	TestBatchColor::~TestBatchColor()
