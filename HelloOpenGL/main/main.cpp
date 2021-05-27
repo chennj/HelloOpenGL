@@ -38,6 +38,7 @@
 #include "../tests/TestBatchRenderer.h"
 #include "../tests/TestTexture3D.h"
 #include "../tests/TestCamera.h"
+#include "../tests/TestLight.h"
 
 int main(void)
 {
@@ -99,6 +100,7 @@ int main(void)
 		testMenu->RegisterTest<tests::TestBatchRenderer>("Batch Renderer");
 		testMenu->RegisterTest<tests::TestTexture3D>("3D Texture");
 		testMenu->RegisterTest<tests::TestCamera>("Camera");
+		testMenu->RegisterTest<tests::TestLight>("Light");
 
 		while (!glfwWindowShouldClose(window))
 		{

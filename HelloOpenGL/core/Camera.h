@@ -19,6 +19,10 @@ private:
 	float m_pitch;
 	float m_yaw;
 
+	float m_speedX = 0.1f;
+	float m_speedY = 0.1f;
+	float m_speedZ = 0.1f;
+
 public:
 	Camera(glm::vec3 position, glm::vec3 target/*被观察目标位置*/, glm::vec3 worldup/*世界坐标系上方*/);
 	Camera(glm::vec3 position, float pitch, float yaw, glm::vec3 worldup);
@@ -26,8 +30,10 @@ public:
 
 public:
 	inline glm::mat4 GetViewMatrix()const { return m_viewmatrix; }
+	inline glm::vec3 GetPosition()const { return m_position; }
 
-	void  SetViewMatrix();
-	void Update(glm::vec3 position, float pitch, float yaw, glm::vec3 worldup);
+	void SetViewMatrix();
+	void UpdateVector(glm::vec3 position, float pitch, float yaw, glm::vec3 worldup);
+	void UpdatePosition();
 	void Move(float x, float y, float z);
 };

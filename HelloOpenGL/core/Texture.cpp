@@ -1,6 +1,17 @@
 #include "Texture.h"
 #include "../stb_image/stb_image.h"
 
+Texture::Texture(uint32_t color)
+{
+	GLCall(glGenTextures(1, &_RendererID));
+	GLCall(glBindTexture(GL_TEXTURE_2D, _RendererID));
+	GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR));
+	GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
+	GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE));
+	GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
+	GLCall(glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, 1, 1, 0, GL_RGBA, GL_UNSIGNED_BYTE, &color));
+}
+
 Texture::Texture(const std::string & filepath)
 	:_RendererID(0),_FilePath(filepath),_LocalBuffer(nullptr),_Width(0),_Height(0),_BPP(0)
 {
@@ -40,7 +51,7 @@ Texture::Texture(const std::string & filepath)
 
 	GLCall(glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, _Width, _Height, 0, GL_RGBA, GL_UNSIGNED_BYTE, _LocalBuffer));
 
-	GLCall(glBindTexture(GL_TEXTURE_2D, 0));
+	//GLCall(glBindTexture(GL_TEXTURE_2D, 0));
 
 	if (_LocalBuffer)
 		stbi_image_free(_LocalBuffer);

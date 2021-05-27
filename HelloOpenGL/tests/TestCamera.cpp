@@ -114,7 +114,7 @@ TestCamera::TestCamera()
 	_Shader->Bind();
 
 	_Texture = CreateScope<Texture>("../res/texture/texture-02-1.png");
-	_Shader->SetUniform1i("u_Texture", 0/*因为我们的纹理绑定在0卡槽，看Texture::Bind()*/);
+	//_Shader->SetUniform1i("u_Texture", 0/*因为我们的纹理绑定在0卡槽，看Texture::Bind()*/);
 
 
 	_CubePositions = new glm::vec3[10];
@@ -162,11 +162,12 @@ TestCamera::~TestCamera()
 	glfwSetWindowUserPointer(m_window, nullptr);
 	glfwSetCursorPosCallback(m_window, nullptr);
 	glfwSetScrollCallback(m_window, nullptr);
+	glfwSetCharCallback(m_window, nullptr);
 }
 
 void TestCamera::OnUpdate(float deltaTime)
 {
-	m_camera->Update(m_camera_position, m_camera_pitch, m_camera_yaw, m_camera_worldup);
+	m_camera->UpdateVector(m_camera_position, m_camera_pitch, m_camera_yaw, m_camera_worldup);
 }
 
 void TestCamera::OnRender()

@@ -31,7 +31,7 @@ Camera::Camera(glm::vec3 position, float pitch, float yaw, glm::vec3 worldup)
 	m_forward.y = glm::sin(pitch);
 	m_forward.z = glm::cos(pitch) * glm::cos(yaw);
 	m_right = glm::normalize(glm::cross(m_forward, m_worldup));
-	m_up = glm::normalize(glm::cross(m_forward, m_right));
+	m_up = glm::normalize(glm::cross(m_right, m_forward));
 
 	SetViewMatrix();
 }
@@ -49,7 +49,7 @@ void Camera::SetViewMatrix()
 	);
 }
 
-void Camera::Update(glm::vec3 position, float pitch, float yaw, glm::vec3 worldup)
+void Camera::UpdateVector(glm::vec3 position, float pitch, float yaw, glm::vec3 worldup)
 {
 	m_position = position;
 	m_worldup = worldup;
@@ -60,8 +60,14 @@ void Camera::Update(glm::vec3 position, float pitch, float yaw, glm::vec3 worldu
 	m_forward.y = glm::sin(m_pitch);			
 	m_forward.z = glm::cos(m_pitch) * glm::cos(m_yaw);
 	m_right = glm::normalize(glm::cross(m_forward, m_worldup));
-	m_up = glm::normalize(glm::cross(m_forward, m_right));
+	m_up = glm::normalize(glm::cross(m_right, m_forward));
 
+	SetViewMatrix();
+}
+
+void Camera::UpdatePosition()
+{
+	m_position += m_forward * m_speedZ + m_right * m_speedX + m_up * m_speedY;
 	SetViewMatrix();
 }
 

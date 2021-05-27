@@ -12,6 +12,7 @@ private:
 	int _Width, _Height, _BPP/*bits per pixel*/;
 
 public:
+	Texture(uint32_t color=  0xffffffff);
 	Texture(const std::string& filepath);
 	~Texture();
 

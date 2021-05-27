@@ -191,6 +191,9 @@
     <ClCompile Include="tests\TestCamera.cpp">
       <Filter>源文件\tests</Filter>
     </ClCompile>
+    <ClCompile Include="tests\TestLight.cpp">
+      <Filter>源文件\tests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stb_image\stb_image.h">
@@ -271,10 +274,10 @@
     <ClInclude Include="core\Camera.h">
       <Filter>源文件\core</Filter>
     </ClInclude>
-    <ClInclude Include="TestCamera.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="tests\TestCamera.h">
+      <Filter>源文件\tests</Filter>
+    </ClInclude>
+    <ClInclude Include="tests\TestLight.h">
       <Filter>源文件\tests</Filter>
     </ClInclude>
   </ItemGroup>
@@ -292,6 +295,9 @@
       <Filter>assets\shaders</Filter>
     </None>
     <None Include="shaders\Basic3D.shader">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="shaders\Light.shader">
       <Filter>assets\shaders</Filter>
     </None>
   </ItemGroup>
