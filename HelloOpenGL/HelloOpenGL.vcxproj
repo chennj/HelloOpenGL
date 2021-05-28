@@ -184,6 +184,7 @@
   <ItemGroup>
     <ClCompile Include="core\Camera.cpp" />
     <ClCompile Include="core\IndexBuffer.cpp" />
+    <ClCompile Include="core\Material.cpp" />
     <ClCompile Include="core\Renderer.cpp" />
     <ClCompile Include="core\Shader.cpp" />
     <ClCompile Include="core\Texture.cpp" />
@@ -241,6 +242,7 @@
     <ClInclude Include="core\Base.h" />
     <ClInclude Include="core\Camera.h" />
     <ClInclude Include="core\IndexBuffer.h" />
+    <ClInclude Include="core\Material.h" />
     <ClInclude Include="core\Renderer.h" />
     <ClInclude Include="core\Shader.h" />
     <ClInclude Include="core\Texture.h" />
@@ -274,6 +276,7 @@
     <None Include="shaders\Color.shader" />
     <None Include="shaders\ColorAndTexture.shader" />
     <None Include="shaders\Light.shader" />
+    <None Include="shaders\Material.shader" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

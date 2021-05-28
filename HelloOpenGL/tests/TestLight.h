@@ -8,6 +8,8 @@
 #include "../core/VertexBufferLayout.h"
 #include "../core/Texture.h"
 
+#include "../core/Material.h"
+
 namespace tests
 {
 	class TestLight : public Test
@@ -16,7 +18,8 @@ namespace tests
 		Scope<VertexArray>	m_VAO;
 		Scope<VertexBuffer> m_VBO;
 		Scope<IndexBuffer>	m_IBO;
-		Scope<Shader>		m_Shader;
+		Ref<Shader>			m_Shader;
+		Scope<Material>		m_Material;
 		Scope<Texture>		m_Texture;
 		Scope<Texture>		m_Background;
 

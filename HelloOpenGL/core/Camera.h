@@ -19,9 +19,9 @@ private:
 	float m_pitch;
 	float m_yaw;
 
-	float m_speedX = 0.1f;
-	float m_speedY = 0.1f;
-	float m_speedZ = 0.1f;
+	float m_speedX = 0.0f;
+	float m_speedY = 0.0f;
+	float m_speedZ = 0.0f;
 
 public:
 	Camera(glm::vec3 position, glm::vec3 target/*被观察目标位置*/, glm::vec3 worldup/*世界坐标系上方*/);

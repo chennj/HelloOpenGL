@@ -85,7 +85,9 @@ namespace tests
 
 		m_IBO = CreateScope<IndexBuffer>(indices, sizeof(indices) / sizeof(unsigned int));
 
-		m_Shader = CreateScope<Shader>("shaders/Light.shader");
+		m_Shader = CreateRef<Shader>("shaders/Material.shader");
+
+		m_Material = CreateScope<Material>(m_Shader);
 
 		m_Background	= CreateScope<Texture>();
 		m_Texture		= CreateScope<Texture>("../res/texture/texture-02-1.png");
@@ -146,7 +148,13 @@ namespace tests
 
 	void TestLight::OnUpdate(float deltaTime)
 	{
-		m_Camera->UpdateVector(m_CameraPosition, m_CameraPitch, m_CameraYaw, m_CameraWorldup);
+		//m_Camera->UpdateVector(m_CameraPosition, m_CameraPitch, m_CameraYaw, m_CameraWorldup);
+		//m_Camera->UpdatePosition();
+
+		m_LightColor.x = sin(glfwGetTime() * 2.0f);
+		m_LightColor.y = sin(glfwGetTime() * 0.7f);
+		m_LightColor.z = sin(glfwGetTime() * 1.3f);
+
 	}
 
 	void TestLight::OnRender()
@@ -181,6 +189,11 @@ namespace tests
 			m_Shader->SetUniform3f("viewPosition",	m_Camera->GetPosition());
 			m_Shader->SetUniform3f("lightColor",	m_LightColor);
 			m_Shader->SetUniform3f("objectColor",	m_ObjectColor);
+
+			m_Material->SetAmbient(m_LightColor * glm::vec3(0.5f) * glm::vec3(0.2f))  ;
+			m_Material->SetDiffuse(m_LightColor * glm::vec3(0.5f))  ;
+			m_Material->SetSpecular() ;
+			m_Material->SetShininess();
 
 			renderer.Draw(*m_VAO, *m_IBO, *m_Shader);
 		}
@@ -244,6 +257,11 @@ namespace tests
 				self->m_CameraPosition.y -= speed;
 				break;
 			}
+			self->m_Camera->UpdateVector(
+				self->m_CameraPosition, 
+				self->m_CameraPitch, 
+				self->m_CameraYaw, 
+				self->m_CameraWorldup);
 		});
 
 		glfwSetKeyCallback(m_Window, [](GLFWwindow* window, int key, int scancode, int action, int mods)
@@ -256,7 +274,7 @@ namespace tests
 			//	<< "action=" << action << ","
 			//	<< "mods=" << mods << std::endl;
 
-			float speed = 0.01f;
+			float speed = 0.005f;
 
 			switch (action)
 			{
@@ -270,21 +288,32 @@ namespace tests
 					switch (key)
 					{
 					case GLFW_KEY_LEFT:
-						self->m_CameraYaw += speed;
+						self->m_CameraYaw += speed * 2;
 						break;
 					case GLFW_KEY_RIGHT:
-						self->m_CameraYaw -= speed;
+						self->m_CameraYaw -= speed * 2;
 						break;
 					case GLFW_KEY_UP:
-						self->m_CameraPitch += speed;
+						self->m_CameraPosition.z -= speed * 10;
 						break;
 					case GLFW_KEY_DOWN:
+						self->m_CameraPosition.z += speed * 10;
+						break;
+					case GLFW_KEY_PAGE_UP:
+						self->m_CameraPitch += speed;
+						break;
+					case GLFW_KEY_PAGE_DOWN:
 						self->m_CameraPitch -= speed;
 						break;
 					}
 					break;
 				}
 			}
+			self->m_Camera->UpdateVector(
+				self->m_CameraPosition,
+				self->m_CameraPitch,
+				self->m_CameraYaw,
+				self->m_CameraWorldup);
 		});
 	}
 }

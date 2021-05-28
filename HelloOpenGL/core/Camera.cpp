@@ -67,15 +67,14 @@ void Camera::UpdateVector(glm::vec3 position, float pitch, float yaw, glm::vec3 
 
 void Camera::UpdatePosition()
 {
-	m_position += m_forward * m_speedZ + m_right * m_speedX + m_up * m_speedY;
+	m_position += m_forward * m_speedZ * 0.1f + m_right * m_speedX * 0.1f + m_up * m_speedY * 0.1f;
 	SetViewMatrix();
 }
 
 void Camera::Move(float x, float y, float z)
 {
-	m_forward.x = x;
-	m_forward.y = y;
-	m_forward.z = z;
-	m_right = glm::normalize(glm::cross(m_forward, m_worldup));
-	m_up = glm::normalize(glm::cross(m_forward, m_right));
+	m_speedX = x;
+	m_speedY = y;
+	m_speedZ = z;
+	UpdatePosition();
 }
