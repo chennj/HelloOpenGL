@@ -93,3 +93,13 @@ void Material::SetPosition(glm::vec3 & value)
 {
 	SetPosition(value, m_Name + ".position");
 }
+
+void Material::SetColor(glm::vec3 & value, const std::string & name)
+{
+	m_Shader->SetUniform3f(name, value);
+}
+
+void Material::SetColor(glm::vec3 & value)
+{
+	SetColor(value, m_Name + ".color");
+}

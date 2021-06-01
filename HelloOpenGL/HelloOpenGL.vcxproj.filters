@@ -197,6 +197,12 @@
     <ClCompile Include="core\Material.cpp">
       <Filter>源文件\core</Filter>
     </ClCompile>
+    <ClCompile Include="core\LightDirectional.cpp">
+      <Filter>源文件\core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\LightPoint.cpp">
+      <Filter>源文件\core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stb_image\stb_image.h">
@@ -284,6 +290,12 @@
       <Filter>源文件\tests</Filter>
     </ClInclude>
     <ClInclude Include="core\Material.h">
+      <Filter>源文件\core</Filter>
+    </ClInclude>
+    <ClInclude Include="core\LightDirectional.h">
+      <Filter>源文件\core</Filter>
+    </ClInclude>
+    <ClInclude Include="core\LightPoint.h">
       <Filter>源文件\core</Filter>
     </ClInclude>
   </ItemGroup>

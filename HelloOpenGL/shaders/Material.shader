@@ -38,10 +38,17 @@ struct Material {
 
 struct Light {
 	vec3 position;
+	vec3 color;
+	vec3 direction;
 
 	vec3 ambient;
 	vec3 diffuse;
 	vec3 specular;
+
+	// 衰减
+	float constant;
+	float linear;
+	float quadratic;
 };
 
 uniform Material material;
@@ -58,23 +65,30 @@ void main()
 	vec3 norm		= normalize(v_Normal);
 
 	// 入射光（lightDir）、反射光（reflectDir）、相机（viewDir）
-	vec3 lightDir	= normalize(light.position - v_FragPosition);
+	vec3 lightDir	= normalize(light.position - v_FragPosition);	//点光源
+	//vec3 lightDir	= light.direction;	// 平行光
 	vec3 reflectDir	= reflect(-lightDir, norm);
 	vec3 viewDir	= normalize(viewPosition - v_FragPosition);
 
+	// 衰减
+	float dist = length(light.position - v_FragPosition);
+	float attenuation = 1.0 / (light.constant + light.linear * dist +
+		light.quadratic * (dist * dist));
+
 	// ambient
-	vec3 ambient	= light.ambient * texture(material.diffuse, v_TexCoord).rgb;
+	vec3 ambient	= light.ambient * texture(material.diffuse, v_TexCoord).rgb * light.color * attenuation;
 
 	// diffuse 
 	float diff		= max(dot(norm, lightDir), 0.0);
-	vec3 diffuse	= light.diffuse * diff * texture(material.diffuse, v_TexCoord).rgb;
+	vec3 diffuse	= light.diffuse * diff * texture(material.diffuse, v_TexCoord).rgb * light.color * attenuation;
 
 	// specular
 	float spec		= pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
-	vec3 specular	= light.specular * spec * texture(material.specular, v_TexCoord).rgb;
+	vec3 specular	= light.specular * spec * texture(material.specular, v_TexCoord).rgb * light.color * attenuation;
 
 	// emission
-	vec3 emission	= light.specular * texture(u_Texture, v_TexCoord).rgb;
+	//vec3 emission	= (texture(u_Texture, v_TexCoord) * texture(u_Background, v_TexCoord)).rgb;
+	vec3 emission	= (texture(u_Texture, v_TexCoord) * texture(u_Background, v_TexCoord)).rgb * vec3(0.0f, 0.0f, 0.0f);
 
 	vec3 result = ambient + diffuse + specular + emission;
 	FragColor	= vec4(result, 1.0);

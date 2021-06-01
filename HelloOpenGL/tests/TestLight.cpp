@@ -7,6 +7,7 @@
 #include "TestLight.h"
 
 #include "../imgui/imgui.h"
+#include "../imgui/imgui_internal.h"
 #include <iostream>
 
 #define BB_KEY_A                  97
@@ -88,7 +89,9 @@ namespace tests
 		m_Shader = CreateRef<Shader>("shaders/Material.shader");
 
 		m_Material = CreateScope<Material>(m_Shader, "material");
-		m_Light = CreateScope<Material>(m_Shader, "light");
+
+		m_LightDirectional = CreateScope<LightDirectional>(glm::vec3(45.0f, 0.0f, 0.0f));
+		m_LightPoint = CreateScope<LightPoint>(glm::vec3(1.0f, 1.0f, -1.0f), glm::vec3(2.0f, 2.0f, 2.0f));
 
 		m_Background	= CreateScope<Texture>();
 		m_Texture		= CreateScope<Texture>("../res/texture/matrix.jpg");
@@ -159,6 +162,8 @@ namespace tests
 		//m_LightColor.y = sin(glfwGetTime() * 0.7f);
 		//m_LightColor.z = sin(glfwGetTime() * 1.3f);
 
+		m_LightDirectional->UpdateDirection();
+
 	}
 
 	void TestLight::OnRender()
@@ -171,8 +176,8 @@ namespace tests
 		for (unsigned int i = 0; i < 10; i++)
 		{
 			float angle = m_ModelRotationAngle;
-			if (i % 3 == 0)
-				angle = glfwGetTime() * 25.0f;
+			//if (i % 3 == 0)
+			//	angle = glfwGetTime() * 25.0f;
 			m_Proj = glm::perspective(glm::radians(m_FOV), 1200.0f / 600.0f/*Viewport的width/height*/, 0.1f, 100.0f);
 			m_Model = glm::translate(glm::mat4(1.0f), m_CubePositions[i])
 				* glm::rotate(glm::mat4(1.0f), glm::radians(angle), m_ModelRotationDirection)
@@ -192,10 +197,20 @@ namespace tests
 
 			m_Shader->SetUniform3f("viewPosition",		m_Camera->GetPosition());
 
-			m_Light->SetPosition(m_LightPosition);
-			m_Light->SetAmbient(glm::vec3(0.2f, 0.2f, 0.2f));
-			m_Light->SetDiffuse(glm::vec3(0.5f, 0.5f, 0.5f));
-			m_Light->SetSpecular(glm::vec3(1.0f, 1.0f, 1.0f));
+#if 1		// 点光源
+			m_Shader->SetUniform3f("light.position",	m_LightPoint->m_Position);
+			m_Shader->SetUniform3f("light.color",		m_LightPoint->m_Color);
+			m_Shader->SetUniform1f("light.constant",	m_LightPoint->m_Attenuation.Constant);
+			m_Shader->SetUniform1f("light.linear",		m_LightPoint->m_Attenuation.Linear);
+			m_Shader->SetUniform1f("light.quadratic",	m_LightPoint->m_Attenuation.Quadratic);
+#endif
+#if 0		//平行光源
+			m_Shader->SetUniform3f("light.color",		m_LightDirectional->m_Color);
+			m_Shader->SetUniform3f("light.direction",	m_LightDirectional->m_Direction);平行光源
+#endif
+			m_Shader->SetUniform3f("light.ambient",		glm::vec3(0.1f, 0.1f, 0.1f));
+			m_Shader->SetUniform3f("light.diffuse",		glm::vec3(0.5f, 0.5f, 0.5f));
+			m_Shader->SetUniform3f("light.specular",	glm::vec3(1.0f, 1.0f, 1.0f));
 
 			m_Material->SetDiffuse(m_Diffuse, 3);
 			m_Material->SetSpecular(m_Specular, 4);
@@ -207,8 +222,14 @@ namespace tests
 
 	void TestLight::OnImGuiRender()
 	{
-		ImGui::DragFloat3("Light Color",	&m_LightColor.x,	0.01f);
-		ImGui::DragFloat3("Light Pos",		&m_LightPosition.x,	0.01f);
+		ImGui::Separator();
+		ImGui::LabelText("Light Directional","");
+		ImGui::DragFloat3("Light Color",	&m_LightDirectional->m_Color.x,	0.01f);
+		ImGui::DragFloat3("Light Angle",	&m_LightDirectional->m_Angle.x,	0.5f);
+		ImGui::Separator();
+		ImGui::LabelText("Light Point","");
+		ImGui::DragFloat3("Light Color", &m_LightPoint->m_Color.x, 0.01f);
+		ImGui::DragFloat3("Light Position", &m_LightPoint->m_Position.x, 0.01f);
 	}
 
 	void TestLight::InitCallback()

@@ -184,6 +184,8 @@
   <ItemGroup>
     <ClCompile Include="core\Camera.cpp" />
     <ClCompile Include="core\IndexBuffer.cpp" />
+    <ClCompile Include="core\LightDirectional.cpp" />
+    <ClCompile Include="core\LightPoint.cpp" />
     <ClCompile Include="core\Material.cpp" />
     <ClCompile Include="core\Renderer.cpp" />
     <ClCompile Include="core\Shader.cpp" />
@@ -242,6 +244,8 @@
     <ClInclude Include="core\Base.h" />
     <ClInclude Include="core\Camera.h" />
     <ClInclude Include="core\IndexBuffer.h" />
+    <ClInclude Include="core\LightDirectional.h" />
+    <ClInclude Include="core\LightPoint.h" />
     <ClInclude Include="core\Material.h" />
     <ClInclude Include="core\Renderer.h" />
     <ClInclude Include="core\Shader.h" />

@@ -41,4 +41,7 @@ public:
 
 	void SetPosition	(glm::vec3& value, const std::string& name);
 	void SetPosition	(glm::vec3& value);
+
+	void SetColor		(glm::vec3& value, const std::string& name);
+	void SetColor		(glm::vec3& value);
 };

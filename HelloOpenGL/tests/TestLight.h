@@ -9,22 +9,25 @@
 #include "../core/Texture.h"
 
 #include "../core/Material.h"
+#include "../core/LightDirectional.h"
+#include "../core/LightPoint.h"
 
 namespace tests
 {
 	class TestLight : public Test
 	{
 	private:
-		Scope<VertexArray>	m_VAO;
-		Scope<VertexBuffer> m_VBO;
-		Scope<IndexBuffer>	m_IBO;
-		Ref<Shader>			m_Shader;
-		Scope<Material>		m_Material;
-		Scope<Material>		m_Light;
-		Scope<Texture>		m_Texture;
-		Scope<Texture>		m_Background;
-		Ref<Texture>		m_Diffuse;
-		Ref<Texture>		m_Specular;
+		Scope<VertexArray>		m_VAO;
+		Scope<VertexBuffer>		m_VBO;
+		Scope<IndexBuffer>		m_IBO;
+		Ref<Shader>				m_Shader;
+		Scope<Material>			m_Material;
+		Scope<LightDirectional>	m_LightDirectional;
+		Scope<LightPoint>		m_LightPoint;
+		Scope<Texture>			m_Texture;
+		Scope<Texture>			m_Background;
+		Ref<Texture>			m_Diffuse;
+		Ref<Texture>			m_Specular;
 
 		glm::mat4 m_Proj, m_View, m_Model;
 		float m_FOV = 45.0f;
