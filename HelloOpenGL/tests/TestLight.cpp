@@ -87,10 +87,14 @@ namespace tests
 
 		m_Shader = CreateRef<Shader>("shaders/Material.shader");
 
-		m_Material = CreateScope<Material>(m_Shader);
+		m_Material = CreateScope<Material>(m_Shader, "material");
+		m_Light = CreateScope<Material>(m_Shader, "light");
 
 		m_Background	= CreateScope<Texture>();
-		m_Texture		= CreateScope<Texture>("../res/texture/texture-02-1.png");
+		m_Texture		= CreateScope<Texture>("../res/texture/matrix.jpg");
+
+		m_Diffuse		= CreateRef<Texture>("../res/texture/container2.png");
+		m_Specular		= CreateRef<Texture>("../res/texture/container2_specular.png");
 
 		m_CubePositions		= new glm::vec3[10];
 		m_CubePositions[0]	= glm::vec3(0.0f, 0.0f, 0.0f);
@@ -151,15 +155,15 @@ namespace tests
 		//m_Camera->UpdateVector(m_CameraPosition, m_CameraPitch, m_CameraYaw, m_CameraWorldup);
 		//m_Camera->UpdatePosition();
 
-		m_LightColor.x = sin(glfwGetTime() * 2.0f);
-		m_LightColor.y = sin(glfwGetTime() * 0.7f);
-		m_LightColor.z = sin(glfwGetTime() * 1.3f);
+		//m_LightColor.x = sin(glfwGetTime() * 2.0f);
+		//m_LightColor.y = sin(glfwGetTime() * 0.7f);
+		//m_LightColor.z = sin(glfwGetTime() * 1.3f);
 
 	}
 
 	void TestLight::OnRender()
 	{
-		GLCall(glClearColor(0, 0, 0, 1));
+		GLCall(glClearColor(0.1f, 0.1f, 0.1f, 1.0f));
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		Renderer renderer;
@@ -169,13 +173,14 @@ namespace tests
 			float angle = m_ModelRotationAngle;
 			if (i % 3 == 0)
 				angle = glfwGetTime() * 25.0f;
-			m_Proj = glm::perspective(glm::radians(m_FOV), 1200.0f / 600.0f/*ViewportµÄwidth/height*/, 0.1f, 1000.0f);
+			m_Proj = glm::perspective(glm::radians(m_FOV), 1200.0f / 600.0f/*ViewportµÄwidth/height*/, 0.1f, 100.0f);
 			m_Model = glm::translate(glm::mat4(1.0f), m_CubePositions[i])
 				* glm::rotate(glm::mat4(1.0f), glm::radians(angle), m_ModelRotationDirection)
 				* glm::scale(glm::mat4(1.0f), m_ModelScale);
 			m_View = m_Camera->GetViewMatrix();
 
 			m_Shader->Bind();
+
 			m_Background->Bind(0);
 			m_Shader->SetUniform1i("u_Background", 0);
 			m_Texture->Bind(1);
@@ -185,15 +190,16 @@ namespace tests
 			m_Shader->SetUniformMat4f("u_View",		m_View);
 			m_Shader->SetUniformMat4f("u_Proj",		m_Proj);
 
-			m_Shader->SetUniform3f("lightPosition",	m_LightPosition);
-			m_Shader->SetUniform3f("viewPosition",	m_Camera->GetPosition());
-			m_Shader->SetUniform3f("lightColor",	m_LightColor);
-			m_Shader->SetUniform3f("objectColor",	m_ObjectColor);
+			m_Shader->SetUniform3f("viewPosition",		m_Camera->GetPosition());
 
-			m_Material->SetAmbient(m_LightColor * glm::vec3(0.5f) * glm::vec3(0.2f))  ;
-			m_Material->SetDiffuse(m_LightColor * glm::vec3(0.5f))  ;
-			m_Material->SetSpecular() ;
-			m_Material->SetShininess();
+			m_Light->SetPosition(m_LightPosition);
+			m_Light->SetAmbient(glm::vec3(0.2f, 0.2f, 0.2f));
+			m_Light->SetDiffuse(glm::vec3(0.5f, 0.5f, 0.5f));
+			m_Light->SetSpecular(glm::vec3(1.0f, 1.0f, 1.0f));
+
+			m_Material->SetDiffuse(m_Diffuse, 3);
+			m_Material->SetSpecular(m_Specular, 4);
+			m_Material->SetShininess(64.0f);
 
 			renderer.Draw(*m_VAO, *m_IBO, *m_Shader);
 		}
@@ -203,7 +209,6 @@ namespace tests
 	{
 		ImGui::DragFloat3("Light Color",	&m_LightColor.x,	0.01f);
 		ImGui::DragFloat3("Light Pos",		&m_LightPosition.x,	0.01f);
-		ImGui::DragFloat3("Object Color",	&m_ObjectColor.x,	0.01f);
 	}
 
 	void TestLight::InitCallback()

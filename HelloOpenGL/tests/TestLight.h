@@ -20,8 +20,11 @@ namespace tests
 		Scope<IndexBuffer>	m_IBO;
 		Ref<Shader>			m_Shader;
 		Scope<Material>		m_Material;
+		Scope<Material>		m_Light;
 		Scope<Texture>		m_Texture;
 		Scope<Texture>		m_Background;
+		Ref<Texture>		m_Diffuse;
+		Ref<Texture>		m_Specular;
 
 		glm::mat4 m_Proj, m_View, m_Model;
 		float m_FOV = 45.0f;
@@ -41,7 +44,7 @@ namespace tests
 		float			m_CameraPitch;
 		float			m_CameraYaw;
 
-		glm::vec3		m_LightPosition = { 1.9f,0.8f,2.0f };
+		glm::vec3		m_LightPosition = { 1.2f, 1.0f, 8.0f };
 		glm::vec3		m_ViewPosition;
 		glm::vec3		m_LightColor = { 1.0f,1.0f,1.0f };
 		glm::vec3		m_ObjectColor = { 1.0f,0.74f,0.31f };
