@@ -186,6 +186,7 @@
     <ClCompile Include="core\IndexBuffer.cpp" />
     <ClCompile Include="core\LightDirectional.cpp" />
     <ClCompile Include="core\LightPoint.cpp" />
+    <ClCompile Include="core\LightSpot.cpp" />
     <ClCompile Include="core\Material.cpp" />
     <ClCompile Include="core\Renderer.cpp" />
     <ClCompile Include="core\Shader.cpp" />
@@ -246,6 +247,7 @@
     <ClInclude Include="core\IndexBuffer.h" />
     <ClInclude Include="core\LightDirectional.h" />
     <ClInclude Include="core\LightPoint.h" />
+    <ClInclude Include="core\LightSpot.h" />
     <ClInclude Include="core\Material.h" />
     <ClInclude Include="core\Renderer.h" />
     <ClInclude Include="core\Shader.h" />
@@ -281,6 +283,7 @@
     <None Include="shaders\ColorAndTexture.shader" />
     <None Include="shaders\Light.shader" />
     <None Include="shaders\Material.shader" />
+    <None Include="shaders\SpotLight.shader" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

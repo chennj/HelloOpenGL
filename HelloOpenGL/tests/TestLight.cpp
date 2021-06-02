@@ -86,12 +86,13 @@ namespace tests
 
 		m_IBO = CreateScope<IndexBuffer>(indices, sizeof(indices) / sizeof(unsigned int));
 
-		m_Shader = CreateRef<Shader>("shaders/Material.shader");
+		m_Shader = CreateRef<Shader>("shaders/SpotLight.shader");
 
 		m_Material = CreateScope<Material>(m_Shader, "material");
 
 		m_LightDirectional = CreateScope<LightDirectional>(glm::vec3(45.0f, 0.0f, 0.0f));
 		m_LightPoint = CreateScope<LightPoint>(glm::vec3(1.0f, 1.0f, -1.0f), glm::vec3(2.0f, 2.0f, 2.0f));
+		m_LightSpot = CreateScope<LightSpot>(glm::vec3(0.0f, 0.0f, 5.0f), glm::vec3(180.0f, 0.0f, 0.0f), glm::vec3(2.0f, 2.0f, 2.0f));
 
 		m_Background	= CreateScope<Texture>();
 		m_Texture		= CreateScope<Texture>("../res/texture/matrix.jpg");
@@ -162,7 +163,7 @@ namespace tests
 		//m_LightColor.y = sin(glfwGetTime() * 0.7f);
 		//m_LightColor.z = sin(glfwGetTime() * 1.3f);
 
-		m_LightDirectional->UpdateDirection();
+		m_LightSpot->UpdateDirection();
 
 	}
 
@@ -197,13 +198,22 @@ namespace tests
 
 			m_Shader->SetUniform3f("viewPosition",		m_Camera->GetPosition());
 
-#if 1		// 点光源
+#if 1		// 聚光灯
+			m_Shader->SetUniform3f("light.position",	m_LightSpot->m_Position);
+			m_Shader->SetUniform3f("light.direction",	m_LightSpot->m_Direction);
+			m_Shader->SetUniform3f("light.color",		m_LightSpot->m_Color);
+			m_Shader->SetUniform1f("light.cutoff",		m_LightSpot->m_Cutoff);
+			m_Shader->SetUniform1f("light.cutoffouter",	m_LightSpot->m_CutoffOuter);
+#endif
+
+#if 0		// 点光源
 			m_Shader->SetUniform3f("light.position",	m_LightPoint->m_Position);
 			m_Shader->SetUniform3f("light.color",		m_LightPoint->m_Color);
 			m_Shader->SetUniform1f("light.constant",	m_LightPoint->m_Attenuation.Constant);
 			m_Shader->SetUniform1f("light.linear",		m_LightPoint->m_Attenuation.Linear);
 			m_Shader->SetUniform1f("light.quadratic",	m_LightPoint->m_Attenuation.Quadratic);
 #endif
+
 #if 0		//平行光源
 			m_Shader->SetUniform3f("light.color",		m_LightDirectional->m_Color);
 			m_Shader->SetUniform3f("light.direction",	m_LightDirectional->m_Direction);平行光源
@@ -223,13 +233,20 @@ namespace tests
 	void TestLight::OnImGuiRender()
 	{
 		ImGui::Separator();
-		ImGui::LabelText("Light Directional","");
-		ImGui::DragFloat3("Light Color",	&m_LightDirectional->m_Color.x,	0.01f);
-		ImGui::DragFloat3("Light Angle",	&m_LightDirectional->m_Angle.x,	0.5f);
+		ImGui::Text("%s", "Light Directional");
+		ImGui::DragFloat3("Color",		&m_LightDirectional->m_Color.x,	0.01f);
+		ImGui::DragFloat3("Angle",		&m_LightDirectional->m_Angle.x,	0.5f);
 		ImGui::Separator();
-		ImGui::LabelText("Light Point","");
-		ImGui::DragFloat3("Light Color", &m_LightPoint->m_Color.x, 0.01f);
-		ImGui::DragFloat3("Light Position", &m_LightPoint->m_Position.x, 0.01f);
+		ImGui::Text("%s", "Point");
+		ImGui::DragFloat3("Color",		&m_LightPoint->m_Color.x, 0.01f);
+		ImGui::DragFloat3("Position",	&m_LightPoint->m_Position.x, 0.01f);
+		ImGui::Separator();
+		ImGui::Text("%s", "Spot");
+		ImGui::DragFloat3("Color",		&m_LightSpot->m_Color.x, 0.01f);
+		ImGui::DragFloat3("Angle",		&m_LightSpot->m_Angle.x, 0.5f);
+		ImGui::DragFloat3("Position",	&m_LightSpot->m_Position.x, 0.01f);
+		ImGui::DragFloat("Cutoff",		&m_LightSpot->m_Cutoff, 0.01f);
+		ImGui::DragFloat("CutoffOuter", &m_LightSpot->m_CutoffOuter, 0.01f);
 	}
 
 	void TestLight::InitCallback()

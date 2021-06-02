@@ -11,6 +11,7 @@
 #include "../core/Material.h"
 #include "../core/LightDirectional.h"
 #include "../core/LightPoint.h"
+#include "../core/LightSpot.h"
 
 namespace tests
 {
@@ -24,6 +25,7 @@ namespace tests
 		Scope<Material>			m_Material;
 		Scope<LightDirectional>	m_LightDirectional;
 		Scope<LightPoint>		m_LightPoint;
+		Scope<LightSpot>		m_LightSpot;
 		Scope<Texture>			m_Texture;
 		Scope<Texture>			m_Background;
 		Ref<Texture>			m_Diffuse;

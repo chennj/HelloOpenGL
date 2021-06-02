@@ -203,6 +203,9 @@
     <ClCompile Include="core\LightPoint.cpp">
       <Filter>源文件\core</Filter>
     </ClCompile>
+    <ClCompile Include="core\LightSpot.cpp">
+      <Filter>源文件\core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stb_image\stb_image.h">
@@ -298,6 +301,9 @@
     <ClInclude Include="core\LightPoint.h">
       <Filter>源文件\core</Filter>
     </ClInclude>
+    <ClInclude Include="core\LightSpot.h">
+      <Filter>源文件\core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\Basic.shader">
@@ -319,6 +325,9 @@
       <Filter>assets\shaders</Filter>
     </None>
     <None Include="shaders\Material.shader">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="shaders\SpotLight.shader">
       <Filter>assets\shaders</Filter>
     </None>
   </ItemGroup>
