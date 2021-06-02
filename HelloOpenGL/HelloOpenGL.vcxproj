@@ -282,6 +282,7 @@
     <None Include="shaders\Color.shader" />
     <None Include="shaders\ColorAndTexture.shader" />
     <None Include="shaders\Light.shader" />
+    <None Include="shaders\MultiLight.shader" />
     <None Include="shaders\Material.shader" />
     <None Include="shaders\SpotLight.shader" />
   </ItemGroup>

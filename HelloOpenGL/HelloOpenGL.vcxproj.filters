@@ -330,5 +330,8 @@
     <None Include="shaders\SpotLight.shader">
       <Filter>assets\shaders</Filter>
     </None>
+    <None Include="shaders\MultiLight.shader">
+      <Filter>assets\shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>

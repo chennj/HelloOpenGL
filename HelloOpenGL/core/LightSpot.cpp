@@ -2,9 +2,13 @@
 
 #include <glm/gtx/rotate_vector.hpp>
 
-LightSpot::LightSpot(const glm::vec3 & position, const glm::vec3 & angle, const glm::vec3 color)
-	:m_Position(position),m_Angle(angle),m_Color(color)
+LightSpot::LightSpot(glm::vec3 position, glm::vec3 angle, glm::vec3 color, float cutoff, float cutoffouter, float constant, float linear, float quadratic)
+	:m_Position(position),m_Angle(angle),m_Color(color),m_Cutoff(cutoff),m_CutoffOuter(cutoffouter)
 {
+	m_Attenuation.Constant = constant;
+	m_Attenuation.Linear = linear;
+	m_Attenuation.Quadratic = quadratic;
+
 	UpdateDirection();
 }
 

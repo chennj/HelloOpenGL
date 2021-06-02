@@ -21,7 +21,7 @@ public:
 	Attenuation m_Attenuation;
 
 public:
-	LightPoint(const glm::vec3 & position = { 1.2f, 1.0f, 8.0f }, const glm::vec3 color = { 1.0f,1.0f,1.0f });
+	LightPoint(glm::vec3 position, glm::vec3 color, float constant, float linear, float quadratic);
 	~LightPoint();
 
 };

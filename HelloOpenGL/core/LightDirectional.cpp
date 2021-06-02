@@ -2,8 +2,8 @@
 
 #include <glm/gtx/rotate_vector.hpp>
 
-LightDirectional::LightDirectional(const glm::vec3 & angle, const glm::vec3 color)
-	:m_Angle(angle),m_Color(color)
+LightDirectional::LightDirectional(glm::vec3 position, glm::vec3 angle, glm::vec3 color)
+	:m_Position(position), m_Angle(angle), m_Color(color)
 {
 	UpdateDirection();
 }

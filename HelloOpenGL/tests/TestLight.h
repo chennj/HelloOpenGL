@@ -24,10 +24,8 @@ namespace tests
 		Ref<Shader>				m_Shader;
 		Scope<Material>			m_Material;
 		Scope<LightDirectional>	m_LightDirectional;
-		Scope<LightPoint>		m_LightPoint;
+		Scope<LightPoint>		m_LightPoint0, m_LightPoint1, m_LightPoint2, m_LightPoint3;
 		Scope<LightSpot>		m_LightSpot;
-		Scope<Texture>			m_Texture;
-		Scope<Texture>			m_Background;
 		Ref<Texture>			m_Diffuse;
 		Ref<Texture>			m_Specular;
 

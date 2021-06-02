@@ -2,12 +2,12 @@
 
 #include <glm/gtx/rotate_vector.hpp>
 
-LightPoint::LightPoint(const glm::vec3 & position, const glm::vec3 color)
+LightPoint::LightPoint(glm::vec3 position, glm::vec3 color, float constant, float linear, float quadratic)
 	:m_Position(position), m_Color(color)
 {
-	m_Attenuation.Constant = 1.0f;
-	m_Attenuation.Linear = 0.09f;
-	m_Attenuation.Quadratic = 0.032f;
+	m_Attenuation.Constant = constant;
+	m_Attenuation.Linear = linear;
+	m_Attenuation.Quadratic = quadratic;
 }
 
 LightPoint::~LightPoint()

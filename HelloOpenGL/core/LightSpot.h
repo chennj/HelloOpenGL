@@ -19,8 +19,16 @@ public:
 	// Ä£ºý±ßÑØ°ë¾¶µÄcosÖµ
 	float m_CutoffOuter = 0.95f;
 
+	struct Attenuation {
+		float Constant;
+		float Linear;
+		float Quadratic;
+	};
+
+	Attenuation m_Attenuation;
+
 public:
-	LightSpot(const glm::vec3 & position = { 1.0f, 1.0f, -1.0f }, const glm::vec3 & angle = { 0.0f, 0.0f, 0.0f }, const glm::vec3 color = { 1.0f,1.0f,1.0f });
+	LightSpot(glm::vec3 position, glm::vec3 angle, glm::vec3 color, float cutoff, float cutoffouter, float constant, float linear, float quadratic);
 	~LightSpot();
 
 public:

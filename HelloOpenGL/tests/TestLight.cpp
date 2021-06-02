@@ -86,16 +86,43 @@ namespace tests
 
 		m_IBO = CreateScope<IndexBuffer>(indices, sizeof(indices) / sizeof(unsigned int));
 
-		m_Shader = CreateRef<Shader>("shaders/SpotLight.shader");
+		m_Shader = CreateRef<Shader>("shaders/MultiLight.shader");
 
 		m_Material = CreateScope<Material>(m_Shader, "material");
 
-		m_LightDirectional = CreateScope<LightDirectional>(glm::vec3(45.0f, 0.0f, 0.0f));
-		m_LightPoint = CreateScope<LightPoint>(glm::vec3(1.0f, 1.0f, -1.0f), glm::vec3(2.0f, 2.0f, 2.0f));
-		m_LightSpot = CreateScope<LightSpot>(glm::vec3(0.0f, 0.0f, 5.0f), glm::vec3(180.0f, 0.0f, 0.0f), glm::vec3(2.0f, 2.0f, 2.0f));
+		m_LightDirectional = CreateScope<LightDirectional>(
+			glm::vec3(0.0f, 0.0f, -1.0f),
+			glm::vec3(90.0f, 0.0f, 0.0f),
+			glm::vec3(1.0f, 1.0f, 1.0f)
+			);
+		m_LightPoint0 = CreateScope<LightPoint>(
+			glm::vec3(1.0f, 0.0f, 0.0f), 
+			glm::vec3(1.0f, 0.0f, 0.0f),
+			1.0f, 0.1f, 0.032f
+			);
+		m_LightPoint1 = CreateScope<LightPoint>(
+			glm::vec3(0.0f, 1.0f, 0.0f),
+			glm::vec3(0.0f, 1.0f, 0.0f),
+			1.0f, 0.1f, 0.032f
+			);
+		m_LightPoint2 = CreateScope<LightPoint>(
+			glm::vec3(0.0f, 0.0f, 1.0f),
+			glm::vec3(0.0f, 0.0f, 1.0f),
+			1.0f, 0.1f, 0.032f
+			);
+		m_LightPoint3 = CreateScope<LightPoint>(
+			glm::vec3(1.0f, 1.0f, 1.0f),
+			glm::vec3(1.0f, 1.0f, 1.0f),
+			1.0f, 0.1f, 0.032f
+			);
 
-		m_Background	= CreateScope<Texture>();
-		m_Texture		= CreateScope<Texture>("../res/texture/matrix.jpg");
+		m_LightSpot = CreateScope<LightSpot>(
+			glm::vec3(0.0f, 0.0f, 2.0f), 
+			glm::vec3(180.0f, 0.0f, 0.0f), 
+			glm::vec3(2.0f, 2.0f, 2.0f),
+			0.99f,0.97f,
+			1.0f, 0.1f, 0.032f
+			);
 
 		m_Diffuse		= CreateRef<Texture>("../res/texture/container2.png");
 		m_Specular		= CreateRef<Texture>("../res/texture/container2_specular.png");
@@ -156,15 +183,7 @@ namespace tests
 
 	void TestLight::OnUpdate(float deltaTime)
 	{
-		//m_Camera->UpdateVector(m_CameraPosition, m_CameraPitch, m_CameraYaw, m_CameraWorldup);
-		//m_Camera->UpdatePosition();
-
-		//m_LightColor.x = sin(glfwGetTime() * 2.0f);
-		//m_LightColor.y = sin(glfwGetTime() * 0.7f);
-		//m_LightColor.z = sin(glfwGetTime() * 1.3f);
-
 		m_LightSpot->UpdateDirection();
-
 	}
 
 	void TestLight::OnRender()
@@ -187,44 +206,62 @@ namespace tests
 
 			m_Shader->Bind();
 
-			m_Background->Bind(0);
-			m_Shader->SetUniform1i("u_Background", 0);
-			m_Texture->Bind(1);
-			m_Shader->SetUniform1i("u_Texture", 1);
+			m_Material->SetDiffuse(m_Diffuse, 0);
+			m_Material->SetSpecular(m_Specular, 1);
+			m_Material->SetShininess(64.0f);
 
 			m_Shader->SetUniformMat4f("u_Model",	m_Model);
 			m_Shader->SetUniformMat4f("u_View",		m_View);
 			m_Shader->SetUniformMat4f("u_Proj",		m_Proj);
 
-			m_Shader->SetUniform3f("viewPosition",		m_Camera->GetPosition());
+			m_Shader->SetUniform3f("cameraPosition",	m_Camera->GetPosition());
 
 #if 1		// 聚光灯
-			m_Shader->SetUniform3f("light.position",	m_LightSpot->m_Position);
-			m_Shader->SetUniform3f("light.direction",	m_LightSpot->m_Direction);
-			m_Shader->SetUniform3f("light.color",		m_LightSpot->m_Color);
-			m_Shader->SetUniform1f("light.cutoff",		m_LightSpot->m_Cutoff);
-			m_Shader->SetUniform1f("light.cutoffouter",	m_LightSpot->m_CutoffOuter);
+			m_Shader->SetUniform3f("lightS.position",			m_LightSpot->m_Position);
+			m_Shader->SetUniform3f("lightS.directionToLight",	m_LightSpot->m_Direction);
+			m_Shader->SetUniform3f("lightS.color",				m_LightSpot->m_Color);
+			m_Shader->SetUniform1f("lightS.cutoff",				m_LightSpot->m_Cutoff);
+			m_Shader->SetUniform1f("lightS.cutoffouter",		m_LightSpot->m_CutoffOuter);
+			m_Shader->SetUniform1f("lightS.constant",			m_LightSpot->m_Attenuation.Constant);
+			m_Shader->SetUniform1f("lightS.linear",				m_LightSpot->m_Attenuation.Linear);
+			m_Shader->SetUniform1f("lightS.quadratic",			m_LightSpot->m_Attenuation.Quadratic);
 #endif
 
-#if 0		// 点光源
-			m_Shader->SetUniform3f("light.position",	m_LightPoint->m_Position);
-			m_Shader->SetUniform3f("light.color",		m_LightPoint->m_Color);
-			m_Shader->SetUniform1f("light.constant",	m_LightPoint->m_Attenuation.Constant);
-			m_Shader->SetUniform1f("light.linear",		m_LightPoint->m_Attenuation.Linear);
-			m_Shader->SetUniform1f("light.quadratic",	m_LightPoint->m_Attenuation.Quadratic);
+#if 1		// 点光源
+			m_Shader->SetUniform3f("lightP0.position",	m_LightPoint0->m_Position);
+			m_Shader->SetUniform3f("lightP0.color",		m_LightPoint0->m_Color);
+			m_Shader->SetUniform1f("lightP0.constant",	m_LightPoint0->m_Attenuation.Constant);
+			m_Shader->SetUniform1f("lightP0.linear",	m_LightPoint0->m_Attenuation.Linear);
+			m_Shader->SetUniform1f("lightP0.quadratic",	m_LightPoint0->m_Attenuation.Quadratic);
+
+			m_Shader->SetUniform3f("lightP1.position",	m_LightPoint1->m_Position);
+			m_Shader->SetUniform3f("lightP1.color",		m_LightPoint1->m_Color);
+			m_Shader->SetUniform1f("lightP1.constant",	m_LightPoint1->m_Attenuation.Constant);
+			m_Shader->SetUniform1f("lightP1.linear",	m_LightPoint1->m_Attenuation.Linear);
+			m_Shader->SetUniform1f("lightP1.quadratic", m_LightPoint1->m_Attenuation.Quadratic);
+
+			m_Shader->SetUniform3f("lightP2.position",	m_LightPoint2->m_Position);
+			m_Shader->SetUniform3f("lightP2.color",		m_LightPoint2->m_Color);
+			m_Shader->SetUniform1f("lightP2.constant",	m_LightPoint2->m_Attenuation.Constant);
+			m_Shader->SetUniform1f("lightP2.linear",	m_LightPoint2->m_Attenuation.Linear);
+			m_Shader->SetUniform1f("lightP2.quadratic", m_LightPoint2->m_Attenuation.Quadratic);
+
+			m_Shader->SetUniform3f("lightP3.position",	m_LightPoint3->m_Position);
+			m_Shader->SetUniform3f("lightP3.color",		m_LightPoint3->m_Color);
+			m_Shader->SetUniform1f("lightP3.constant",	m_LightPoint3->m_Attenuation.Constant);
+			m_Shader->SetUniform1f("lightP3.linear",	m_LightPoint3->m_Attenuation.Linear);
+			m_Shader->SetUniform1f("lightP3.quadratic", m_LightPoint3->m_Attenuation.Quadratic);
 #endif
 
-#if 0		//平行光源
-			m_Shader->SetUniform3f("light.color",		m_LightDirectional->m_Color);
-			m_Shader->SetUniform3f("light.direction",	m_LightDirectional->m_Direction);平行光源
+#if 1		//平行光源
+			m_Shader->SetUniform3f("lightD.position",			m_LightDirectional->m_Position);
+			m_Shader->SetUniform3f("lightD.color",				m_LightDirectional->m_Color);
+			m_Shader->SetUniform3f("lightD.directionToLight",	m_LightDirectional->m_Direction);
 #endif
-			m_Shader->SetUniform3f("light.ambient",		glm::vec3(0.1f, 0.1f, 0.1f));
-			m_Shader->SetUniform3f("light.diffuse",		glm::vec3(0.5f, 0.5f, 0.5f));
-			m_Shader->SetUniform3f("light.specular",	glm::vec3(1.0f, 1.0f, 1.0f));
+			//m_Shader->SetUniform3f("light.ambient",		glm::vec3(0.1f, 0.1f, 0.1f));
+			//m_Shader->SetUniform3f("light.diffuse",		glm::vec3(0.5f, 0.5f, 0.5f));
+			//m_Shader->SetUniform3f("light.specular",	glm::vec3(1.0f, 1.0f, 1.0f));
 
-			m_Material->SetDiffuse(m_Diffuse, 3);
-			m_Material->SetSpecular(m_Specular, 4);
-			m_Material->SetShininess(64.0f);
 
 			renderer.Draw(*m_VAO, *m_IBO, *m_Shader);
 		}
@@ -232,14 +269,6 @@ namespace tests
 
 	void TestLight::OnImGuiRender()
 	{
-		ImGui::Separator();
-		ImGui::Text("%s", "Light Directional");
-		ImGui::DragFloat3("Color",		&m_LightDirectional->m_Color.x,	0.01f);
-		ImGui::DragFloat3("Angle",		&m_LightDirectional->m_Angle.x,	0.5f);
-		ImGui::Separator();
-		ImGui::Text("%s", "Point");
-		ImGui::DragFloat3("Color",		&m_LightPoint->m_Color.x, 0.01f);
-		ImGui::DragFloat3("Position",	&m_LightPoint->m_Position.x, 0.01f);
 		ImGui::Separator();
 		ImGui::Text("%s", "Spot");
 		ImGui::DragFloat3("Color",		&m_LightSpot->m_Color.x, 0.01f);
