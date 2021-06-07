@@ -188,6 +188,8 @@
     <ClCompile Include="core\LightPoint.cpp" />
     <ClCompile Include="core\LightSpot.cpp" />
     <ClCompile Include="core\Material.cpp" />
+    <ClCompile Include="core\Mesh.cpp" />
+    <ClCompile Include="core\Model.cpp" />
     <ClCompile Include="core\Renderer.cpp" />
     <ClCompile Include="core\Shader.cpp" />
     <ClCompile Include="core\Texture.cpp" />
@@ -238,6 +240,7 @@
     <ClCompile Include="tests\TestCamera.cpp" />
     <ClCompile Include="tests\TestClearColor.cpp" />
     <ClCompile Include="tests\TestLight.cpp" />
+    <ClCompile Include="tests\TestMesh.cpp" />
     <ClCompile Include="tests\TestTexture2D.cpp" />
     <ClCompile Include="tests\TestTexture3D.cpp" />
   </ItemGroup>
@@ -249,6 +252,8 @@
     <ClInclude Include="core\LightPoint.h" />
     <ClInclude Include="core\LightSpot.h" />
     <ClInclude Include="core\Material.h" />
+    <ClInclude Include="core\Mesh.h" />
+    <ClInclude Include="core\Model.h" />
     <ClInclude Include="core\Renderer.h" />
     <ClInclude Include="core\Shader.h" />
     <ClInclude Include="core\Texture.h" />
@@ -272,21 +277,33 @@
     <ClInclude Include="tests\TestCamera.h" />
     <ClInclude Include="tests\TestClearColor.h" />
     <ClInclude Include="tests\TestLight.h" />
+    <ClInclude Include="tests\TestMesh.h" />
     <ClInclude Include="tests\TestTexture2D.h" />
     <ClInclude Include="tests\TestTexture3D.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
     <None Include="shaders\Basic.shader" />
     <None Include="shaders\Basic3D.shader" />
     <None Include="shaders\BatchRenderer.shader" />
     <None Include="shaders\Color.shader" />
     <None Include="shaders\ColorAndTexture.shader" />
     <None Include="shaders\Light.shader" />
+    <None Include="shaders\Mesh.shader" />
     <None Include="shaders\MultiLight.shader" />
     <None Include="shaders\Material.shader" />
     <None Include="shaders\SpotLight.shader" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="..\packages\Assimp.redist.3.0.0\build\native\Assimp.redist.targets" Condition="Exists('..\packages\Assimp.redist.3.0.0\build\native\Assimp.redist.targets')" />
+    <Import Project="..\packages\Assimp.3.0.0\build\native\Assimp.targets" Condition="Exists('..\packages\Assimp.3.0.0\build\native\Assimp.targets')" />
   </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>这台计算机上缺少此项目引用的 NuGet 程序包。使用“NuGet 程序包还原”可下载这些程序包。有关更多信息，请参见 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的文件是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Assimp.redist.3.0.0\build\native\Assimp.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Assimp.redist.3.0.0\build\native\Assimp.redist.targets'))" />
+    <Error Condition="!Exists('..\packages\Assimp.3.0.0\build\native\Assimp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Assimp.3.0.0\build\native\Assimp.targets'))" />
+  </Target>
 </Project>

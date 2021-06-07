@@ -8,6 +8,10 @@
 * P 投影变换：正交投影或透视投影（视锥体，近大远小，FOV视角大小），将物体投影到裁剪空间（近平面），
 *			比如物体是一个沙发，你到底是从左边看他，还是右边。使近距离看，还是离远了看，
 *			是从上到下看，还是从下往上看，如果里的太近你可能只看得到沙发的一部分。
+* ---------------------------------------------------------------------------
+* Assimp 库3D模型资源地址
+* https://sketchfab.com/
+* https://sketchfab.com/sketchpunk/collections/downloads
 */
 
 #include <iostream>
@@ -39,6 +43,11 @@
 #include "../tests/TestTexture3D.h"
 #include "../tests/TestCamera.h"
 #include "../tests/TestLight.h"
+#include "../tests/TestMesh.h"
+
+// timing
+float deltaTime = 0.0f;
+float lastFrame = 0.0f;
 
 int main(void)
 {
@@ -101,9 +110,14 @@ int main(void)
 		testMenu->RegisterTest<tests::TestTexture3D>("3D Texture");
 		testMenu->RegisterTest<tests::TestCamera>("Camera");
 		testMenu->RegisterTest<tests::TestLight>("Light");
+		testMenu->RegisterTest<tests::TestMesh>("Assimp Mesh");
 
 		while (!glfwWindowShouldClose(window))
 		{
+			float currentFrame = glfwGetTime();
+			deltaTime = currentFrame - lastFrame;
+			lastFrame = currentFrame;
+
 			GLCall(glClearColor(0, 0, 0, 1));
 
 			renderer.Clear();
@@ -111,7 +125,7 @@ int main(void)
 			ImGui_ImplGlfwGL3_NewFrame();
 			if (currentTest)
 			{
-				currentTest->OnUpdate(0.0f);
+				currentTest->OnUpdate(deltaTime);
 				currentTest->OnRender();
 				ImGui::Begin("Test");
 				if (currentTest != testMenu && ImGui::Button("<-"))

@@ -78,3 +78,54 @@ void Camera::Move(float x, float y, float z)
 	m_speedZ = z;
 	UpdatePosition();
 }
+
+void Camera::MouseMovement(float xoffset, float yoffset, bool constrainPitch)
+{
+	xoffset *= m_MouseSensitivity;
+	yoffset *= m_MouseSensitivity;
+
+	m_yaw += xoffset;
+	m_pitch += yoffset;
+
+	// make sure that when pitch is out of bounds, screen doesn't get flipped
+	if (constrainPitch)
+	{
+		if (m_pitch > 89.0f)
+			m_pitch = 89.0f;
+		if (m_pitch < -89.0f)
+			m_pitch = -89.0f;
+	}
+
+	// update Front, Right and Up Vectors using the updated Euler angles
+	UpdateVector();
+}
+
+void Camera::UpdateVector()
+{
+	m_forward.x = glm::cos(m_pitch) * glm::sin(m_yaw);
+	m_forward.y = glm::sin(m_pitch);
+	m_forward.z = glm::cos(m_pitch) * glm::cos(m_yaw);
+	m_right = glm::normalize(glm::cross(m_forward, m_worldup));
+	m_up = glm::normalize(glm::cross(m_right, m_forward));
+
+	SetViewMatrix();
+}
+
+void Camera::Keyboard(Camera_Movement direction, float deltaTime)
+{
+	float velocity = m_MovementSpeed * deltaTime;
+	if (direction == FORWARD)
+		m_position += m_forward * velocity;
+	if (direction == BACKWARD)
+		m_position -= m_forward * velocity;
+	if (direction == LEFT)
+		m_position -= m_right * velocity;
+	if (direction == RIGHT)
+		m_position += m_right * velocity;
+	if (direction == UP)
+		m_position -= m_up * velocity;
+	if (direction == DOWN)
+		m_position += m_up * velocity;
+
+	SetViewMatrix();
+}

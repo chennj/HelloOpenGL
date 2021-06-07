@@ -19,6 +19,9 @@
 
 namespace tests
 {
+	const float SCR_WIDTH = 1200;
+	const float SCR_HEIGHT = 600;
+
 	TestLight::TestLight()
 	{
 		float positions[] = {
@@ -178,12 +181,15 @@ namespace tests
 
 		glfwSetWindowUserPointer(m_Window, nullptr);
 		glfwSetScrollCallback(m_Window, nullptr);
-		glfwSetCharCallback(m_Window, nullptr);
+		glfwSetCursorPosCallback(m_Window, nullptr);
+		glfwSetFramebufferSizeCallback(m_Window, nullptr);
 	}
 
 	void TestLight::OnUpdate(float deltaTime)
 	{
 		m_LightSpot->UpdateDirection();
+
+		ProcessInput(deltaTime);
 	}
 
 	void TestLight::OnRender()
@@ -198,7 +204,7 @@ namespace tests
 			float angle = m_ModelRotationAngle;
 			//if (i % 3 == 0)
 			//	angle = glfwGetTime() * 25.0f;
-			m_Proj = glm::perspective(glm::radians(m_FOV), 1200.0f / 600.0f/*ViewportµÄwidth/height*/, 0.1f, 100.0f);
+			m_Proj = glm::perspective(glm::radians(m_FOV), SCR_WIDTH / SCR_HEIGHT/*ViewportµÄwidth/height*/, 0.1f, 100.0f);
 			m_Model = glm::translate(glm::mat4(1.0f), m_CubePositions[i])
 				* glm::rotate(glm::mat4(1.0f), glm::radians(angle), m_ModelRotationDirection)
 				* glm::scale(glm::mat4(1.0f), m_ModelScale);
@@ -258,11 +264,6 @@ namespace tests
 			m_Shader->SetUniform3f("lightD.color",				m_LightDirectional->m_Color);
 			m_Shader->SetUniform3f("lightD.directionToLight",	m_LightDirectional->m_Direction);
 #endif
-			//m_Shader->SetUniform3f("light.ambient",		glm::vec3(0.1f, 0.1f, 0.1f));
-			//m_Shader->SetUniform3f("light.diffuse",		glm::vec3(0.5f, 0.5f, 0.5f));
-			//m_Shader->SetUniform3f("light.specular",	glm::vec3(1.0f, 1.0f, 1.0f));
-
-
 			renderer.Draw(*m_VAO, *m_IBO, *m_Shader);
 		}
 	}
@@ -294,98 +295,155 @@ namespace tests
 				self->m_FOV = 45.0f;
 		});
 
-		glfwSetCharCallback(m_Window, [](GLFWwindow* window, unsigned int keycode)
-		{
+		//glfwSetCharCallback(m_Window, [](GLFWwindow* window, unsigned int keycode)
+		//{
+		//	TestLight* self = (TestLight*)glfwGetWindowUserPointer(window);
+
+		//	//std::cout << keycode << std::endl;
+
+		//	float speed = 0.1f;
+
+		//	switch (keycode)
+		//	{
+		//	case BB_KEY_A:
+		//	case GLFW_KEY_A:
+		//		self->m_CameraPosition.x -= speed;
+		//		break;
+		//	case BB_KEY_D:
+		//	case GLFW_KEY_D:
+		//		self->m_CameraPosition.x += speed;
+		//		break;
+		//	case BB_KEY_W:
+		//	case GLFW_KEY_W:
+		//		self->m_CameraPosition.z += speed;
+		//		break;
+		//	case BB_KEY_S:
+		//	case GLFW_KEY_S:
+		//		self->m_CameraPosition.z -= speed;
+		//		break;
+		//	case BB_KEY_Q:
+		//	case GLFW_KEY_Q:
+		//		self->m_CameraPosition.y += speed;
+		//		break;
+		//	case BB_KEY_E:
+		//	case GLFW_KEY_E:
+		//		self->m_CameraPosition.y -= speed;
+		//		break;
+		//	}
+		//	self->m_Camera->UpdateVector(
+		//		self->m_CameraPosition, 
+		//		self->m_CameraPitch, 
+		//		self->m_CameraYaw, 
+		//		self->m_CameraWorldup);
+		//});
+
+		//glfwSetKeyCallback(m_Window, [](GLFWwindow* window, int key, int scancode, int action, int mods)
+		//{
+		//	TestLight* self = (TestLight*)glfwGetWindowUserPointer(window);
+
+		//	std::cout << "----" << std::endl;
+		//	std::cout << "key=" << key << ","
+		//		<< "scancode=" << scancode << ","
+		//		<< "action=" << action << ","
+		//		<< "mods=" << mods << std::endl;
+
+		//	float speed = 0.005f;
+
+		//	switch (action)
+		//	{
+		//		case GLFW_RELEASE:
+		//		{
+		//			break;
+		//		}
+		//		case GLFW_PRESS:
+		//		case GLFW_REPEAT:
+		//		{
+		//			switch (key)
+		//			{
+		//			case GLFW_KEY_LEFT:
+		//				self->m_CameraYaw += speed * 2;
+		//				break;
+		//			case GLFW_KEY_RIGHT:
+		//				self->m_CameraYaw -= speed * 2;
+		//				break;
+		//			case GLFW_KEY_UP:
+		//				self->m_CameraPosition.z -= speed * 10;
+		//				break;
+		//			case GLFW_KEY_DOWN:
+		//				self->m_CameraPosition.z += speed * 10;
+		//				break;
+		//			case GLFW_KEY_PAGE_UP:
+		//				self->m_CameraPitch += speed;
+		//				break;
+		//			case GLFW_KEY_PAGE_DOWN:
+		//				self->m_CameraPitch -= speed;
+		//				break;
+		//			}
+		//			break;
+		//		}
+		//	}
+		//	self->m_Camera->UpdateVector(
+		//		self->m_CameraPosition,
+		//		self->m_CameraPitch,
+		//		self->m_CameraYaw,
+		//		self->m_CameraWorldup);
+		//});
+
+		static bool firstMouse = true;
+		static double lastX = SCR_WIDTH;
+		static double lastY = SCR_HEIGHT;
+
+		glfwSetCursorPosCallback(m_Window, [](GLFWwindow* window, double xpos, double ypos) {
+
 			TestLight* self = (TestLight*)glfwGetWindowUserPointer(window);
 
-			//std::cout << keycode << std::endl;
+			if (!self->m_EnableMouseCallback)return;
 
-			float speed = 0.1f;
-
-			switch (keycode)
+			if (firstMouse)
 			{
-			case BB_KEY_A:
-			case GLFW_KEY_A:
-				self->m_CameraPosition.x -= speed;
-				break;
-			case BB_KEY_D:
-			case GLFW_KEY_D:
-				self->m_CameraPosition.x += speed;
-				break;
-			case BB_KEY_W:
-			case GLFW_KEY_W:
-				self->m_CameraPosition.z += speed;
-				break;
-			case BB_KEY_S:
-			case GLFW_KEY_S:
-				self->m_CameraPosition.z -= speed;
-				break;
-			case BB_KEY_Q:
-			case GLFW_KEY_Q:
-				self->m_CameraPosition.y += speed;
-				break;
-			case BB_KEY_E:
-			case GLFW_KEY_E:
-				self->m_CameraPosition.y -= speed;
-				break;
+				lastX = xpos;
+				lastY = ypos;
+				firstMouse = false;
 			}
-			self->m_Camera->UpdateVector(
-				self->m_CameraPosition, 
-				self->m_CameraPitch, 
-				self->m_CameraYaw, 
-				self->m_CameraWorldup);
+
+			float xoffset = xpos - lastX;
+			float yoffset = lastY - ypos; // reversed since y-coordinates go from bottom to top
+
+			lastX = xpos;
+			lastY = ypos;
+
+			self->m_Camera->MouseMovement(xoffset, yoffset);
 		});
 
-		glfwSetKeyCallback(m_Window, [](GLFWwindow* window, int key, int scancode, int action, int mods)
-		{
-			TestLight* self = (TestLight*)glfwGetWindowUserPointer(window);
-
-			//std::cout << "----" << std::endl;
-			//std::cout << "key=" << key << ","
-			//	<< "scancode=" << scancode << ","
-			//	<< "action=" << action << ","
-			//	<< "mods=" << mods << std::endl;
-
-			float speed = 0.005f;
-
-			switch (action)
-			{
-				case GLFW_RELEASE:
-				{
-					break;
-				}
-				case GLFW_PRESS:
-				case GLFW_REPEAT:
-				{
-					switch (key)
-					{
-					case GLFW_KEY_LEFT:
-						self->m_CameraYaw += speed * 2;
-						break;
-					case GLFW_KEY_RIGHT:
-						self->m_CameraYaw -= speed * 2;
-						break;
-					case GLFW_KEY_UP:
-						self->m_CameraPosition.z -= speed * 10;
-						break;
-					case GLFW_KEY_DOWN:
-						self->m_CameraPosition.z += speed * 10;
-						break;
-					case GLFW_KEY_PAGE_UP:
-						self->m_CameraPitch += speed;
-						break;
-					case GLFW_KEY_PAGE_DOWN:
-						self->m_CameraPitch -= speed;
-						break;
-					}
-					break;
-				}
-			}
-			self->m_Camera->UpdateVector(
-				self->m_CameraPosition,
-				self->m_CameraPitch,
-				self->m_CameraYaw,
-				self->m_CameraWorldup);
+		glfwSetFramebufferSizeCallback(m_Window, [](GLFWwindow* window, int width, int height) {
+			glViewport(0, 0, width, height);
 		});
+	}
+
+	void TestLight::ProcessInput(float deltaTime)
+	{
+		if (glfwGetKey(m_Window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+			m_EnableMouseCallback = false;
+
+		if (glfwGetKey(m_Window, GLFW_KEY_SPACE) == GLFW_PRESS)
+			m_EnableMouseCallback = true;
+
+		if (glfwGetKey(m_Window, GLFW_KEY_W) == GLFW_PRESS)
+			m_Camera->Keyboard(FORWARD, deltaTime);
+
+		if (glfwGetKey(m_Window, GLFW_KEY_S) == GLFW_PRESS)
+			m_Camera->Keyboard(BACKWARD, deltaTime);
+
+		if (glfwGetKey(m_Window, GLFW_KEY_A) == GLFW_PRESS)
+			m_Camera->Keyboard(LEFT, deltaTime);
+
+		if (glfwGetKey(m_Window, GLFW_KEY_D) == GLFW_PRESS)
+			m_Camera->Keyboard(RIGHT, deltaTime);
+
+		if (glfwGetKey(m_Window, GLFW_KEY_Q) == GLFW_PRESS)
+			m_Camera->Keyboard(UP, deltaTime);
+
+		if (glfwGetKey(m_Window, GLFW_KEY_E) == GLFW_PRESS)
+			m_Camera->Keyboard(DOWN, deltaTime);
 	}
 }

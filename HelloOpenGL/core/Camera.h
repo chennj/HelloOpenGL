@@ -3,6 +3,15 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
+enum Camera_Movement {
+	FORWARD,
+	BACKWARD,
+	LEFT,
+	RIGHT,
+	UP,
+	DOWN
+};
+
 class Camera
 {
 private:
@@ -16,12 +25,18 @@ private:
 
 	glm::mat4 m_viewmatrix;
 
+	// euler Angles
 	float m_pitch;
 	float m_yaw;
 
 	float m_speedX = 0.0f;
 	float m_speedY = 0.0f;
 	float m_speedZ = 0.0f;
+
+	// camera options
+	float m_MovementSpeed		= 2.5f;
+	float m_MouseSensitivity	= 0.005f;;
+	float m_Zoom				= 45.0f;
 
 public:
 	Camera(glm::vec3 position, glm::vec3 target/*被观察目标位置*/, glm::vec3 worldup/*世界坐标系上方*/);
@@ -36,4 +51,7 @@ public:
 	void UpdateVector(glm::vec3 position, float pitch, float yaw, glm::vec3 worldup);
 	void UpdatePosition();
 	void Move(float x, float y, float z);
+	void MouseMovement(float xoffset, float yoffset, bool constrainPitch = true);
+	void UpdateVector();
+	void Keyboard(Camera_Movement direction, float deltaTime);
 };
