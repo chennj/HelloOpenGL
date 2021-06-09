@@ -239,6 +239,7 @@
     <ClCompile Include="tests\TestBatchTexture2D.cpp" />
     <ClCompile Include="tests\TestCamera.cpp" />
     <ClCompile Include="tests\TestClearColor.cpp" />
+    <ClCompile Include="tests\TestDepthTest.cpp" />
     <ClCompile Include="tests\TestLight.cpp" />
     <ClCompile Include="tests\TestMesh.cpp" />
     <ClCompile Include="tests\TestTexture2D.cpp" />
@@ -276,6 +277,7 @@
     <ClInclude Include="tests\TestBatchTexture2D.h" />
     <ClInclude Include="tests\TestCamera.h" />
     <ClInclude Include="tests\TestClearColor.h" />
+    <ClInclude Include="tests\TestDepthTest.h" />
     <ClInclude Include="tests\TestLight.h" />
     <ClInclude Include="tests\TestMesh.h" />
     <ClInclude Include="tests\TestTexture2D.h" />
@@ -283,6 +285,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="shaders\Advance01.shader" />
     <None Include="shaders\Basic.shader" />
     <None Include="shaders\Basic3D.shader" />
     <None Include="shaders\BatchRenderer.shader" />

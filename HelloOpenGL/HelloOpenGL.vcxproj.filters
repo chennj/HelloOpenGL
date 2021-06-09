@@ -215,6 +215,9 @@
     <ClCompile Include="core\Model.cpp">
       <Filter>源文件\core</Filter>
     </ClCompile>
+    <ClCompile Include="tests\TestDepthTest.cpp">
+      <Filter>源文件\tests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stb_image\stb_image.h">
@@ -322,6 +325,9 @@
     <ClInclude Include="core\Model.h">
       <Filter>源文件\core</Filter>
     </ClInclude>
+    <ClInclude Include="tests\TestDepthTest.h">
+      <Filter>源文件\tests</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\Basic.shader">
@@ -353,6 +359,9 @@
     </None>
     <None Include="packages.config" />
     <None Include="shaders\Mesh.shader">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="shaders\Advance01.shader">
       <Filter>assets\shaders</Filter>
     </None>
   </ItemGroup>

@@ -44,6 +44,7 @@
 #include "../tests/TestCamera.h"
 #include "../tests/TestLight.h"
 #include "../tests/TestMesh.h"
+#include "../tests/TestDepthTest.h"
 
 // timing
 float deltaTime = 0.0f;
@@ -111,6 +112,7 @@ int main(void)
 		testMenu->RegisterTest<tests::TestCamera>("Camera");
 		testMenu->RegisterTest<tests::TestLight>("Light");
 		testMenu->RegisterTest<tests::TestMesh>("Assimp Mesh");
+		testMenu->RegisterTest<tests::TestDepthTest>("Depth Test");
 
 		while (!glfwWindowShouldClose(window))
 		{
