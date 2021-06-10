@@ -45,6 +45,7 @@
 #include "../tests/TestLight.h"
 #include "../tests/TestMesh.h"
 #include "../tests/TestDepthTest.h"
+#include "../tests/TestStencilTest.h"
 
 // timing
 float deltaTime = 0.0f;
@@ -59,7 +60,7 @@ int main(void)
 		return -1;
 
 	/* Create a windowed mode window and its OpenGL context */
-	window = glfwCreateWindow(1200, 600, "Hello World", NULL, NULL);
+	window = glfwCreateWindow(1200, 600, "Hello OpenGL", NULL, NULL);
 	if (!window)
 	{
 		glfwTerminate();
@@ -95,6 +96,13 @@ int main(void)
 
 		ImGui::CreateContext();
 		ImGui_ImplGlfwGL3_Init(window, true);
+		/**
+		*
+		* ÉèÖÃ×ÖÌå
+		*/
+		//ImGuiIO& io = ImGui::GetIO(); (void)io;
+		//io.FontDefault = io.Fonts->AddFontFromFileTTF("../res/fonts/LongCang-Regular.ttf", 18.0f, NULL, io.Fonts->GetGlyphRangesChineseSimplifiedCommon());
+
 		ImGui::StyleColorsDark();
 
 		tests::Test* currentTest = nullptr;
@@ -113,6 +121,7 @@ int main(void)
 		testMenu->RegisterTest<tests::TestLight>("Light");
 		testMenu->RegisterTest<tests::TestMesh>("Assimp Mesh");
 		testMenu->RegisterTest<tests::TestDepthTest>("Depth Test");
+		testMenu->RegisterTest<tests::TestStencilTest>("Stencil Test");
 
 		while (!glfwWindowShouldClose(window))
 		{

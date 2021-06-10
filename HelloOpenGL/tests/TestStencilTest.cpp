@@ -1,11 +1,10 @@
-#include "TestDepthTest.h"
+#include "TestStencilTest.h"
 
 #include "../imgui/imgui.h"
-#include "../imgui/imgui_internal.h"
 
 namespace tests
 {
-	TestDepthTest::TestDepthTest()
+	TestStencilTest::TestStencilTest()
 	{
 		// --------- 箱子 --------------------------------------------------
 		float cubePositions[] = {
@@ -96,7 +95,7 @@ namespace tests
 		m_PlaneIBO = CreateScope<IndexBuffer>(planeIndices, sizeof(planeIndices) / sizeof(unsigned int));
 
 		// --------- shader --------------------------------------------------
-		m_Shader = CreateRef<Shader>("shaders/Depth.shader");
+		m_Shader = CreateRef<Shader>("shaders/Stencil.shader");
 
 		m_CubeTexture = CreateRef<Texture>("../res/texture/container2.png");
 		m_FloorTexture = CreateRef<Texture>("../res/texture/cnchess/WHITE.GIF");
@@ -132,9 +131,18 @@ namespace tests
 		* 渲染三维图形会很奇怪
 		*/
 		GLCall(glEnable(GL_DEPTH_TEST));
+		GLCall(glDepthFunc(GL_LESS));
+
+		/**
+		*
+		* 启用模板测试
+		*/
+		GLCall(glEnable(GL_STENCIL_TEST));
+		GLCall(glStencilFunc(GL_NOTEQUAL, 1, 0xFF));
+		GLCall(glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE));
 	}
 
-	TestDepthTest::~TestDepthTest()
+	TestStencilTest::~TestStencilTest()
 	{
 		glfwSetWindowUserPointer(m_Window, nullptr);
 		glfwSetScrollCallback(m_Window, nullptr);
@@ -142,20 +150,15 @@ namespace tests
 		glfwSetFramebufferSizeCallback(m_Window, nullptr);
 	}
 
-	void TestDepthTest::OnUpdate(float deltaTime)
+	void TestStencilTest::OnUpdate(float deltaTime)
 	{
 		ProcessInput(deltaTime);
-
-		if (!m_IsDepthLess)
-			glDepthFunc(GL_ALWAYS); // always pass the depth test (same effect as glDisable(GL_DEPTH_TEST))
-		else
-			glDepthFunc(GL_LESS);
 	}
 
-	void TestDepthTest::OnRender()
+	void TestStencilTest::OnRender()
 	{
 		GLCall(glClearColor(0.1f, 0.1f, 0.1f, 1.0f));
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);// don't forget to clear the stencil buffer!
 
 		Renderer renderer;
 
@@ -164,11 +167,24 @@ namespace tests
 
 		m_Shader->Bind();
 		m_Shader->SetUniform1i("textureIndex", 0);
-		m_Shader->SetUniform1i("depthVisual", m_IsDepthVisual);
 
 		m_Shader->SetUniformMat4f("u_View", m_View);
 		m_Shader->SetUniformMat4f("u_Proj", m_Proj);
 
+		glStencilMask(0x00); // 记得保证我们在绘制地板的时候不会更新模板缓冲
+		m_Shader->SetUniform1i("drawFrame", 0);
+		// --------------------------------------------------------------------
+		// 地面
+		m_FloorTexture->Bind();
+		m_Shader->SetUniformMat4f("u_Model", glm::mat4(1.0f));
+		renderer.Draw(*m_PlaneVAO, *m_PlaneIBO, *m_Shader);
+
+		// 1st. render pass, draw objects as normal, writing to the stencil buffer
+		glStencilFunc(GL_ALWAYS, 1, 0xFF);
+		glStencilMask(0xFF);
+		m_Shader->SetUniform1i("drawFrame", 0);
+		m_ModelScale = glm::vec3(1.0f, 1.0f, 1.0f);
+		// --------------------------------------------------------------------
 		// 箱子
 		m_Model = glm::translate(glm::mat4(1.0f), glm::vec3(-1.0f, 0.0f, -1.0f))
 			* glm::rotate(glm::mat4(1.0f), glm::radians(m_ModelRotationAngle), m_ModelRotationDirection)
@@ -184,28 +200,47 @@ namespace tests
 		m_Shader->SetUniformMat4f("u_Model", m_Model);
 		renderer.Draw(*m_CubeVAO, *m_CubeIBO, *m_Shader);
 
-		// 地面
-		m_FloorTexture->Bind();
-		m_Shader->SetUniformMat4f("u_Model", glm::mat4(1.0f));
-		renderer.Draw(*m_PlaneVAO, *m_PlaneIBO, *m_Shader);
+		// 2nd. render pass: now draw slightly scaled versions of the objects, this time disabling stencil writing.
+		// Because the stencil buffer is now filled with several 1s. The parts of the buffer that are 1 are not drawn, thus only drawing 
+		// the objects' size differences, making it look like borders.
+		glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
+		glStencilMask(0x00);
+		glDisable(GL_DEPTH_TEST);
+		m_ModelScale = glm::vec3(1.1f, 1.1f, 1.1f);
+		m_Shader->SetUniform1i("drawFrame", 1);
+		// -----------------------------------------------------------------------------------------------------------------------------
+		// 箱子外框
+		m_Model = glm::translate(glm::mat4(1.0f), glm::vec3(-1.0f, 0.0f, -1.0f))
+			* glm::rotate(glm::mat4(1.0f), glm::radians(m_ModelRotationAngle), m_ModelRotationDirection)
+			* glm::scale(glm::mat4(1.0f), m_ModelScale);
+		m_CubeTexture->Bind();
+		m_Shader->SetUniformMat4f("u_Model", m_Model);
+		renderer.Draw(*m_CubeVAO, *m_CubeIBO, *m_Shader);
+
+		m_Model = glm::translate(glm::mat4(1.0f), glm::vec3(2.0f, 0.0f, 0.0f))
+			* glm::rotate(glm::mat4(1.0f), glm::radians(m_ModelRotationAngle), m_ModelRotationDirection)
+			* glm::scale(glm::mat4(1.0f), m_ModelScale);
+		m_CubeTexture->Bind();
+		m_Shader->SetUniformMat4f("u_Model", m_Model);
+		renderer.Draw(*m_CubeVAO, *m_CubeIBO, *m_Shader);
+
+		glStencilMask(0xFF);
+		glStencilFunc(GL_ALWAYS, 0, 0xFF);
+		glEnable(GL_DEPTH_TEST);
 	}
 
-	void TestDepthTest::OnImGuiRender()
+	void TestStencilTest::OnImGuiRender()
 	{
 
-		ImGui::Begin("Depth Opition");
-		ImGui::Checkbox("LESS or NO", &m_IsDepthLess);
-		ImGui::Checkbox("Depth Visual", &m_IsDepthVisual);
-		ImGui::End();
 	}
 
-	void TestDepthTest::InitCallback()
+	void TestStencilTest::InitCallback()
 	{
 		glfwSetWindowUserPointer(m_Window, this);
 
 		glfwSetScrollCallback(m_Window, [](GLFWwindow* window, double xoffset, double yoffset) {
 
-			TestDepthTest* self = (TestDepthTest*)glfwGetWindowUserPointer(window);
+			TestStencilTest* self = (TestStencilTest*)glfwGetWindowUserPointer(window);
 
 			if (self->m_FOV >= 1.0f && self->m_FOV <= 45.0f)
 				self->m_FOV -= yoffset;
@@ -221,7 +256,7 @@ namespace tests
 
 		glfwSetCursorPosCallback(m_Window, [](GLFWwindow* window, double xpos, double ypos) {
 
-			TestDepthTest* self = (TestDepthTest*)glfwGetWindowUserPointer(window);
+			TestStencilTest* self = (TestStencilTest*)glfwGetWindowUserPointer(window);
 
 			if (!self->m_EnableMouseCallback)return;
 
@@ -242,15 +277,15 @@ namespace tests
 		});
 
 		glfwSetFramebufferSizeCallback(m_Window, [](GLFWwindow* window, int width, int height) {
-			
-			TestDepthTest* self = (TestDepthTest*)glfwGetWindowUserPointer(window);
+
+			TestStencilTest* self = (TestStencilTest*)glfwGetWindowUserPointer(window);
 			self->m_ScreenWidth = width;
 			self->m_ScreenHeight = height;
 			glViewport(0, 0, width, height);
 		});
 	}
 
-	void TestDepthTest::ProcessInput(float deltaTime)
+	void TestStencilTest::ProcessInput(float deltaTime)
 	{
 		if (glfwGetKey(m_Window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 			m_EnableMouseCallback = false;
