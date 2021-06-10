@@ -46,6 +46,7 @@
 #include "../tests/TestMesh.h"
 #include "../tests/TestDepthTest.h"
 #include "../tests/TestStencilTest.h"
+#include "../tests/TestBlending.h"
 
 // timing
 float deltaTime = 0.0f;
@@ -122,6 +123,7 @@ int main(void)
 		testMenu->RegisterTest<tests::TestMesh>("Assimp Mesh");
 		testMenu->RegisterTest<tests::TestDepthTest>("Depth Test");
 		testMenu->RegisterTest<tests::TestStencilTest>("Stencil Test");
+		testMenu->RegisterTest<tests::TestBlending>("Blending");
 
 		while (!glfwWindowShouldClose(window))
 		{

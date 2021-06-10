@@ -221,6 +221,9 @@
     <ClCompile Include="imgui\imgui_impl_glfw_gl3.cpp">
       <Filter>源文件\imgui</Filter>
     </ClCompile>
+    <ClCompile Include="tests\TestBlending.cpp">
+      <Filter>源文件\tests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stb_image\stb_image.h">
@@ -334,6 +337,9 @@
     <ClInclude Include="imgui\stb_truetype.h">
       <Filter>源文件\imgui</Filter>
     </ClInclude>
+    <ClInclude Include="tests\TestBlending.h">
+      <Filter>源文件\tests</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\Basic.shader">
@@ -371,6 +377,9 @@
       <Filter>assets\shaders</Filter>
     </None>
     <None Include="shaders\Depth.shader">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="shaders\Blending.shader">
       <Filter>assets\shaders</Filter>
     </None>
   </ItemGroup>
