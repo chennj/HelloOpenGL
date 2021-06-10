@@ -47,6 +47,7 @@
 #include "../tests/TestDepthTest.h"
 #include "../tests/TestStencilTest.h"
 #include "../tests/TestBlending.h"
+#include "../tests/TestFaceCulling.h"
 
 // timing
 float deltaTime = 0.0f;
@@ -124,6 +125,7 @@ int main(void)
 		testMenu->RegisterTest<tests::TestDepthTest>("Depth Test");
 		testMenu->RegisterTest<tests::TestStencilTest>("Stencil Test");
 		testMenu->RegisterTest<tests::TestBlending>("Blending");
+		testMenu->RegisterTest<tests::TestFaceCulling>("Face Culling");
 
 		while (!glfwWindowShouldClose(window))
 		{
