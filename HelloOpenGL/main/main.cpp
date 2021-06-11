@@ -48,6 +48,7 @@
 #include "../tests/TestStencilTest.h"
 #include "../tests/TestBlending.h"
 #include "../tests/TestFaceCulling.h"
+#include "../tests/TestFrameBuffer.h"
 
 // timing
 float deltaTime = 0.0f;
@@ -88,7 +89,7 @@ int main(void)
 
 		/**
 		*
-		* blending 混合方式
+		* blending 混合方式 放入各个模块的构建函数中设置
 		* 具体解释：看 /doc/blend-*.jpg
 		*/
 		//GLCall(glEnable(GL_BLEND));
@@ -100,7 +101,7 @@ int main(void)
 		ImGui_ImplGlfwGL3_Init(window, true);
 		/**
 		*
-		* 设置字体
+		* 设置字体 ImGui版本太低不支持
 		*/
 		//ImGuiIO& io = ImGui::GetIO(); (void)io;
 		//io.FontDefault = io.Fonts->AddFontFromFileTTF("../res/fonts/LongCang-Regular.ttf", 18.0f, NULL, io.Fonts->GetGlyphRangesChineseSimplifiedCommon());
@@ -126,6 +127,7 @@ int main(void)
 		testMenu->RegisterTest<tests::TestStencilTest>("Stencil Test");
 		testMenu->RegisterTest<tests::TestBlending>("Blending");
 		testMenu->RegisterTest<tests::TestFaceCulling>("Face Culling");
+		testMenu->RegisterTest<tests::TestFrameBuffer>("Frame Buffer");
 
 		while (!glfwWindowShouldClose(window))
 		{

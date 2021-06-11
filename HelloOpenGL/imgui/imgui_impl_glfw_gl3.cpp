@@ -37,12 +37,14 @@
 #define _CRT_SECURE_NO_WARNINGS
 #endif
 
+#include "../core/Base.h"
+
 #include "imgui.h"
 #include "imgui_impl_glfw_gl3.h"
 
 // GLEW/GLFW
-#include <GLEW/glew.h> 
-#include <GLFW/glfw3.h>
+//#include <GLEW/glew.h> 
+//#include <GLFW/glfw3.h>
 #ifdef _WIN32
 #undef APIENTRY
 #define GLFW_EXPOSE_NATIVE_WIN32

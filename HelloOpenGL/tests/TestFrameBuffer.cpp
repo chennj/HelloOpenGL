@@ -1,11 +1,11 @@
-#include "TestFaceCulling.h"
+#include "TestFrameBuffer.h"
 
 #include "../imgui/imgui.h"
 #include "../imgui/imgui_internal.h"
 
 namespace tests
 {
-	TestFaceCulling::TestFaceCulling()
+	TestFrameBuffer::TestFrameBuffer()
 	{
 		// --------- 箱子 --------------------------------------------------
 		float cubePositions[] = {
@@ -126,18 +126,49 @@ namespace tests
 		m_Vegetation.push_back(glm::vec3(-0.3f, 0.0f, -2.3f));
 		m_Vegetation.push_back(glm::vec3(0.5f, 0.0f, -0.6f));
 
-		// --------- shader --------------------------------------------------
-		m_Shader = CreateScope<Shader>("shaders/Blending.shader");
+		// --------- 帧缓冲 --------------------------------------------------
+		float framePositions[] = {
+			// positions          // texture Coords (note we set these higher than 1 (together with GL_REPEAT as texture wrapping mode). this will cause the floor texture to repeat)
+			-1.0f, -1.0f,  0.0f,  0.0f, 0.0f,
+			 1.0f, -1.0f,  0.0f,  1.0f, 0.0f,
+			 1.0f,  1.0f,  0.0f,  1.0f, 1.0f,
+			-1.0f,  1.0f,  0.0f,  0.0f, 1.0f,
+		};
 
+		unsigned int frameIndices[] = {
+			0,1,2,
+			2,3,0,
+		};
+
+		m_FrameVAO = CreateScope<VertexArray>();
+
+		VertexBufferLayout frameLayout;
+		frameLayout.Push<float>(3);	// 顶点坐标(x,y,z)
+		frameLayout.Push<float>(2);	// 纹理坐标(s,t)
+
+		m_FrameVBO = CreateScope<VertexBuffer>(framePositions, sizeof(framePositions));
+		m_FrameVAO->AddBuffer(*m_FrameVBO, frameLayout);
+		m_FrameIBO = CreateScope<IndexBuffer>(frameIndices, sizeof(frameIndices) / sizeof(unsigned int));
+
+		//FrameBufferSpecification spec = { m_ScreenWidth / 2,m_ScreenHeight / 2 , 1, false };
+		FrameBufferSpecification spec = { m_ScreenWidth,m_ScreenHeight , 1, false };
+		m_FBO = CreateScope<FrameBuffer>(spec);
+
+		// --------- shader --------------------------------------------------
+		m_Shader = CreateScope<Shader>("shaders/FrameBuffer.shader");
+		m_ShaderFrame = CreateScope<Shader>("shaders/FrameBuffer_Screen.shader");
+
+		// --------- texture --------------------------------------------------
 		m_CubeTexture	= CreateScope<Texture>("../res/texture/container2.png");
-		m_FloorTexture  = CreateScope<Texture>("../res/texture/white-stone-floor-texture.jpg");
-		m_GrassTexture  = CreateScope<Texture>("../res/texture/grass.png");
+		m_FloorTexture	= CreateScope<Texture>("../res/texture/white-stone-floor-texture.jpg");
+		m_GrassTexture	= CreateScope<Texture>("../res/texture/grass.png");
 		m_WindowTexture = CreateScope<Texture>("../res/texture/blending_transparent_window.png");
 
-		m_CameraPosition = glm::vec3(0.0f, 2.0f, 10.0f);
-		m_CameraPitch = glm::radians(0.0f);
-		m_CameraYaw = glm::radians(180.0f);
-		m_CameraWorldup = glm::vec3(0.0f, 1.0f, 0.0f);
+		// --------- camera --------------------------------------------------
+		m_CameraPosition	= glm::vec3(0.0f, 2.0f, 10.0f);
+		m_CameraPitch		= glm::radians(0.0f);
+		m_CameraYaw			= glm::radians(180.0f);
+		m_CameraWorldup		= glm::vec3(0.0f, 1.0f, 0.0f);
 		// 欧拉角法 
 		m_Camera = CreateScope<Camera>(
 			m_CameraPosition,	// 相机位置
@@ -146,6 +177,7 @@ namespace tests
 			m_CameraWorldup		// 世界坐标向上方向向量
 			);
 
+		// --------- other --------------------------------------------------
 		m_Window = glfwGetCurrentContext();
 		ASSERT(m_Window);
 
@@ -173,7 +205,7 @@ namespace tests
 		GLCall(glEnable(GL_CULL_FACE));
 	}
 
-	TestFaceCulling::~TestFaceCulling()
+	TestFrameBuffer::~TestFrameBuffer()
 	{
 		glfwSetWindowUserPointer(m_Window, nullptr);
 		glfwSetScrollCallback(m_Window, nullptr);
@@ -181,17 +213,7 @@ namespace tests
 		glfwSetFramebufferSizeCallback(m_Window, nullptr);
 	}
 
-	void TestFaceCulling::OnUpdate(float deltaTime)
-	{
-		ProcessInput(deltaTime);
-
-		if (m_FrontOrBack)
-			glCullFace(GL_FRONT);
-		else
-			glCullFace(GL_BACK);
-	}
-
-	void TestFaceCulling::OnRender()
+	void TestFrameBuffer::DrawScene()
 	{
 		GLCall(glClearColor(0.1f, 0.1f, 0.1f, 1.0f));
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -244,18 +266,45 @@ namespace tests
 		GLCall(glEnable(GL_CULL_FACE));
 	}
 
-	void TestFaceCulling::OnImGuiRender()
+	void TestFrameBuffer::OnUpdate(float deltaTime)
 	{
-		ImGui::Checkbox("Front or Back", &m_FrontOrBack);
+		ProcessInput(deltaTime);
 	}
 
-	void TestFaceCulling::InitCallback()
+	void TestFrameBuffer::OnRender()
+	{
+		// 第一处理阶段，将场景绘制到我们自己帧缓冲上，即整个场景都被渲染到了帧缓冲的一个纹理上
+		m_FBO->Bind();
+		glEnable(GL_DEPTH_TEST);
+		DrawScene();
+
+		// 第二处理阶段，将帧缓冲重新定位到屏幕上
+		// now bind back to default framebuffer and draw a quad plane with the attached framebuffer color texture
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		glDisable(GL_DEPTH_TEST); // disable depth test so screen-space quad isn't discarded due to depth test.
+		// clear all relevant buffers
+		glClearColor(1.0f, 1.0f, 1.0f, 1.0f); // set clear color to white (not really necessary actually, since we won't be able to see behind the quad anyways)
+		glClear(GL_COLOR_BUFFER_BIT);
+
+		// 第三处理阶段，将帧缓冲输出到屏幕上
+		Renderer renderer;
+		m_ShaderFrame->Bind();
+		glBindTexture(GL_TEXTURE_2D, m_FBO->GetColorAttachmentRendererID());	// use the color attachment texture as the texture of the quad plane
+		renderer.Draw(*m_FrameVAO, *m_FrameIBO, *m_ShaderFrame);
+	}
+
+	void TestFrameBuffer::OnImGuiRender()
+	{
+		//ImGui::Checkbox("Front or Back", &m_FrontOrBack);
+	}
+
+	void TestFrameBuffer::InitCallback()
 	{
 		glfwSetWindowUserPointer(m_Window, this);
 
 		glfwSetScrollCallback(m_Window, [](GLFWwindow* window, double xoffset, double yoffset) {
 
-			TestFaceCulling* self = (TestFaceCulling*)glfwGetWindowUserPointer(window);
+			TestFrameBuffer* self = (TestFrameBuffer*)glfwGetWindowUserPointer(window);
 
 			if (self->m_FOV >= 1.0f && self->m_FOV <= 45.0f)
 				self->m_FOV -= yoffset;
@@ -271,7 +320,7 @@ namespace tests
 
 		glfwSetCursorPosCallback(m_Window, [](GLFWwindow* window, double xpos, double ypos) {
 
-			TestFaceCulling* self = (TestFaceCulling*)glfwGetWindowUserPointer(window);
+			TestFrameBuffer* self = (TestFrameBuffer*)glfwGetWindowUserPointer(window);
 
 			if (!self->m_EnableMouseCallback)return;
 
@@ -293,14 +342,14 @@ namespace tests
 
 		glfwSetFramebufferSizeCallback(m_Window, [](GLFWwindow* window, int width, int height) {
 
-			TestFaceCulling* self = (TestFaceCulling*)glfwGetWindowUserPointer(window);
+			TestFrameBuffer* self = (TestFrameBuffer*)glfwGetWindowUserPointer(window);
 			self->m_ScreenWidth = width;
 			self->m_ScreenHeight = height;
 			glViewport(0, 0, width, height);
 		});
 	}
 
-	void TestFaceCulling::ProcessInput(float deltaTime)
+	void TestFrameBuffer::ProcessInput(float deltaTime)
 	{
 		if (glfwGetKey(m_Window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 			m_EnableMouseCallback = false;

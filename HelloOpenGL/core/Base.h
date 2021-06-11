@@ -12,6 +12,7 @@
 // ---------------------------------
 #pragma comment(lib,"OpenGL32.Lib")
 
+#include <cstdint>
 #include <memory>
 
 #define ASSERT(x) if(!(x)) __debugbreak();
@@ -104,3 +105,5 @@ constexpr Ref<T> CreateRef(Args&& ... args)
 {
 	return std::make_shared<T>(std::forward<Args>(args)...);
 }
+
+#define OPENGL_VERSION 4.4

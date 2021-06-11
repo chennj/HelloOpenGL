@@ -183,6 +183,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="core\Camera.cpp" />
+    <ClCompile Include="core\FrameBuffer.cpp" />
     <ClCompile Include="core\IndexBuffer.cpp" />
     <ClCompile Include="core\LightDirectional.cpp" />
     <ClCompile Include="core\LightPoint.cpp" />
@@ -242,6 +243,7 @@
     <ClCompile Include="tests\TestClearColor.cpp" />
     <ClCompile Include="tests\TestDepthTest.cpp" />
     <ClCompile Include="tests\TestFaceCulling.cpp" />
+    <ClCompile Include="tests\TestFrameBuffer.cpp" />
     <ClCompile Include="tests\TestLight.cpp" />
     <ClCompile Include="tests\TestMesh.cpp" />
     <ClCompile Include="tests\TestStencilTest.cpp" />
@@ -251,6 +253,7 @@
   <ItemGroup>
     <ClInclude Include="core\Base.h" />
     <ClInclude Include="core\Camera.h" />
+    <ClInclude Include="core\FrameBuffer.h" />
     <ClInclude Include="core\IndexBuffer.h" />
     <ClInclude Include="core\LightDirectional.h" />
     <ClInclude Include="core\LightPoint.h" />
@@ -283,6 +286,7 @@
     <ClInclude Include="tests\TestClearColor.h" />
     <ClInclude Include="tests\TestDepthTest.h" />
     <ClInclude Include="tests\TestFaceCulling.h" />
+    <ClInclude Include="tests\TestFrameBuffer.h" />
     <ClInclude Include="tests\TestLight.h" />
     <ClInclude Include="tests\TestMesh.h" />
     <ClInclude Include="tests\TestStencilTest.h" />
@@ -298,6 +302,8 @@
     <None Include="shaders\BatchRenderer.shader" />
     <None Include="shaders\Color.shader" />
     <None Include="shaders\ColorAndTexture.shader" />
+    <None Include="shaders\FrameBuffer.shader" />
+    <None Include="shaders\FrameBuffer_Screen.shader" />
     <None Include="shaders\Light.shader" />
     <None Include="shaders\Mesh.shader" />
     <None Include="shaders\MultiLight.shader" />
