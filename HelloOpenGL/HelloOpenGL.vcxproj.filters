@@ -233,6 +233,12 @@
     <ClCompile Include="core\FrameBuffer.cpp">
       <Filter>源文件\core</Filter>
     </ClCompile>
+    <ClCompile Include="tests\TestCubeMap.cpp">
+      <Filter>源文件\tests</Filter>
+    </ClCompile>
+    <ClCompile Include="core\Texture3D.cpp">
+      <Filter>源文件\core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stb_image\stb_image.h">
@@ -358,6 +364,12 @@
     <ClInclude Include="core\FrameBuffer.h">
       <Filter>源文件\core</Filter>
     </ClInclude>
+    <ClInclude Include="tests\TestCubeMap.h">
+      <Filter>源文件\tests</Filter>
+    </ClInclude>
+    <ClInclude Include="core\Texture3D.h">
+      <Filter>源文件\core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\Basic.shader">
@@ -404,6 +416,12 @@
       <Filter>assets\shaders</Filter>
     </None>
     <None Include="shaders\FrameBuffer_Screen.shader">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="shaders\CubeMap.shader">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="shaders\CubeMap_Skybox.shader">
       <Filter>assets\shaders</Filter>
     </None>
   </ItemGroup>

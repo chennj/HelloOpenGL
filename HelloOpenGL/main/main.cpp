@@ -49,6 +49,7 @@
 #include "../tests/TestBlending.h"
 #include "../tests/TestFaceCulling.h"
 #include "../tests/TestFrameBuffer.h"
+#include "../tests/TestCubeMap.h"
 
 // timing
 float deltaTime = 0.0f;
@@ -128,6 +129,7 @@ int main(void)
 		testMenu->RegisterTest<tests::TestBlending>("Blending");
 		testMenu->RegisterTest<tests::TestFaceCulling>("Face Culling");
 		testMenu->RegisterTest<tests::TestFrameBuffer>("Frame Buffer");
+		testMenu->RegisterTest<tests::TestCubeMap>("Cube Map");
 
 		while (!glfwWindowShouldClose(window))
 		{
