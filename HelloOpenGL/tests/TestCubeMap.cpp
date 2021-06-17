@@ -10,35 +10,35 @@ namespace tests
 		// --------- 箱子 --------------------------------------------------
 		float cubePositions[] = {
 
-			-0.5f,	-0.5f,	 0.5f,	/*顶点 0-0*/		 0.0f,	 0.0f,	  1.0f,	/*法向量*/		0.0f, 0.0f,	/*坐标*/
-			 0.5f,	-0.5f,	 0.5f,	/*顶点 1-1*/		 0.0f,	 0.0f,	  1.0f,	/*法向量*/		1.0f, 0.0f,	/*坐标*/
-			 0.5f,	 0.5f,	 0.5f,	/*顶点 2-2*/		 0.0f,	 0.0f,	  1.0f,	/*法向量*/		1.0f, 1.0f,	/*坐标*/
-			-0.5f,	 0.5f,	 0.5f,	/*顶点 3-3*/		 0.0f,	 0.0f,	  1.0f,	/*法向量*/		0.0f, 1.0f,	/*坐标*/
+			-0.5f,	-0.5f,	 0.5f,	/*顶点 0-0*/		 0.0f,	 0.0f,	  1.0f,	/*法向量*/
+			 0.5f,	-0.5f,	 0.5f,	/*顶点 1-1*/		 0.0f,	 0.0f,	  1.0f,	/*法向量*/
+			 0.5f,	 0.5f,	 0.5f,	/*顶点 2-2*/		 0.0f,	 0.0f,	  1.0f,	/*法向量*/
+			-0.5f,	 0.5f,	 0.5f,	/*顶点 3-3*/		 0.0f,	 0.0f,	  1.0f,	/*法向量*/
 
-			-0.5f,	-0.5f,	-0.5f,	/*顶点 4-4*/		-1.0f,	 0.0f,	  0.0f,	/*法向量*/		0.0f, 0.0f,	/*坐标*/
-			-0.5f,	-0.5f,	 0.5f,	/*顶点 5-0*/		-1.0f,	 0.0f,	  0.0f,	/*法向量*/		1.0f, 0.0f,	/*坐标*/
-			-0.5f,	 0.5f,	 0.5f,	/*顶点 6-3*/		-1.0f,	 0.0f,	  0.0f,	/*法向量*/		1.0f, 1.0f,	/*坐标*/
-			-0.5f,	 0.5f,	-0.5f,	/*顶点 7-7*/		-1.0f,	 0.0f,	  0.0f,	/*法向量*/		0.0f, 1.0f,	/*坐标*/
+			-0.5f,	-0.5f,	-0.5f,	/*顶点 4-4*/		-1.0f,	 0.0f,	  0.0f,	/*法向量*/
+			-0.5f,	-0.5f,	 0.5f,	/*顶点 5-0*/		-1.0f,	 0.0f,	  0.0f,	/*法向量*/
+			-0.5f,	 0.5f,	 0.5f,	/*顶点 6-3*/		-1.0f,	 0.0f,	  0.0f,	/*法向量*/
+			-0.5f,	 0.5f,	-0.5f,	/*顶点 7-7*/		-1.0f,	 0.0f,	  0.0f,	/*法向量*/
 
-			 0.5f,	-0.5f,	-0.5f,	/*顶点 8-5*/		 0.0f,	 0.0f,	 -1.0f,	/*法向量*/		0.0f, 0.0f,	/*坐标*/
-			-0.5f,	-0.5f,	-0.5f,	/*顶点 9-4*/		 0.0f,	 0.0f,	 -1.0f,	/*法向量*/		1.0f, 0.0f,	/*坐标*/
-			-0.5f,	 0.5f,	-0.5f,	/*顶点 10-7*/	 0.0f,	 0.0f,	 -1.0f,	/*法向量*/		1.0f, 1.0f,	/*坐标*/
-			 0.5f,	 0.5f,	-0.5f,	/*顶点 11-6*/	 0.0f,	 0.0f,	 -1.0f,	/*法向量*/		0.0f, 1.0f,	/*坐标*/
+			 0.5f,	-0.5f,	-0.5f,	/*顶点 8-5*/		 0.0f,	 0.0f,	 -1.0f,	/*法向量*/
+			-0.5f,	-0.5f,	-0.5f,	/*顶点 9-4*/		 0.0f,	 0.0f,	 -1.0f,	/*法向量*/
+			-0.5f,	 0.5f,	-0.5f,	/*顶点 10-7*/	 0.0f,	 0.0f,	 -1.0f,	/*法向量*/
+			 0.5f,	 0.5f,	-0.5f,	/*顶点 11-6*/	 0.0f,	 0.0f,	 -1.0f,	/*法向量*/
 
-			 0.5f,	-0.5f,	 0.5f,	/*顶点 12-1*/	 1.0f,	 0.0f,	  0.0f,	/*法向量*/		0.0f, 0.0f,	/*坐标*/
-			 0.5f,	-0.5f,	-0.5f,	/*顶点 13-5*/	 1.0f,	 0.0f,	  0.0f,	/*法向量*/		1.0f, 0.0f,	/*坐标*/
-			 0.5f,	 0.5f,	-0.5f,	/*顶点 14-6*/	 1.0f,	 0.0f,	  0.0f,	/*法向量*/		1.0f, 1.0f,	/*坐标*/
-			 0.5f,	 0.5f,	 0.5f,	/*顶点 15-2*/	 1.0f,	 0.0f,	  0.0f,	/*法向量*/		0.0f, 1.0f,	/*坐标*/
+			 0.5f,	-0.5f,	 0.5f,	/*顶点 12-1*/	 1.0f,	 0.0f,	  0.0f,	/*法向量*/
+			 0.5f,	-0.5f,	-0.5f,	/*顶点 13-5*/	 1.0f,	 0.0f,	  0.0f,	/*法向量*/
+			 0.5f,	 0.5f,	-0.5f,	/*顶点 14-6*/	 1.0f,	 0.0f,	  0.0f,	/*法向量*/
+			 0.5f,	 0.5f,	 0.5f,	/*顶点 15-2*/	 1.0f,	 0.0f,	  0.0f,	/*法向量*/
 
-			-0.5f,	 0.5f,	 0.5f,	/*顶点 16-3*/	 0.0f,	 1.0f,	  0.0f,	/*法向量*/		0.0f, 0.0f,	/*坐标*/
-			 0.5f,	 0.5f,	 0.5f,	/*顶点 17-2*/	 0.0f,	 1.0f,	  0.0f,	/*法向量*/		1.0f, 0.0f,	/*坐标*/
-			 0.5f,	 0.5f,	-0.5f,	/*顶点 18-6*/	 0.0f,	 1.0f,	  0.0f,	/*法向量*/		1.0f, 1.0f,	/*坐标*/
-			-0.5f,	 0.5f,	-0.5f,	/*顶点 19-7*/	 0.0f,	 1.0f,	  0.0f,	/*法向量*/		0.0f, 1.0f,	/*坐标*/
+			-0.5f,	 0.5f,	 0.5f,	/*顶点 16-3*/	 0.0f,	 1.0f,	  0.0f,	/*法向量*/
+			 0.5f,	 0.5f,	 0.5f,	/*顶点 17-2*/	 0.0f,	 1.0f,	  0.0f,	/*法向量*/
+			 0.5f,	 0.5f,	-0.5f,	/*顶点 18-6*/	 0.0f,	 1.0f,	  0.0f,	/*法向量*/
+			-0.5f,	 0.5f,	-0.5f,	/*顶点 19-7*/	 0.0f,	 1.0f,	  0.0f,	/*法向量*/
 
-			-0.5f,	-0.5f,	-0.5f,	/*顶点 20-4*/	 0.0f,	-1.0f,	  0.0f,	/*法向量*/		0.0f, 0.0f,	/*坐标*/
-			 0.5f,	-0.5f,	-0.5f,	/*顶点 21-5*/	 0.0f,	-1.0f,	  0.0f,	/*法向量*/		1.0f, 0.0f,	/*坐标*/
-			 0.5f,	-0.5f,	 0.5f,	/*顶点 22-1*/	 0.0f,	-1.0f,	  0.0f,	/*法向量*/		1.0f, 1.0f,	/*坐标*/
-			-0.5f,	-0.5f,	 0.5f,	/*顶点 23-0*/	 0.0f,	-1.0f,	  0.0f,	/*法向量*/		0.0f, 1.0f,	/*坐标*/
+			-0.5f,	-0.5f,	-0.5f,	/*顶点 20-4*/	 0.0f,	-1.0f,	  0.0f,	/*法向量*/
+			 0.5f,	-0.5f,	-0.5f,	/*顶点 21-5*/	 0.0f,	-1.0f,	  0.0f,	/*法向量*/
+			 0.5f,	-0.5f,	 0.5f,	/*顶点 22-1*/	 0.0f,	-1.0f,	  0.0f,	/*法向量*/
+			-0.5f,	-0.5f,	 0.5f,	/*顶点 23-0*/	 0.0f,	-1.0f,	  0.0f,	/*法向量*/
 		};
 
 		unsigned int cubeIndices[] = {
@@ -66,7 +66,6 @@ namespace tests
 		VertexBufferLayout cubeLayout;
 		cubeLayout.Push<float>(3);	// 顶点坐标(x,y,z)
 		cubeLayout.Push<float>(3);	// 法向量
-		cubeLayout.Push<float>(2);	// 纹理坐标(s,t)
 
 		m_CubeVBO = CreateScope<VertexBuffer>(cubePositions, sizeof(cubePositions));
 		m_CubeVAO->AddBuffer(*m_CubeVBO, cubeLayout);
@@ -204,8 +203,25 @@ namespace tests
 		m_Proj = glm::perspective(glm::radians(m_FOV), m_ScreenWidth / m_ScreenHeight/*Viewport的width/height*/, 0.1f, 100.0f);
 		m_View = m_Camera->GetViewMatrix();
 
+		// 箱子
+		m_Model = glm::translate(glm::mat4(1.0f), glm::vec3(1.0f, 0.0f, -1.0f))
+			* glm::rotate(glm::mat4(1.0f), glm::radians(m_ModelRotationAngle), m_ModelRotationDirection)
+			* glm::scale(glm::mat4(1.0f), m_ModelScale);
+		// 设置模型、观察和投影矩阵
+		// 使用2D纹理对箱子进行渲染
+		//m_CubeTexture->Bind();
+		// 使用3D纹理对箱子渲染
+		m_ShaderSkybox->Bind();
+		m_Shader->Bind();
+		m_Shader->SetUniform1i("textureIndex", 0);
+		m_Shader->SetUniformMat4f("u_Proj", m_Proj);
+		m_Shader->SetUniformMat4f("u_View", m_View);
+		m_Shader->SetUniformMat4f("u_Model", m_Model);
+		m_Shader->SetUniform3f("cameraPos", m_Camera->GetPosition());
+		renderer.Draw(*m_CubeVAO, *m_CubeIBO, *m_Shader);
+
 		// 天空盒
-		glDepthMask(GL_FALSE);
+		glDepthFunc(GL_LEQUAL);  // change depth function so depth test passes when values are equal to depth buffer's content
 		m_ShaderSkybox->Bind();
 		m_ShaderSkybox->SetUniform1i("skybox", 0);
 		m_SkyboxTexture->Bind();
@@ -213,20 +229,7 @@ namespace tests
 		m_ShaderSkybox->SetUniformMat4f("u_View", glm::mat4(glm::mat3(m_Camera->GetViewMatrix())/*移除位移分量*/));
 		m_ShaderSkybox->SetUniformMat4f("u_Proj", m_Proj);
 		renderer.Draw(*m_SkyboxVAO, *m_SkyboxIBO, *m_ShaderSkybox);
-		glDepthMask(GL_TRUE);
-
-		// 箱子
-		m_Model = glm::translate(glm::mat4(1.0f), glm::vec3(1.0f, 0.0f, -1.0f))
-			* glm::rotate(glm::mat4(1.0f), glm::radians(m_ModelRotationAngle), m_ModelRotationDirection)
-			* glm::scale(glm::mat4(1.0f), m_ModelScale);
-		// 设置模型、观察和投影矩阵
-		m_CubeTexture->Bind();
-		m_Shader->Bind();
-		m_Shader->SetUniform1i("textureIndex", 0);
-		m_Shader->SetUniformMat4f("u_Proj", m_Proj);
-		m_Shader->SetUniformMat4f("u_View", m_View);
-		m_Shader->SetUniformMat4f("u_Model", m_Model);
-		renderer.Draw(*m_CubeVAO, *m_CubeIBO, *m_Shader);
+		glDepthFunc(GL_LESS); // set depth function back to default	
 	}
 
 	void TestCubeMap::OnImGuiRender()
