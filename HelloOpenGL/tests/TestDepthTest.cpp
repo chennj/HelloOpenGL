@@ -96,7 +96,8 @@ namespace tests
 		m_PlaneIBO = CreateScope<IndexBuffer>(planeIndices, sizeof(planeIndices) / sizeof(unsigned int));
 
 		// --------- shader --------------------------------------------------
-		m_Shader = CreateRef<Shader>("shaders/Depth.shader");
+		//m_Shader = CreateRef<Shader>("shaders/Depth.shader");
+		m_Shader = CreateRef<Shader>("shaders/Depth.vs.glsl", "shaders/Depth.fs.glsl");
 
 		m_CubeTexture = CreateRef<Texture>("../res/texture/container2.png");
 		m_FloorTexture = CreateRef<Texture>("../res/texture/cnchess/WHITE.GIF");

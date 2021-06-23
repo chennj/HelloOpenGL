@@ -14,6 +14,12 @@ Shader::Shader(const std::string & filepath)
 	_RendererID = CreateShader(source.VertexSource, source.FragmentSource);
 }
 
+Shader::Shader(const std::string & vertexPath, const std::string & fragmentPath, const std::string & geometryPath)
+{
+	ShaderProgramSource source = ParseShader(vertexPath, fragmentPath, geometryPath);
+	_RendererID = CreateShader(source.VertexSource, source.FragmentSource, source.GeometrySource);
+}
+
 Shader::~Shader()
 {
 	GLCall(glDeleteProgram(_RendererID));
@@ -32,11 +38,6 @@ void Shader::Unbind() const
 ShaderProgramSource Shader::ParseShader(const std::string& filepath)
 {
 	std::fstream stream(filepath);
-
-	enum class ShaderType
-	{
-		NONE = -1, VERTEX = 0, FRAGMENT = 1
-	};
 
 	std::string line;
 	std::stringstream ss[2];
@@ -64,6 +65,31 @@ ShaderProgramSource Shader::ParseShader(const std::string& filepath)
 	}
 
 	return{ ss[0].str(), ss[1].str() };
+}
+
+ShaderProgramSource Shader::ParseShader(const std::string & vertexPath, const std::string & fragmentPath, const std::string & geometryPath)
+{
+	std::string line;
+	std::stringstream ss[3] = { std::stringstream(""), std::stringstream(""), std::stringstream("") };
+
+	std::vector<std::string> filepath = {
+		vertexPath,
+		fragmentPath,
+		geometryPath
+	};
+
+	for (unsigned int i = 0; i < filepath.size(); i++)
+	{
+		if (!filepath[i].empty())
+		{
+			std::fstream stream(filepath[i]);
+			while (getline(stream, line)) {
+				ss[i] << line << "\n";
+			}
+		}
+	}
+
+	return{ ss[0].str(), ss[1].str(), ss[2].str() };
 }
 
 unsigned int Shader::CompileShader(unsigned int type, const std::string& source)
@@ -114,6 +140,37 @@ unsigned int Shader::CreateShader(const std::string& vertexShader, const std::st
 	//将着色器链接进program后，立即释放这两个着色器
 	GLCall(glDeleteShader(vs));
 	GLCall(glDeleteShader(fs));
+
+	return program;
+}
+
+unsigned int Shader::CreateShader(const std::string & vertexShader, const std::string & fragmentShader, const std::string & geometryShader)
+{
+	GLCall(unsigned int program = glCreateProgram());
+	//建立顶点着色器
+	unsigned int vs = CompileShader(GL_VERTEX_SHADER, vertexShader);
+	//建立片段着色器
+	unsigned int fs = CompileShader(GL_FRAGMENT_SHADER, fragmentShader);
+	//建立几何着色器
+	unsigned int gs = 0;
+	if (!geometryShader.empty()) {
+		gs = CompileShader(GL_GEOMETRY_SHADER, geometryShader);
+		GLCall(glAttachShader(program, gs));
+	}
+
+	//将这两个着色器都附加到我们的程序中，在程序中指定要附加的着色器
+	//把它想象成编译c++代码，我们有两个不同的文件: vertexShader 和 fragmentShader，
+	//将他们放入我们的 propram，然后就可以使用他们。
+	GLCall(glAttachShader(program, vs));
+	GLCall(glAttachShader(program, fs));	
+	GLCall(glLinkProgram(program));
+	GLCall(glValidateProgram(program));
+
+	//将着色器链接进program后，立即释放这两个着色器
+	GLCall(glDeleteShader(vs));
+	GLCall(glDeleteShader(fs));
+	if (gs) { GLCall(glDeleteShader(gs)); }
+
 
 	return program;
 }

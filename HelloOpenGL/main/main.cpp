@@ -50,6 +50,9 @@
 #include "../tests/TestFaceCulling.h"
 #include "../tests/TestFrameBuffer.h"
 #include "../tests/TestCubeMap.h"
+#include "../tests/TestGeometryShader.h"
+#include "../tests/TestExplode.h"
+#include "../tests/TestNormalVisualization.h"
 
 // timing
 float deltaTime = 0.0f;
@@ -130,6 +133,9 @@ int main(void)
 		testMenu->RegisterTest<tests::TestFaceCulling>("Face Culling");
 		testMenu->RegisterTest<tests::TestFrameBuffer>("Frame Buffer");
 		testMenu->RegisterTest<tests::TestCubeMap>("Cube Map");
+		testMenu->RegisterTest<tests::TestGeometryShader>("Geometry Shader");
+		testMenu->RegisterTest<tests::TestExplode>("Geometry Shader - Explode");
+		testMenu->RegisterTest<tests::TestNormalVisualization>("Geometry Shader - Normal Visual");
 
 		while (!glfwWindowShouldClose(window))
 		{

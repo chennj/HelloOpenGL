@@ -239,6 +239,15 @@
     <ClCompile Include="core\Texture3D.cpp">
       <Filter>源文件\core</Filter>
     </ClCompile>
+    <ClCompile Include="tests\TestGeometryShader.cpp">
+      <Filter>源文件\tests</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\TestExplode.cpp">
+      <Filter>源文件\tests</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\TestNormalVisualization.cpp">
+      <Filter>源文件\tests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stb_image\stb_image.h">
@@ -370,6 +379,15 @@
     <ClInclude Include="core\Texture3D.h">
       <Filter>源文件\core</Filter>
     </ClInclude>
+    <ClInclude Include="tests\TestGeometryShader.h">
+      <Filter>源文件\tests</Filter>
+    </ClInclude>
+    <ClInclude Include="tests\TestExplode.h">
+      <Filter>源文件\tests</Filter>
+    </ClInclude>
+    <ClInclude Include="tests\TestNormalVisualization.h">
+      <Filter>源文件\tests</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\Basic.shader">
@@ -422,6 +440,45 @@
       <Filter>assets\shaders</Filter>
     </None>
     <None Include="shaders\CubeMap_Skybox.shader">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="shaders\Geometry.gs.glsl">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="shaders\Geometry.vs.glsl">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="shaders\Geometry.fs.glsl">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="shaders\Explode.vs.glsl">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="shaders\Explode.gs.glsl">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="shaders\Explode.fs.glsl">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="shaders\Depth.vs.glsl">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="shaders\Depth.fs.glsl">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="shaders\NormalVisualization.vs.glsl">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="shaders\NormalVisualization.gs.glsl">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="shaders\NormalVisualization.fs.glsl">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="shaders\Default.vs.glsl">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="shaders\Default.fs.glsl">
       <Filter>assets\shaders</Filter>
     </None>
   </ItemGroup>
