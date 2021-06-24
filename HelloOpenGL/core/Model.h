@@ -36,4 +36,5 @@ private:
 		std::string typeName);
 public:
 	void Draw(Ref<Shader>& shader);
+	void Draw1(Ref<Shader>& shader);
 };

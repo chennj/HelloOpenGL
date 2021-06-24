@@ -53,6 +53,7 @@
 #include "../tests/TestGeometryShader.h"
 #include "../tests/TestExplode.h"
 #include "../tests/TestNormalVisualization.h"
+#include "../tests/TestInstancing.h"
 
 // timing
 float deltaTime = 0.0f;
@@ -136,6 +137,7 @@ int main(void)
 		testMenu->RegisterTest<tests::TestGeometryShader>("Geometry Shader");
 		testMenu->RegisterTest<tests::TestExplode>("Geometry Shader - Explode");
 		testMenu->RegisterTest<tests::TestNormalVisualization>("Geometry Shader - Normal Visual");
+		testMenu->RegisterTest<tests::TestInstancing>("Instancing");
 
 		while (!glfwWindowShouldClose(window))
 		{

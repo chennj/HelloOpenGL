@@ -206,3 +206,9 @@ void Model::Draw(Ref<Shader>& shader)
 	for (unsigned int i = 0; i < m_Meshes.size(); i++)
 		m_Meshes[i].Draw(shader);
 }
+
+void Model::Draw1(Ref<Shader>& shader)
+{
+	for (unsigned int i = 0; i < m_Meshes.size(); i++)
+		m_Meshes[i].Draw1(shader);
+}

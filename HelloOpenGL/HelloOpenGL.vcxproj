@@ -248,6 +248,7 @@
     <ClCompile Include="tests\TestFaceCulling.cpp" />
     <ClCompile Include="tests\TestFrameBuffer.cpp" />
     <ClCompile Include="tests\TestGeometryShader.cpp" />
+    <ClCompile Include="tests\TestInstancing.cpp" />
     <ClCompile Include="tests\TestLight.cpp" />
     <ClCompile Include="tests\TestMesh.cpp" />
     <ClCompile Include="tests\TestNormalVisualization.cpp" />
@@ -296,6 +297,7 @@
     <ClInclude Include="tests\TestFaceCulling.h" />
     <ClInclude Include="tests\TestFrameBuffer.h" />
     <ClInclude Include="tests\TestGeometryShader.h" />
+    <ClInclude Include="tests\TestInstancing.h" />
     <ClInclude Include="tests\TestLight.h" />
     <ClInclude Include="tests\TestMesh.h" />
     <ClInclude Include="tests\TestNormalVisualization.h" />
@@ -305,6 +307,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="shaders\Asteroids.fs.glsl" />
+    <None Include="shaders\Asteroids.vs.glsl" />
     <None Include="shaders\Blending.shader" />
     <None Include="shaders\CubeMap.shader" />
     <None Include="shaders\CubeMap_Skybox.shader" />
@@ -333,6 +337,8 @@
     <None Include="shaders\NormalVisualization.fs.glsl" />
     <None Include="shaders\NormalVisualization.gs.glsl" />
     <None Include="shaders\NormalVisualization.vs.glsl" />
+    <None Include="shaders\Planet.fs.glsl" />
+    <None Include="shaders\Planet.vs.glsl" />
     <None Include="shaders\SpotLight.shader" />
     <None Include="shaders\Stencil.shader" />
   </ItemGroup>

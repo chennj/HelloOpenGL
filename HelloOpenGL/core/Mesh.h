@@ -30,7 +30,7 @@ struct AssimpTexture
 
 class Mesh
 {
-private:
+public:
 	/*  äÖÈ¾Êý¾Ý  */
 	unsigned int VAO, VBO, IBO;
 
@@ -52,4 +52,5 @@ private:
 public:
 	/*  º¯Êý  */
 	void Draw(Ref<Shader>& shader);
+	void Draw1(Ref<Shader>& shader);
 };

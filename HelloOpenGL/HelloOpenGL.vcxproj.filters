@@ -248,6 +248,9 @@
     <ClCompile Include="tests\TestNormalVisualization.cpp">
       <Filter>源文件\tests</Filter>
     </ClCompile>
+    <ClCompile Include="tests\TestInstancing.cpp">
+      <Filter>源文件\tests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stb_image\stb_image.h">
@@ -388,6 +391,9 @@
     <ClInclude Include="tests\TestNormalVisualization.h">
       <Filter>源文件\tests</Filter>
     </ClInclude>
+    <ClInclude Include="tests\TestInstancing.h">
+      <Filter>源文件\tests</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\Basic.shader">
@@ -479,6 +485,18 @@
       <Filter>assets\shaders</Filter>
     </None>
     <None Include="shaders\Default.fs.glsl">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="shaders\Asteroids.vs.glsl">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="shaders\Asteroids.fs.glsl">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="shaders\Planet.vs.glsl">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="shaders\Planet.fs.glsl">
       <Filter>assets\shaders</Filter>
     </None>
   </ItemGroup>

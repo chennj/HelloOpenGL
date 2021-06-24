@@ -34,7 +34,6 @@ bld/
 [Tt]emp/
 
 # resource folder
-res/model/
 res/fonts/
 
 # Visual Studio 2015/2017 cache/options directory

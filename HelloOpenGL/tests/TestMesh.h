@@ -44,7 +44,6 @@ namespace tests
 
 		Scope<Camera>	m_Camera;
 
-		Scope<Mesh>	m_AssimpMesh;
 		Scope<Model> m_AssimpModel;
 
 		bool m_EnableMouseCallback = false;
