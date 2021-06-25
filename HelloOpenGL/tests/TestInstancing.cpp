@@ -65,9 +65,8 @@ TestInstancing::TestInstancing()
 	* configure instanced array
 	*/
 	// -------------------------
-	unsigned int buffer;
-	glGenBuffers(1, &buffer);
-	glBindBuffer(GL_ARRAY_BUFFER, buffer);
+	glGenBuffers(1, &m_AsteroidVBO);
+	glBindBuffer(GL_ARRAY_BUFFER, m_AsteroidVBO);
 	glBufferData(GL_ARRAY_BUFFER, m_AsteriodAmount * sizeof(glm::mat4), &m_ModelMatrices[0], GL_STATIC_DRAW);
 
 	// set transformation matrices as an instance vertex attribute (with divisor 1)
@@ -100,8 +99,8 @@ TestInstancing::TestInstancing()
 	/**
 	* 相机
 	*/
-	m_CameraPosition = glm::vec3(0.0f, 26.0f, 250.0f);
-	m_CameraPitch = glm::radians(-5.0f);
+	m_CameraPosition = glm::vec3(0.0f, 20.0f, 250.0f);
+	m_CameraPitch = glm::radians(-3.0f);
 	m_CameraYaw = glm::radians(180.0f);
 	m_CameraWorldup = glm::vec3(0.0f, 1.0f, 0.0f);
 	// 欧拉角法 
@@ -111,7 +110,7 @@ TestInstancing::TestInstancing()
 		m_CameraYaw,		// 相机左右转动角度,右手系-》左手系 = 转动180
 		m_CameraWorldup		// 世界坐标向上方向向量
 		);
-	// ---------------------------------------------------
+	// ------------------------------------------------------------------
 
 	/**
 	* 其他
@@ -171,11 +170,53 @@ void TestInstancing::OnRender()
 	m_ShaderPlanet->SetUniformMat4f("projection", m_Proj);
 	m_ModelPlanet->Draw1(m_ShaderPlanet);
 
-	// draw asteriods
+	/**
+	* draw asteriods
+	*/
+	// generate a large list of semi-random model transformation matrices
+	//if (m_Count++ % 20 == 0)
+	//{
+	//	m_Count = 1;
+	//	float radius = 150.0;
+	//	float offset = 25.0f;
+	//	for (unsigned int i = 0; i < m_AsteriodAmount; i++)
+	//	{
+	//		glm::mat4 model = glm::mat4(1.0f);
+	//		// 1. translation: displace along circle with 'radius' in range [-offset, offset]
+	//		float angle = (float)i / (float)m_AsteriodAmount * 360.0f;
+	//		angle += m_ModelRotationAngle;
+	//		float displacement = (rand() % (int)(2 * offset * 100)) / 100.0f - offset;
+	//		float x = sin(angle) * radius + displacement;
+	//		displacement = (rand() % (int)(2 * offset * 100)) / 100.0f - offset;
+	//		float y = displacement * 0.3f; // keep height of asteroid field smaller compared to width of x and z
+	//		displacement = (rand() % (int)(2 * offset * 100)) / 100.0f - offset;
+	//		float z = cos(angle) * radius + displacement;
+	//		model = glm::translate(model, glm::vec3(x, y, z));
+
+	//		// 2. scale: Scale between 0.05 and 0.25f
+	//		float scale = (rand() % 20) / 100.0f + 0.05;
+	//		model = glm::scale(model, glm::vec3(scale));
+
+	//		// 3. rotation: add random rotation around a (semi)randomly picked rotation axis vector
+	//		float rotAngle = (rand() % 360);
+	//		model = glm::rotate(model, rotAngle, glm::vec3(0.4f, 0.6f, 0.8f));
+
+	//		// 4. now add to list of matrices
+	//		m_ModelMatrices[i] = model;
+	//	}
+
+	//	// reset instanced array
+	//	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	//	glBindBuffer(GL_ARRAY_BUFFER, m_AsteroidVBO);
+	//	glBufferData(GL_ARRAY_BUFFER, m_AsteriodAmount * sizeof(glm::mat4), &m_ModelMatrices[0], GL_STATIC_DRAW);
+	//}
+
+	// draw
 	m_ShaderAsteriods->Bind();
 	m_ShaderAsteriods->SetUniformMat4f("view", m_View);
 	m_ShaderAsteriods->SetUniformMat4f("projection", m_Proj);
 	m_ShaderAsteriods->SetUniform1i("texture_diffuse1", 0);
+
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, m_ModelAsteriods->m_TexturesLoaded[0].Id); // note: we also made the textures_loaded vector public (instead of private) from the model class.
 	for (unsigned int i = 0; i < m_ModelAsteriods->m_Meshes.size(); i++)
@@ -184,6 +225,7 @@ void TestInstancing::OnRender()
 		glDrawElementsInstanced(GL_TRIANGLES, m_ModelAsteriods->m_Meshes[i].m_Indices.size(), GL_UNSIGNED_INT, 0, m_AsteriodAmount);
 		glBindVertexArray(0);
 	}
+	// ------------------------------------------------------------------
 }
 
 void TestInstancing::OnImGuiRender()

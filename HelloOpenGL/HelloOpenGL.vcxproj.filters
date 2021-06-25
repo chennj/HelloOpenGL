@@ -251,6 +251,9 @@
     <ClCompile Include="tests\TestInstancing.cpp">
       <Filter>源文件\tests</Filter>
     </ClCompile>
+    <ClCompile Include="tests\TestBlinnPhong.cpp">
+      <Filter>源文件\tests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stb_image\stb_image.h">
@@ -394,6 +397,9 @@
     <ClInclude Include="tests\TestInstancing.h">
       <Filter>源文件\tests</Filter>
     </ClInclude>
+    <ClInclude Include="tests\TestBlinnPhong.h">
+      <Filter>源文件\tests</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\Basic.shader">
@@ -497,6 +503,12 @@
       <Filter>assets\shaders</Filter>
     </None>
     <None Include="shaders\Planet.fs.glsl">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="shaders\AdvancedLighting.vs.glsl">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="shaders\AdvancedLighting.fs.glsl">
       <Filter>assets\shaders</Filter>
     </None>
   </ItemGroup>

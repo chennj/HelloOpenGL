@@ -240,6 +240,7 @@
     <ClCompile Include="tests\TestBatchRenderer.cpp" />
     <ClCompile Include="tests\TestBatchTexture2D.cpp" />
     <ClCompile Include="tests\TestBlending.cpp" />
+    <ClCompile Include="tests\TestBlinnPhong.cpp" />
     <ClCompile Include="tests\TestCamera.cpp" />
     <ClCompile Include="tests\TestClearColor.cpp" />
     <ClCompile Include="tests\TestCubeMap.cpp" />
@@ -289,6 +290,7 @@
     <ClInclude Include="tests\TestBatchRenderer.h" />
     <ClInclude Include="tests\TestBatchTexture2D.h" />
     <ClInclude Include="tests\TestBlending.h" />
+    <ClInclude Include="tests\TestBlinnPhong.h" />
     <ClInclude Include="tests\TestCamera.h" />
     <ClInclude Include="tests\TestClearColor.h" />
     <ClInclude Include="tests\TestCubeMap.h" />
@@ -307,6 +309,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="shaders\AdvancedLighting.fs.glsl" />
+    <None Include="shaders\AdvancedLighting.vs.glsl" />
     <None Include="shaders\Asteroids.fs.glsl" />
     <None Include="shaders\Asteroids.vs.glsl" />
     <None Include="shaders\Blending.shader" />
