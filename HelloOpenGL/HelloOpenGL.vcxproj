@@ -253,6 +253,7 @@
     <ClCompile Include="tests\TestLight.cpp" />
     <ClCompile Include="tests\TestMesh.cpp" />
     <ClCompile Include="tests\TestNormalVisualization.cpp" />
+    <ClCompile Include="tests\TestShadowMapping.cpp" />
     <ClCompile Include="tests\TestStencilTest.cpp" />
     <ClCompile Include="tests\TestTexture2D.cpp" />
     <ClCompile Include="tests\TestTexture3D.cpp" />
@@ -303,6 +304,7 @@
     <ClInclude Include="tests\TestLight.h" />
     <ClInclude Include="tests\TestMesh.h" />
     <ClInclude Include="tests\TestNormalVisualization.h" />
+    <ClInclude Include="tests\TestShadowMapping.h" />
     <ClInclude Include="tests\TestStencilTest.h" />
     <ClInclude Include="tests\TestTexture2D.h" />
     <ClInclude Include="tests\TestTexture3D.h" />
@@ -343,6 +345,12 @@
     <None Include="shaders\NormalVisualization.vs.glsl" />
     <None Include="shaders\Planet.fs.glsl" />
     <None Include="shaders\Planet.vs.glsl" />
+    <None Include="shaders\ShadowMapping.fs.glsl" />
+    <None Include="shaders\ShadowMapping.vs.glsl" />
+    <None Include="shaders\ShadowMapping_Debug_Quad.fs.glsl" />
+    <None Include="shaders\ShadowMapping_Debug_Quad.vs.glsl" />
+    <None Include="shaders\ShadowMapping_Depth.fs.glsl" />
+    <None Include="shaders\ShadowMapping_Depth.vs.glsl" />
     <None Include="shaders\SpotLight.shader" />
     <None Include="shaders\Stencil.shader" />
   </ItemGroup>

@@ -26,6 +26,7 @@ public:
 public:
 	inline const FrameBufferSpecification& GetSpecification() const { return m_Specification; }
 	inline const uint32_t GetColorAttachmentRendererID() const { return m_ColorAttachment; }
+	inline const uint32_t GetDepthAttachmentRendererID() const { return m_DepthAttachment; }
 	inline const uint32_t GetRendererID() const { return m_RendererID; }
 
 	void Invalide();

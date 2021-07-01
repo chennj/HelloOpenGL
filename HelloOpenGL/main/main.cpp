@@ -55,10 +55,13 @@
 #include "../tests/TestNormalVisualization.h"
 #include "../tests/TestInstancing.h"
 #include "../tests/TestBlinnPhong.h"
+#include "../tests/TestShadowMapping.h"
 
 // timing
 float deltaTime = 0.0f;
 float lastFrame = 0.0f;
+
+#define NEEDIMGUI 1
 
 int main(void)
 {
@@ -91,6 +94,7 @@ int main(void)
 
 	std::cout << glfwGetVersionString() << std::endl;
 
+#if NEEDIMGUI
 	{
 
 		/**
@@ -140,6 +144,7 @@ int main(void)
 		testMenu->RegisterTest<tests::TestNormalVisualization>("Geometry Shader - Normal Visual");
 		testMenu->RegisterTest<tests::TestInstancing>("Instancing");
 		testMenu->RegisterTest<tests::TestBlinnPhong>("Blinn Or Phong");
+		testMenu->RegisterTest<tests::TestShadowMapping>("Shadow Map");
 
 		while (!glfwWindowShouldClose(window))
 		{
@@ -176,11 +181,35 @@ int main(void)
 		delete currentTest;
 		if (currentTest != testMenu)
 			delete testMenu;
-	}
 
-	// Cleanup
-	ImGui_ImplGlfwGL3_Shutdown();
-	ImGui::DestroyContext();
+		// Cleanup
+		ImGui_ImplGlfwGL3_Shutdown();
+		ImGui::DestroyContext();
+	}
+#else
+	{
+		Renderer renderer;
+		tests::TestShadowMapping shaderMapping;
+
+		while (!glfwWindowShouldClose(window))
+		{
+			float currentFrame = glfwGetTime();
+			deltaTime = currentFrame - lastFrame;
+			lastFrame = currentFrame;
+
+			GLCall(glClearColor(0, 0, 0, 1));
+
+			renderer.Clear();
+
+			shaderMapping.OnUpdate(deltaTime);
+			shaderMapping.OnRender();
+
+			glfwSwapBuffers(window);
+			glfwPollEvents();
+		}
+
+	}
+#endif
 	glfwTerminate();
 	return 0;
 }
